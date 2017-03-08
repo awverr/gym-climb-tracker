@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">GymClimbTracker</string>
+    <string-array name="climb_type_array">
+        <item>Boulder</item>
+        <item>Top Rope</item>
+        <item>Lead</item>
+    </string-array>
+    <string-array name="rope_grade_array">
+        <item>5.5</item>
+        <item>5.6</item>
+        <item>5.7</item>
+        <item>5.8</item>
+        <item>5.9</item>
+        <item>5.10a</item>
+        <item>5.10b</item>
+        <item>5.10c</item>
+        <item>5.10d</item>
+        <item>5.11a</item>
+        <item>5.11b</item>
+        <item>5.11c</item>
+        <item>5.11d</item>
+        <item>5.12a</item>
+        <item>5.12b</item>
+        <item>5.12c</item>
+        <item>5.12d</item>
+        <item>5.13a</item>
+        <item>5.13b</item>
+        <item>5.13c</item>
+        <item>5.13d</item>
+        <item>5.14</item>
+    </string-array>
+    <string-array name="boulder_grade_array">
+        <item>v0</item>
+        <item>v1</item>
+        <item>v2</item>
+        <item>v3</item>
+        <item>v4</item>
+        <item>v5</item>
+        <item>v6</item>
+        <item>v7</item>
+        <item>v8</item>
+        <item>v9</item>
+        <item>v10</item>
+    </string-array>
+</resources>

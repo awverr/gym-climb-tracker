@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "327589810124",
+    "firebase_url": "https://gymclimbtracker.firebaseio.com",
+    "project_id": "gymclimbtracker",
+    "storage_bucket": "gymclimbtracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327589810124:android:c891ef133686adf4",
+        "android_client_info": {
+          "package_name": "com.awverret.gymclimbtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327589810124-mb4ivnh2bu65e3ahsvr8oogkq8fkv2lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.awverret.gymclimbtracker",
+            "certificate_hash": "900d60ed83a45efb6cd6906a57f3a4bf55eca13c"
+          }
+        },
+        {
+          "client_id": "327589810124-1b9tf8b7cr6e2cjcpe01e4bfnsgglsc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjcee2i_fiazxfVeXqewQVW5xC8HI7SC0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327589810124-1b9tf8b7cr6e2cjcpe01e4bfnsgglsc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
