@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity implements
     public void saveClimb(View view){
 
         // this is actully a string
-       // RopeGrade grade = gradeSpinner.getSelectedItem();
+        String stringGrade = (String) gradeSpinner.getSelectedItem();
+        RopeGrade grade = RopeGrade.fromString(stringGrade);
 
-        store.saveLeadClimb(new LeadClimb(RopeGrade.FIVE_EIGHT));
+        store.saveLeadClimb(new LeadClimb(grade));
     }
 }
