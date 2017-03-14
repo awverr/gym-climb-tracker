@@ -9,18 +9,27 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.model.BoulderClimb;
+import com.awverret.gymclimbtracker.model.BoulderGrade;
+import com.awverret.gymclimbtracker.model.Climb;
+import com.awverret.gymclimbtracker.model.ClimbType;
 import com.awverret.gymclimbtracker.model.LeadClimb;
 import com.awverret.gymclimbtracker.model.RopeGrade;
+import com.awverret.gymclimbtracker.model.TopRopeClimb;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.google.firebase.FirebaseApp;
+
+import static com.awverret.gymclimbtracker.model.ClimbType.BOULDER;
+import static com.awverret.gymclimbtracker.model.ClimbType.LEAD;
+import static com.awverret.gymclimbtracker.model.ClimbType.TOP_ROPE;
 
 public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
         Spinner climbTypeSpinner, gradeSpinner;
-
         CloudStore store;
+        ClimbType climbType = TOP_ROPE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +56,24 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String climbType= String.valueOf(climbTypeSpinner.getSelectedItem());
-        if(climbType.contentEquals("Top Rope") || climbType.contentEquals("Lead")) {
+        String climbTypeString= String.valueOf(climbTypeSpinner.getSelectedItem());
+        if(climbTypeString.contentEquals("Top Rope")) {
+            climbType = TOP_ROPE;
             ArrayAdapter<CharSequence> ropeGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.rope_grade_array, android.R.layout.simple_spinner_item);
             ropeGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             gradeSpinner.setAdapter(ropeGradeAdapter);
         }
-        if(climbType.contentEquals("Boulder")) {
+        if (climbTypeString.contentEquals("Lead")){
+            climbType = LEAD;
+            ArrayAdapter<CharSequence> ropeGradeAdapter = ArrayAdapter.createFromResource(this,
+                    R.array.rope_grade_array, android.R.layout.simple_spinner_item);
+            ropeGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            gradeSpinner.setAdapter(ropeGradeAdapter);
+
+        }
+        if(climbTypeString.contentEquals("Boulder")) {
+            climbType = BOULDER;
             ArrayAdapter<CharSequence> boulderGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.boulder_grade_array, android.R.layout.simple_spinner_item);
             boulderGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,11 +87,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void saveClimb(View view){
-
-        // this is actually a string
         String stringGrade = (String) gradeSpinner.getSelectedItem();
-        RopeGrade grade = RopeGrade.fromString(stringGrade);
-
-        store.saveLeadClimb(new LeadClimb(grade));
+        if(climbType.equals(LEAD)){
+            RopeGrade grade = RopeGrade.fromString(stringGrade);
+            store.saveClimb(new LeadClimb(grade));
+        }
+        if(climbType.equals(TOP_ROPE)){
+            RopeGrade grade = RopeGrade.fromString(stringGrade);
+            store.saveClimb(new TopRopeClimb(grade));
+        }
+        if(climbType.equals(BOULDER)){
+            BoulderGrade grade = BoulderGrade.fromString(stringGrade);
+            store.saveClimb(new BoulderClimb(grade));
+        }
     }
 }
