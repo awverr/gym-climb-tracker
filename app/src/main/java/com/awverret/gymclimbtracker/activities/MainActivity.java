@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements
 
     public void saveClimb(View view){
 
-        // this is actually a string string
+        // this is actually a string
         String stringGrade = (String) gradeSpinner.getSelectedItem();
         RopeGrade grade = RopeGrade.fromString(stringGrade);
 
