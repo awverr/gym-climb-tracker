@@ -3,8 +3,10 @@ package com.awverret.gymclimbtracker.store;
 import android.content.Context;
 
 import com.awverret.gymclimbtracker.activities.MainActivity;
+import com.awverret.gymclimbtracker.model.BoulderClimb;
 import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.LeadClimb;
+import com.awverret.gymclimbtracker.model.TopRopeClimb;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,14 +23,21 @@ public class FirebaseCloudStore implements CloudStore {
 
        db = FirebaseDatabase.getInstance().getReference();
 
-       // FirebaseDatabase database = FirebaseDatabase.getInstance();
+    }
 
 
-
+    @Override
+    public void saveClimb(LeadClimb climb) {
+        db.child("climbs").child(climb.getId()).setValue(climb);
     }
 
     @Override
-    public void saveLeadClimb(LeadClimb climb) {
-     db.child("climbs").child(climb.getId()).setValue(climb);
+    public void saveClimb(TopRopeClimb climb) {
+        db.child("climbs").child(climb.getId()).setValue(climb);
+    }
+
+    @Override
+    public void saveClimb(BoulderClimb climb) {
+        db.child("climbs").child(climb.getId()).setValue(climb);
     }
 }
