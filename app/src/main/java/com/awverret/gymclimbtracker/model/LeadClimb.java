@@ -8,7 +8,7 @@ import static java.util.UUID.randomUUID;
 
 public class LeadClimb extends Climb {
 
-    String id;
+
     RopeGrade ropeGrade;
 
     public LeadClimb() {
