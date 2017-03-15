@@ -42,4 +42,50 @@
         <item>v9</item>
         <item>v10</item>
     </string-array>
+    <string-array name="climb_color_array">
+        <item>Black</item>
+        <item>White</item>
+        <item>Tan</item>
+        <item>Orange</item>
+        <item>Red</item>
+        <item>Purple</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+    </string-array>
+    <string-array name="climb_wall_array">
+        <item>Welcome Wall</item>
+        <item>Left Cheek</item>
+        <item>Right Cheek</item>
+        <item>Bouldering Slabs</item>
+        <item>10 Degree Wall</item>
+        <item>Prow</item>
+        <item>Learning Center</item>
+        <item>Alcove</item>
+        <item>Storage Slabs</item>
+        <item>Tower</item>
+        <item>Gallery</item>
+        <item>Trophy Wall</item>
+        <item>Holiday Wall</item>
+        <item>Constant Wall</item>
+        <item>Crystal</item>
+        <item>Marathon Wall</item>
+        <item>Double Wave</item>
+        <item>Sun Wall</item>
+        <item>Mega Slab</item>
+        <item>Crows Nest</item>
+        <item>Crack Wall</item>
+        <item>Ice Box</item>
+        <item>Belly</item>
+        <item>Wave</item>
+        <item>Corner-Copia</item>
+    </string-array>
+    <string-array name="climb_setter_array">
+        <item>Smash(Walker E.)</item>
+        <item>DH(Danny H.)</item>
+        <item>Monkey Face(Ronaldo E.)</item>
+        <item>Meerkat(Ford M.)</item>
+        <item>JD(John D.)</item>
+        <item>Cam(Cameron C.)</item>
+    </string-array>
 </resources>
