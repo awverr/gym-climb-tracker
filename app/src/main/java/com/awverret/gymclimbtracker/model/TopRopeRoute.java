@@ -15,7 +15,6 @@ public class TopRopeRoute extends Route {
     }
 
     public TopRopeRoute(RopeGrade ropeGrade) {
-        id = randomUUID().toString();
         this.ropeGrade = ropeGrade;
     }
 

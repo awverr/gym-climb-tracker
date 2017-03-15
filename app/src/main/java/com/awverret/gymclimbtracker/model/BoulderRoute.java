@@ -15,7 +15,6 @@ public class BoulderRoute extends Route {
     }
 
     public BoulderRoute(BoulderGrade boulderGrade) {
-        id = randomUUID().toString();
         this.boulderGrade = boulderGrade;
     }
 

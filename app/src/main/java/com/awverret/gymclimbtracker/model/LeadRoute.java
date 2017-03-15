@@ -16,7 +16,6 @@ public class LeadRoute extends Route {
     }
 
     public LeadRoute(RopeGrade ropeGrade) {
-        id = randomUUID().toString();
         this.ropeGrade = ropeGrade;
     }
 
