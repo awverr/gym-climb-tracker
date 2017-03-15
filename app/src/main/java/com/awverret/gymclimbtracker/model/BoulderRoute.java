@@ -8,7 +8,6 @@ import static java.util.UUID.randomUUID;
 
 public class BoulderRoute extends Route {
 
-    String id;
     BoulderGrade boulderGrade;
 
     public BoulderRoute() {
