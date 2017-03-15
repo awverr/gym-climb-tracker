@@ -29,10 +29,35 @@
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="56dp"
         android:id="@+id/save_route_button"
-        android:onClick="saveRoute" />
+        android:onClick="saveRoute"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:id="@+id/route_setter_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/grade_spinner"
+        android:layout_marginTop="59dp" />
+
+    <Spinner
+        android:id="@+id/route_color_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <Spinner
+        android:id="@+id/route_wall_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/save_route_button"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="45dp" />
 
 </RelativeLayout>
