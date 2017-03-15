@@ -4,7 +4,7 @@ package com.awverret.gymclimbtracker.model;
  * Created by aubry on 3/14/2017.
  */
 
-public enum Color {
+public enum RouteColor {
     BLACK("Black"),
     WHITE("White"),
     TAN("Tan"),
@@ -17,7 +17,7 @@ public enum Color {
 
     private String text;
 
-    Color(String text) {
+    RouteColor(String text) {
         this.text = text;
     }
 
