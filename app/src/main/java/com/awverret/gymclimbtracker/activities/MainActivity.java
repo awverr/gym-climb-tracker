@@ -25,7 +25,7 @@ import static com.awverret.gymclimbtracker.model.RouteType.TOP_ROPE;
 public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
-        Spinner routeTypeSpinner, gradeSpinner;
+        Spinner routeTypeSpinner, routeGradeSpinner, routeSetterSpinner, routeWallSpinner, routeColorSpinner;
         CloudStore store;
         RouteType routeType = TOP_ROPE;
 
@@ -35,9 +35,18 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
         routeTypeSpinner = (Spinner) findViewById(R.id.route_type_spinner);
-        gradeSpinner = (Spinner) findViewById(R.id.grade_spinner);
+        routeGradeSpinner = (Spinner) findViewById(R.id.grade_spinner);
+        routeSetterSpinner = (Spinner) findViewById(R.id.route_setter_spinner);
+        routeWallSpinner = (Spinner) findViewById(R.id.route_wall_spinner);
+        routeColorSpinner = (Spinner) findViewById(R.id.route_color_spinner);
         initializeRouteTypeSpinner(routeTypeSpinner);
+        initializeRouteSetterSpinner(routeSetterSpinner);
+        initializeRouteWallSpinner(routeWallSpinner);
+        initializeRouteColorSpinner(routeColorSpinner);
         routeTypeSpinner.setOnItemSelectedListener(this);
+        routeSetterSpinner.setOnItemSelectedListener(this);
+        routeWallSpinner.setOnItemSelectedListener(this);
+        routeColorSpinner.setOnItemSelectedListener(this);
 
         store = new FirebaseCloudStore(this);
     }
@@ -51,6 +60,32 @@ public class MainActivity extends AppCompatActivity implements
         spinner.setAdapter(routeTypeAdapter);
     }
 
+    public void initializeRouteSetterSpinner(Spinner spinner){
+        //route_setter_spinner
+
+        ArrayAdapter<CharSequence> routeSetterAdapter = ArrayAdapter.createFromResource(this,
+                R.array.route_setter_array, android.R.layout.simple_spinner_item);
+        routeSetterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(routeSetterAdapter);
+    }
+
+    public void initializeRouteColorSpinner(Spinner spinner){
+        //route_color_spinner
+
+        ArrayAdapter<CharSequence> routeColorAdapter = ArrayAdapter.createFromResource(this,
+                R.array.route_color_array, android.R.layout.simple_spinner_item);
+        routeColorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(routeColorAdapter);
+    }
+
+    public void initializeRouteWallSpinner(Spinner spinner){
+        //route_wall_spinner
+
+        ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(this,
+                R.array.route_wall_array, android.R.layout.simple_spinner_item);
+        routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(routeWallAdapter);
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -60,14 +95,14 @@ public class MainActivity extends AppCompatActivity implements
             ArrayAdapter<CharSequence> ropeGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.rope_grade_array, android.R.layout.simple_spinner_item);
             ropeGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            gradeSpinner.setAdapter(ropeGradeAdapter);
+            routeGradeSpinner.setAdapter(ropeGradeAdapter);
         }
         if (routeTypeString.contentEquals("Lead")){
             routeType = LEAD;
             ArrayAdapter<CharSequence> ropeGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.rope_grade_array, android.R.layout.simple_spinner_item);
             ropeGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            gradeSpinner.setAdapter(ropeGradeAdapter);
+            routeGradeSpinner.setAdapter(ropeGradeAdapter);
 
         }
         if(routeTypeString.contentEquals("Boulder")) {
@@ -75,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements
             ArrayAdapter<CharSequence> boulderGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.boulder_grade_array, android.R.layout.simple_spinner_item);
             boulderGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            gradeSpinner.setAdapter(boulderGradeAdapter);
+            routeGradeSpinner.setAdapter(boulderGradeAdapter);
         }
     }
 
@@ -85,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void saveRoute(View view){
-        String stringGrade = (String) gradeSpinner.getSelectedItem();
+        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
         if(routeType.equals(LEAD)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
             store.saveRoute(new LeadRoute(grade));
