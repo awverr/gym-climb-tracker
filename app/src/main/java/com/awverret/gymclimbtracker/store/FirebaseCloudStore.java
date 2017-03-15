@@ -2,12 +2,9 @@ package com.awverret.gymclimbtracker.store;
 
 import android.content.Context;
 
-import com.awverret.gymclimbtracker.activities.MainActivity;
-import com.awverret.gymclimbtracker.model.BoulderClimb;
-import com.awverret.gymclimbtracker.model.Climb;
-import com.awverret.gymclimbtracker.model.LeadClimb;
-import com.awverret.gymclimbtracker.model.TopRopeClimb;
-import com.google.firebase.FirebaseApp;
+import com.awverret.gymclimbtracker.model.BoulderRoute;
+import com.awverret.gymclimbtracker.model.LeadRoute;
+import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,17 +24,17 @@ public class FirebaseCloudStore implements CloudStore {
 
 
     @Override
-    public void saveClimb(LeadClimb climb) {
-        db.child("climbs").child(climb.getId()).setValue(climb);
+    public void saveRoute(LeadRoute route) {
+        db.child("climbs").child(route.getId()).setValue(route);
     }
 
     @Override
-    public void saveClimb(TopRopeClimb climb) {
-        db.child("climbs").child(climb.getId()).setValue(climb);
+    public void saveRoute(TopRopeRoute route) {
+        db.child("climbs").child(route.getId()).setValue(route);
     }
 
     @Override
-    public void saveClimb(BoulderClimb climb) {
-        db.child("climbs").child(climb.getId()).setValue(climb);
+    public void saveRoute(BoulderRoute route) {
+        db.child("routes").child(route.getId()).setValue(route);
     }
 }

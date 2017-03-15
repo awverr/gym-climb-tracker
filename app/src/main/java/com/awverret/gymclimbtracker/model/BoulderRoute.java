@@ -6,25 +6,25 @@ import static java.util.UUID.randomUUID;
  * Created by aubry on 3/1/17.
  */
 
-public class TopRopeClimb extends Climb {
+public class BoulderRoute extends Route {
 
     String id;
-    RopeGrade ropeGrade;
+    BoulderGrade boulderGrade;
 
-    public TopRopeClimb() {
+    public BoulderRoute() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public TopRopeClimb(RopeGrade ropeGrade) {
+    public BoulderRoute(BoulderGrade boulderGrade) {
         id = randomUUID().toString();
-        this.ropeGrade = ropeGrade;
+        this.boulderGrade = boulderGrade;
     }
 
     public String getId() {
         return id;
     }
 
-    public RopeGrade getRopeGrade() {
-        return ropeGrade;
+    public BoulderGrade getBoulderGrade() {
+        return boulderGrade;
     }
 }

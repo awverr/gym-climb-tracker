@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by aubry on 2/24/17.
  */
 
-public class Climb {
+public class Route {
 
     String id;
     Color color;
@@ -15,7 +15,7 @@ public class Climb {
    // Setter setter;
     Date setDate;
 
-    public Climb() {
+    public Route() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 

@@ -1,9 +1,8 @@
 package com.awverret.gymclimbtracker.store;
 
-import com.awverret.gymclimbtracker.model.BoulderClimb;
-import com.awverret.gymclimbtracker.model.Climb;
-import com.awverret.gymclimbtracker.model.LeadClimb;
-import com.awverret.gymclimbtracker.model.TopRopeClimb;
+import com.awverret.gymclimbtracker.model.BoulderRoute;
+import com.awverret.gymclimbtracker.model.LeadRoute;
+import com.awverret.gymclimbtracker.model.TopRopeRoute;
 
 /**
  * Created by aubry on 3/1/17. Storage interface.
@@ -11,7 +10,7 @@ import com.awverret.gymclimbtracker.model.TopRopeClimb;
 
 public interface CloudStore {
 
-    void saveClimb(LeadClimb climb);
-    void saveClimb(TopRopeClimb climb);
-    void saveClimb(BoulderClimb climb);
+    void saveRoute(LeadRoute route);
+    void saveRoute(TopRopeRoute route);
+    void saveRoute(BoulderRoute route);
 }

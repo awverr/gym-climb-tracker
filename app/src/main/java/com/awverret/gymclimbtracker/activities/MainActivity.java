@@ -5,75 +5,73 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
-import com.awverret.gymclimbtracker.model.BoulderClimb;
+import com.awverret.gymclimbtracker.model.BoulderRoute;
 import com.awverret.gymclimbtracker.model.BoulderGrade;
-import com.awverret.gymclimbtracker.model.Climb;
-import com.awverret.gymclimbtracker.model.ClimbType;
-import com.awverret.gymclimbtracker.model.LeadClimb;
+import com.awverret.gymclimbtracker.model.RouteType;
+import com.awverret.gymclimbtracker.model.LeadRoute;
 import com.awverret.gymclimbtracker.model.RopeGrade;
-import com.awverret.gymclimbtracker.model.TopRopeClimb;
+import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.google.firebase.FirebaseApp;
 
-import static com.awverret.gymclimbtracker.model.ClimbType.BOULDER;
-import static com.awverret.gymclimbtracker.model.ClimbType.LEAD;
-import static com.awverret.gymclimbtracker.model.ClimbType.TOP_ROPE;
+import static com.awverret.gymclimbtracker.model.RouteType.BOULDER;
+import static com.awverret.gymclimbtracker.model.RouteType.LEAD;
+import static com.awverret.gymclimbtracker.model.RouteType.TOP_ROPE;
 
 public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
-        Spinner climbTypeSpinner, gradeSpinner;
+        Spinner routeTypeSpinner, gradeSpinner;
         CloudStore store;
-        ClimbType climbType = TOP_ROPE;
+        RouteType routeType = TOP_ROPE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
-        climbTypeSpinner = (Spinner) findViewById(R.id.climb_type_spinner);
+        routeTypeSpinner = (Spinner) findViewById(R.id.route_type_spinner);
         gradeSpinner = (Spinner) findViewById(R.id.grade_spinner);
-        initializeClimbTypeSpinner(climbTypeSpinner);
-        climbTypeSpinner.setOnItemSelectedListener(this);
+        initializeRouteTypeSpinner(routeTypeSpinner);
+        routeTypeSpinner.setOnItemSelectedListener(this);
 
         store = new FirebaseCloudStore(this);
     }
 
-    public void initializeClimbTypeSpinner(Spinner spinner){
-        //climb_type_spinner
+    public void initializeRouteTypeSpinner(Spinner spinner){
+        //route_type_spinner
 
-        ArrayAdapter<CharSequence> climbTypeAdapter = ArrayAdapter.createFromResource(this,
-                R.array.climb_type_array, android.R.layout.simple_spinner_item);
-        climbTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(climbTypeAdapter);
+        ArrayAdapter<CharSequence> routeTypeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.route_type_array, android.R.layout.simple_spinner_item);
+        routeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(routeTypeAdapter);
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String climbTypeString= String.valueOf(climbTypeSpinner.getSelectedItem());
-        if(climbTypeString.contentEquals("Top Rope")) {
-            climbType = TOP_ROPE;
+        String routeTypeString= String.valueOf(routeTypeSpinner.getSelectedItem());
+        if(routeTypeString.contentEquals("Top Rope")) {
+            routeType = TOP_ROPE;
             ArrayAdapter<CharSequence> ropeGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.rope_grade_array, android.R.layout.simple_spinner_item);
             ropeGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             gradeSpinner.setAdapter(ropeGradeAdapter);
         }
-        if (climbTypeString.contentEquals("Lead")){
-            climbType = LEAD;
+        if (routeTypeString.contentEquals("Lead")){
+            routeType = LEAD;
             ArrayAdapter<CharSequence> ropeGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.rope_grade_array, android.R.layout.simple_spinner_item);
             ropeGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             gradeSpinner.setAdapter(ropeGradeAdapter);
 
         }
-        if(climbTypeString.contentEquals("Boulder")) {
-            climbType = BOULDER;
+        if(routeTypeString.contentEquals("Boulder")) {
+            routeType = BOULDER;
             ArrayAdapter<CharSequence> boulderGradeAdapter = ArrayAdapter.createFromResource(this,
                     R.array.boulder_grade_array, android.R.layout.simple_spinner_item);
             boulderGradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -86,19 +84,19 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    public void saveClimb(View view){
+    public void saveRoute(View view){
         String stringGrade = (String) gradeSpinner.getSelectedItem();
-        if(climbType.equals(LEAD)){
+        if(routeType.equals(LEAD)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
-            store.saveClimb(new LeadClimb(grade));
+            store.saveRoute(new LeadRoute(grade));
         }
-        if(climbType.equals(TOP_ROPE)){
+        if(routeType.equals(TOP_ROPE)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
-            store.saveClimb(new TopRopeClimb(grade));
+            store.saveRoute(new TopRopeRoute(grade));
         }
-        if(climbType.equals(BOULDER)){
+        if(routeType.equals(BOULDER)){
             BoulderGrade grade = BoulderGrade.fromString(stringGrade);
-            store.saveClimb(new BoulderClimb(grade));
+            store.saveRoute(new BoulderRoute(grade));
         }
     }
 }

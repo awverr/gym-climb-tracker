@@ -14,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:id="@+id/climb_type_spinner" />
+        android:id="@+id/route_type_spinner" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/climb_type_spinner"
+        android:layout_below="@+id/route_type_spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="48dp"
@@ -32,7 +32,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="108dp"
-        android:id="@+id/save_climb_button"
-        android:onClick="saveClimb" />
+        android:id="@+id/save_route_button"
+        android:onClick="saveRoute" />
 
 </RelativeLayout>

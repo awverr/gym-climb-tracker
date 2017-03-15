@@ -6,16 +6,16 @@ import static java.util.UUID.randomUUID;
  * Created by aubry on 3/1/17.
  */
 
-public class LeadClimb extends Climb {
+public class LeadRoute extends Route {
 
 
     RopeGrade ropeGrade;
 
-    public LeadClimb() {
+    public LeadRoute() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public LeadClimb(RopeGrade ropeGrade) {
+    public LeadRoute(RopeGrade ropeGrade) {
         id = randomUUID().toString();
         this.ropeGrade = ropeGrade;
     }
