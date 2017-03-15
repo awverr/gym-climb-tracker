@@ -8,7 +8,6 @@ import static java.util.UUID.randomUUID;
 
 public class TopRopeRoute extends Route {
 
-    String id;
     RopeGrade ropeGrade;
 
     public TopRopeRoute() {
