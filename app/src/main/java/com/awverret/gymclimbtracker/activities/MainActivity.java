@@ -18,6 +18,11 @@ import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.google.firebase.FirebaseApp;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static com.awverret.gymclimbtracker.model.RouteType.BOULDER;
 import static com.awverret.gymclimbtracker.model.RouteType.LEAD;
 import static com.awverret.gymclimbtracker.model.RouteType.TOP_ROPE;
@@ -119,8 +124,14 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    public void saveRoute(View view){
+    public void saveRoute(View view) throws ParseException {
         String stringGrade = (String) routeGradeSpinner.getSelectedItem();
+        String stringDate = findViewById(R.id.date_text_box).toString();
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM"); // Make sure user insert date into edittext in this format.
+
+        Date date = formatter.parse(stringDate);
+
         if(routeType.equals(LEAD)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
             store.saveRoute(new LeadRoute(grade));
