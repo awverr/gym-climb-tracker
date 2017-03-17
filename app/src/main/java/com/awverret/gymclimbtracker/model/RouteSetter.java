@@ -5,12 +5,13 @@ package com.awverret.gymclimbtracker.model;
  */
 
 public enum RouteSetter {
-    SMASH("Smash(Walker E.)"),
-    DH("DH(Danny H.)"),
-    MONKEY_FACE("Monkey Face(Ronaldo E.)"),
-    MEERKAT(">Meerkat(Ford M.)"),
-    JD("JD(John D.)"),
-    CAM("Cam(Cameron C.)");
+    SMASH("Smash"),
+    DH("DH"),
+    MONKEY_FACE("Monkey Face"),
+    MEERKAT(">Meerkat"),
+    JD("JD"),
+    CAM("Cam"),
+    MZ("MZ");
 
     private String text;
 
