@@ -81,11 +81,12 @@
         <item>Corner-Copia</item>
     </string-array>
     <string-array name="route_setter_array">
-        <item>Smash(Walker E.)</item>
-        <item>DH(Danny H.)</item>
-        <item>Monkey Face(Ronaldo E.)</item>
-        <item>Meerkat(Ford M.)</item>
-        <item>JD(John D.)</item>
-        <item>Cam(Cameron C.)</item>
+        <item>Smash</item>
+        <item>DH</item>
+        <item>Monkey Face</item>
+        <item>Meerkat</item>
+        <item>JD</item>
+        <item>Cam</item>
+        <item>MZ</item>
     </string-array>
 </resources>
