@@ -1,5 +1,7 @@
 package com.awverret.gymclimbtracker.model;
 
+import java.util.Date;
+
 import static java.util.UUID.randomUUID;
 
 /**
@@ -9,20 +11,44 @@ import static java.util.UUID.randomUUID;
 public class BoulderRoute extends Route {
 
     BoulderGrade boulderGrade;
+    RouteColor color;
+    RouteWall wall;
+    String name;
+    RouteSetter setter;
+    Date setDate;
 
     public BoulderRoute() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public BoulderRoute(BoulderGrade boulderGrade) {
+    public BoulderRoute(BoulderGrade boulderGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
         this.boulderGrade = boulderGrade;
-    }
-
-    public String getId() {
-        return id;
+        this.name = name;
+        this.setter = setter;
+        this.color = color;
+        this.wall = wall;
+        this.setDate = setDate;
     }
 
     public BoulderGrade getBoulderGrade() {
         return boulderGrade;
     }
+
+    public RouteSetter getSetter() {
+        return setter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public RouteColor getColor() {
+        return color;
+    }
+
+    public RouteWall getWall() {
+        return wall;
+    }
+
+    public Date getSetDate() {return setDate;}
 }
