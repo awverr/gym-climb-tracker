@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
 import com.awverret.gymclimbtracker.model.BoulderRoute;
 import com.awverret.gymclimbtracker.model.BoulderGrade;
+import com.awverret.gymclimbtracker.model.RouteColor;
+import com.awverret.gymclimbtracker.model.RouteSetter;
 import com.awverret.gymclimbtracker.model.RouteType;
 import com.awverret.gymclimbtracker.model.LeadRoute;
 import com.awverret.gymclimbtracker.model.RopeGrade;
+import com.awverret.gymclimbtracker.model.RouteWall;
 import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
@@ -22,6 +26,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.awverret.gymclimbtracker.model.RouteType.BOULDER;
 import static com.awverret.gymclimbtracker.model.RouteType.LEAD;
@@ -125,24 +130,33 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void saveRoute(View view) throws ParseException {
-        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-        String stringDate = findViewById(R.id.date_text_box).toString();
+        DateFormat formatter = new SimpleDateFormat("MM/yy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
 
-        DateFormat formatter = new SimpleDateFormat("dd/MM"); // Make sure user insert date into edittext in this format.
+        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
+        EditText editTextDate = (EditText) findViewById(R.id.date_text_box);
+        String stringDate = editTextDate.getText().toString();
+        String stringSetter = (String) routeSetterSpinner.getSelectedItem();
+        String stringColor = (String) routeColorSpinner.getSelectedItem();
+        String stringWall = (String) routeWallSpinner.getSelectedItem();
+        RouteSetter setter = RouteSetter.fromString(stringSetter);
+        RouteColor color = RouteColor.fromString(stringColor);
+        RouteWall wall = RouteWall.fromString(stringWall);
+
+        System.out.println("Date string is: " + stringDate);
 
         Date date = formatter.parse(stringDate);
 
         if(routeType.equals(LEAD)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
-            store.saveRoute(new LeadRoute(grade));
+            store.saveRoute(new LeadRoute(grade, "unnamed", setter, color, wall, date));
         }
         if(routeType.equals(TOP_ROPE)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
-            store.saveRoute(new TopRopeRoute(grade));
+            store.saveRoute(new TopRopeRoute(grade, "unnamed", setter, color, wall, date));
         }
         if(routeType.equals(BOULDER)){
             BoulderGrade grade = BoulderGrade.fromString(stringGrade);
-            store.saveRoute(new BoulderRoute(grade));
+            store.saveRoute(new BoulderRoute(grade, "unnamed", setter, color, wall, date));
         }
     }
 }
