@@ -22,4 +22,26 @@ public enum RouteSetter {
     public String getText() {
         return this.text;
     }
+
+    public static RouteSetter fromString(String text){
+        RouteSetter enumValue = null;
+
+        switch(text) {
+            case "Smash":  enumValue = SMASH;
+                break;
+            case "DH":  enumValue = DH;
+                break;
+            case "Monkey Face":  enumValue = MONKEY_FACE;
+                break;
+            case "Meerkat":  enumValue = MEERKAT;
+                break;
+            case "JD":  enumValue = JD;
+                break;
+            case "Cam":  enumValue = CAM;
+                break;
+            case "MZ":  enumValue = MZ;
+                break;
+        }
+        return enumValue;
+    }
 }
