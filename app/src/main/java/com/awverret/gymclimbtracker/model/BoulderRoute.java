@@ -9,19 +9,21 @@ import static java.util.UUID.randomUUID;
  */
 
 public class BoulderRoute extends Route {
-
+    String id;
     BoulderGrade boulderGrade;
     RouteColor color;
     RouteWall wall;
     String name;
     RouteSetter setter;
-    Date setDate;
+    //Date setDate;
+    long setDate;
 
     public BoulderRoute() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public BoulderRoute(BoulderGrade boulderGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
+    public BoulderRoute(BoulderGrade boulderGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Long setDate) {
+        id = randomUUID().toString();
         this.boulderGrade = boulderGrade;
         this.name = name;
         this.setter = setter;
@@ -50,5 +52,7 @@ public class BoulderRoute extends Route {
         return wall;
     }
 
-    public Date getSetDate() {return setDate;}
+    public Long getSetDate() {return setDate;}
+
+    public String getId() {return id;}
 }
