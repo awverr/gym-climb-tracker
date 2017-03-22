@@ -10,6 +10,7 @@ import static java.util.UUID.randomUUID;
 
 public class TopRopeRoute extends Route {
 
+    String id;
     RopeGrade ropeGrade;
     RouteColor color;
     RouteWall wall;
@@ -22,6 +23,7 @@ public class TopRopeRoute extends Route {
     }
 
     public TopRopeRoute(RopeGrade ropeGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
+        id = randomUUID().toString();
         this.ropeGrade = ropeGrade;
         this.name = name;
         this.setter = setter;
@@ -29,6 +31,8 @@ public class TopRopeRoute extends Route {
         this.wall = wall;
         this.setDate = setDate;
     }
+
+    public String getId() {return id;}
 
     public RopeGrade getRopeGrade() {
         return ropeGrade;
