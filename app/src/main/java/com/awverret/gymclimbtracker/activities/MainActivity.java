@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void saveRoute(View view) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("MM/yy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+        DateFormat formatter = new SimpleDateFormat("MM/dd", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
 
         String stringGrade = (String) routeGradeSpinner.getSelectedItem();
         EditText editTextDate = (EditText) findViewById(R.id.date_text_box);
