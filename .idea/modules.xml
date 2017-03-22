@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GymClimbTracker.iml" filepath="$PROJECT_DIR$/GymClimbTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gym-climb-tracker.iml" filepath="$PROJECT_DIR$/gym-climb-tracker.iml" />
     </modules>
   </component>
 </project>
