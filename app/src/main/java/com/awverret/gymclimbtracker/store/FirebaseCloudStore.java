@@ -25,12 +25,12 @@ public class FirebaseCloudStore implements CloudStore {
 
     @Override
     public void saveRoute(LeadRoute route) {
-        db.child("climbs").child(route.getId()).setValue(route);
+        db.child("routes").child(route.getId()).setValue(route);
     }
 
     @Override
     public void saveRoute(TopRopeRoute route) {
-        db.child("climbs").child(route.getId()).setValue(route);
+        db.child("routes").child(route.getId()).setValue(route);
     }
 
     @Override
