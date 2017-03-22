@@ -10,19 +10,10 @@ import static java.util.UUID.randomUUID;
 
 public class Route {
 
-    String id;
+   // String id;
 
 
     public Route() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
-
-    public Route(String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate){
-        id = randomUUID().toString();
-
-    }
-
-    public String getId() {return id;}
-
-
 }
