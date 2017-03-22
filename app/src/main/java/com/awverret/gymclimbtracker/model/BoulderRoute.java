@@ -16,13 +16,14 @@ public class BoulderRoute extends Route {
     RouteWall wall;
     String name;
     RouteSetter setter;
-    Date setDate;
+    //Date setDate;
+    long setDate;
 
     public BoulderRoute() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public BoulderRoute(BoulderGrade boulderGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
+    public BoulderRoute(BoulderGrade boulderGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, long setDate) {
         id = randomUUID().toString();
         this.boulderGrade = boulderGrade;
         this.name = name;
@@ -54,5 +55,5 @@ public class BoulderRoute extends Route {
         return wall;
     }
 
-    public Date getSetDate() {return setDate;}
+    public long getSetDate() {return setDate;}
 }
