@@ -145,18 +145,19 @@ public class MainActivity extends AppCompatActivity implements
         System.out.println("Date string is: " + stringDate);
 
         Date date = formatter.parse(stringDate);
+        long dateInMillis = date.getTime();
 
         if(routeType.equals(LEAD)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
-            store.saveRoute(new LeadRoute(grade, "unnamed", setter, color, wall, date));
+            store.saveRoute(new LeadRoute(grade, "unnamed", setter, color, wall, dateInMillis));
         }
         if(routeType.equals(TOP_ROPE)){
             RopeGrade grade = RopeGrade.fromString(stringGrade);
-            store.saveRoute(new TopRopeRoute(grade, "unnamed", setter, color, wall, date));
+            store.saveRoute(new TopRopeRoute(grade, "unnamed", setter, color, wall, dateInMillis));
         }
         if(routeType.equals(BOULDER)){
             BoulderGrade grade = BoulderGrade.fromString(stringGrade);
-            store.saveRoute(new BoulderRoute(grade, "unnamed", setter, color, wall, date));
+            store.saveRoute(new BoulderRoute(grade, "unnamed", setter, color, wall, dateInMillis));
         }
     }
 }
