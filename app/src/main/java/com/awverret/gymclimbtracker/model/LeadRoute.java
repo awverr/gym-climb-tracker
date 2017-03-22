@@ -16,13 +16,14 @@ public class LeadRoute extends Route {
     RouteWall wall;
     String name;
     RouteSetter setter;
-    Date setDate;
+    //Date setDate;
+    long setDate;
 
     public LeadRoute() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public LeadRoute(RopeGrade ropeGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
+    public LeadRoute(RopeGrade ropeGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, long setDate) {
         id = randomUUID().toString();
         this.ropeGrade = ropeGrade;
         this.name = name;
@@ -56,5 +57,5 @@ public class LeadRoute extends Route {
         return wall;
     }
 
-    public Date getSetDate() {return setDate;}
+    public long getSetDate() {return setDate;}
 }
