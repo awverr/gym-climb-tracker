@@ -10,7 +10,7 @@ import static java.util.UUID.randomUUID;
 
 public class LeadRoute extends Route {
 
-
+    String id;
     RopeGrade ropeGrade;
     RouteColor color;
     RouteWall wall;
@@ -23,6 +23,7 @@ public class LeadRoute extends Route {
     }
 
     public LeadRoute(RopeGrade ropeGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
+        id = randomUUID().toString();
         this.ropeGrade = ropeGrade;
         this.name = name;
         this.setter = setter;
