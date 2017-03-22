@@ -10,6 +10,7 @@ import static java.util.UUID.randomUUID;
 
 public class BoulderRoute extends Route {
 
+    String id;
     BoulderGrade boulderGrade;
     RouteColor color;
     RouteWall wall;
@@ -22,6 +23,7 @@ public class BoulderRoute extends Route {
     }
 
     public BoulderRoute(BoulderGrade boulderGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, Date setDate) {
+        id = randomUUID().toString();
         this.boulderGrade = boulderGrade;
         this.name = name;
         this.setter = setter;
@@ -29,6 +31,8 @@ public class BoulderRoute extends Route {
         this.wall = wall;
         this.setDate = setDate;
     }
+
+    public String getId() {return id;}
 
     public BoulderGrade getBoulderGrade() {
         return boulderGrade;
