@@ -161,3 +161,6 @@ crashlytics-build.properties
 *.jar
 *.war
 *.ear
+app/libs/
+app/src/main/res/drawable/
+gradlew.bat
