@@ -1,5 +1,6 @@
 package com.awverret.gymclimbtracker.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +19,12 @@ import com.awverret.gymclimbtracker.model.LeadRoute;
 import com.awverret.gymclimbtracker.model.RopeGrade;
 import com.awverret.gymclimbtracker.model.RouteWall;
 import com.awverret.gymclimbtracker.model.TopRopeRoute;
+import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
+import com.awverret.gymclimbtracker.store.LocalStore;
+import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
+import com.google.common.base.Optional;
 import com.google.firebase.FirebaseApp;
 
 import java.text.DateFormat;
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements
         Spinner routeTypeSpinner, routeGradeSpinner, routeSetterSpinner, routeWallSpinner, routeColorSpinner;
         CloudStore store;
         RouteType routeType = TOP_ROPE;
+
+    LocalStore localStore = new PreferencesLocalStore(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +66,21 @@ public class MainActivity extends AppCompatActivity implements
         routeColorSpinner.setOnItemSelectedListener(this);
 
         store = new FirebaseCloudStore(this);
+
+        load();
     }
+
+    private void load() {
+        Optional<User> user = localStore.getUser();
+
+        if (!user.isPresent()) {
+            // send to login if not logged in
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+
 
     public void initializeRouteTypeSpinner(Spinner spinner){
         //route_type_spinner
