@@ -36,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.model.User;
+import com.awverret.gymclimbtracker.store.LocalStore;
+import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -69,6 +72,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     GoogleApiClient mGoogleApiClient;
+
+    LocalStore localStore= new PreferencesLocalStore(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,10 +174,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+                handleSignInResult(result);
             } else {
                 // Google Sign In failed, update UI appropriately
                 // ...
@@ -185,6 +192,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+           User user = new User(acct.getId(), acct.getEmail(), acct.getDisplayName(), acct.getFamilyName());
+            localStore.setUser(user);
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
          //   mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
         } else {
@@ -206,4 +216,3 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     }
 }
-
