@@ -5,6 +5,8 @@ import android.content.Context;
 import com.awverret.gymclimbtracker.model.BoulderRoute;
 import com.awverret.gymclimbtracker.model.LeadRoute;
 import com.awverret.gymclimbtracker.model.TopRopeRoute;
+import com.awverret.gymclimbtracker.model.User;
+import com.awverret.gymclimbtracker.util.Callback;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,5 +38,10 @@ public class FirebaseCloudStore implements CloudStore {
     @Override
     public void saveRoute(BoulderRoute route) {
         db.child("routes").child(route.getId()).setValue(route);
+    }
+
+    @Override
+    public void googleLogin(User user, Callback<User> callback) {
+
     }
 }
