@@ -8,7 +8,7 @@ import com.google.common.base.Optional;
  */
 
 public interface LocalStore {
-  void clearUser();
+    void clearUser();
 
     Optional<User> getUser();
 
