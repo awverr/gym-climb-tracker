@@ -36,7 +36,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.model.BoulderRoute;
+import com.awverret.gymclimbtracker.model.LeadRoute;
+import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.model.User;
+import com.awverret.gymclimbtracker.store.CloudStore;
+import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.awverret.gymclimbtracker.store.LocalStore;
 import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.google.android.gms.auth.api.Auth;
@@ -73,7 +78,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     GoogleApiClient mGoogleApiClient;
 
-    LocalStore localStore= new PreferencesLocalStore(this);
+    private LocalStore localStore = new PreferencesLocalStore(this);
+    private CloudStore cloudStore = new FirebaseCloudStore(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +200,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             GoogleSignInAccount acct = result.getSignInAccount();
            User user = new User(acct.getId(), acct.getEmail(), acct.getDisplayName(), acct.getFamilyName());
             localStore.setUser(user);
+            cloudStore.googleLogin(user);
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
          //   mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
