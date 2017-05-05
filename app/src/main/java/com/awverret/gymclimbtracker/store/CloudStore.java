@@ -15,5 +15,6 @@ public interface CloudStore {
     void saveRoute(LeadRoute route);
     void saveRoute(TopRopeRoute route);
     void saveRoute(BoulderRoute route);
-    void googleLogin(User user, Callback<User> callback);
+    void googleLogin(User user);
+    void googleLogout();
 }
