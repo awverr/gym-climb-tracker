@@ -69,4 +69,14 @@
         android:ems="10"
         android:inputType="date" />
 
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:onClick="logout"
+        android:layout_alignTop="@+id/save_route_button"
+        android:text="Logout" />
+
 </RelativeLayout>
