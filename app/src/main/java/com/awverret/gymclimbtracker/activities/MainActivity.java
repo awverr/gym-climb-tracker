@@ -181,4 +181,9 @@ public class MainActivity extends AppCompatActivity implements
             store.saveRoute(new BoulderRoute(grade, "unnamed", setter, color, wall, dateInMillis));
         }
     }
+
+    public void logout(View view){
+        store.googleLogout();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    }
 }
