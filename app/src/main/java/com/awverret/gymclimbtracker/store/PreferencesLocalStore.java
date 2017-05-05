@@ -32,16 +32,16 @@ public class PreferencesLocalStore implements LocalStore {
                 .apply();
     }
 
-//    @Override
-//    public void clearUser() {
-//        // Add abstraction
-//        context.getSharedPreferences(PREF_TAG, 0).edit()
-//                .remove(UID)
-//                .remove(EMAIL)
-//                .remove(GIVEN_NAME)
-//                .remove(FAMILY_NAME)
-//                .apply();
-//    }
+    @Override
+    public void clearUser() {
+        // Add abstraction
+        context.getSharedPreferences(PREF_TAG, 0).edit()
+                .remove(UID)
+                .remove(EMAIL)
+                .remove(GIVEN_NAME)
+                .remove(FAMILY_NAME)
+                .apply();
+    }
 
     @Override
     public Optional<User> getUser() {
