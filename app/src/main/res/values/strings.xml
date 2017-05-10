@@ -103,4 +103,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_add_route">AddRouteActivity</string>
+    <string name="logout">Logout</string>
+    <string name="save">Save</string>
 </resources>
