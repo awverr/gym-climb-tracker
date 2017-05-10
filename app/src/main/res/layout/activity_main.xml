@@ -25,15 +25,6 @@
         android:layout_marginTop="48dp"
         android:id="@+id/grade_spinner" />
 
-    <Button
-        android:text="Save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/save_route_button"
-        android:onClick="saveRoute"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <Spinner
         android:id="@+id/route_setter_spinner"
         android:layout_width="match_parent"
@@ -70,6 +61,15 @@
         android:inputType="date" />
 
     <Button
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_route_button"
+        android:onClick="saveRoute"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,6 +77,6 @@
         android:layout_alignParentRight="true"
         android:onClick="logout"
         android:layout_alignTop="@+id/save_route_button"
-        android:text="Logout" />
+        android:text="@string/logout" />
 
 </RelativeLayout>
