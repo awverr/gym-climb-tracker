@@ -6,6 +6,8 @@ import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.util.Callback;
 
+import java.util.List;
+
 /**
  * Created by aubry on 3/1/17. Storage interface.
  */
@@ -17,4 +19,5 @@ public interface CloudStore {
     void saveRoute(BoulderRoute route);
     void googleLogin(User user);
     void googleLogout();
+    List<String> lookUpRoutes(Callback<List<String>> callback);
 }
