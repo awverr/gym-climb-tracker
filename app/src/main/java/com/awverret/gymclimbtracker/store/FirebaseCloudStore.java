@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.awverret.gymclimbtracker.model.BoulderRoute;
 import com.awverret.gymclimbtracker.model.LeadRoute;
+import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.util.Callback;
@@ -12,7 +13,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by aubry on 3/1/17.
@@ -69,5 +76,28 @@ public class FirebaseCloudStore implements CloudStore {
     @Override
     public void googleLogout() {
         FirebaseAuth.getInstance().signOut();
+    }
+
+    @Override
+    public List<String> lookUpRoutes(final Callback<List<String>> callback) {
+        final List<String> routes = new ArrayList<>();
+
+        db.child("routes").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                for (DataSnapshot routeSnapshot: snapshot.getChildren()) {
+                    Route route = routeSnapshot.getValue(Route.class);
+                    routes.add(route.getClass().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        return null;
     }
 }
