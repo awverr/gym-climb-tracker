@@ -35,19 +35,8 @@ public class FirebaseCloudStore implements CloudStore {
 
     }
 
-
     @Override
-    public void saveRoute(LeadRoute route) {
-        db.child("routes").child(route.getId()).setValue(route);
-    }
-
-    @Override
-    public void saveRoute(TopRopeRoute route) {
-        db.child("routes").child(route.getId()).setValue(route);
-    }
-
-    @Override
-    public void saveRoute(BoulderRoute route) {
+    public void saveRoute(Route route) {
         db.child("routes").child(route.getId()).setValue(route);
     }
 
@@ -86,9 +75,10 @@ public class FirebaseCloudStore implements CloudStore {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                for (DataSnapshot routeSnapshot: snapshot.getChildren()) {
+                for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
                     Route route = routeSnapshot.getValue(Route.class);
-                    routes.add(route.getClass().toString());
+                  //  routes.add(route.getClass().toString());
+                    System.out.println("VERRET: Route is: " + route.getClass().toString());
                 }
             }
 
@@ -98,6 +88,6 @@ public class FirebaseCloudStore implements CloudStore {
             }
 
         });
-        return null;
+        return routes;
     }
 }
