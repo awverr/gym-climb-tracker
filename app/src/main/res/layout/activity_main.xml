@@ -30,12 +30,20 @@
         android:text="Add Route" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/route_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/logout_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:id="@+id/routes_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/logout_button"
-        android:layout_marginTop="72dp" />
+        android:layout_below="@+id/route_spinner"
+        android:layout_marginTop="14dp" />
 
 </RelativeLayout>
