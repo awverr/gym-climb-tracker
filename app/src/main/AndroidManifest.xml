@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.awverret.gymclimbtracker">
+    package="com.topoutlabs.gymclimbtracker">
 
-    <uses-sdk tools:overrideLibrary="com.firebase.ui.auth"/>
+    <uses-sdk tools:overrideLibrary="com.firebase.ui.auth" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -25,7 +25,11 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".activities.AddRouteActivity"
+            android:label="@string/title_activity_add_route"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
