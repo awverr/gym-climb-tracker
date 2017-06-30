@@ -175,18 +175,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("VERRET: Made it to onActivityResult");
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+       if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 
             if (result.isSuccess()) {
+                System.out.println("VERRET: onActivityResult success");
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
                 handleSignInResult(result);
             } else {
+                result.getStatus().getStatusMessage();
+
                 // Google Sign In failed, update UI appropriately
                 // ...
             }
@@ -194,17 +197,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
+        System.out.println("VERRET: Made it to handleSignInResult");
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
            User user = new User(acct.getId(), acct.getEmail(), acct.getDisplayName(), acct.getFamilyName());
             localStore.setUser(user);
+            System.out.println("VERRET: LocalStore user is: " + localStore.getUser());
             cloudStore.googleLogin(user);
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
          //   mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
         } else {
+            System.out.println("VERRET: Login unsuccessful");
             // Signed out, show unauthenticated UI.
             updateUI(false);
         }
