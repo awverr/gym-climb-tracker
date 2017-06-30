@@ -51,12 +51,12 @@ public class FirebaseCloudStore implements CloudStore {
                 else{
                     db.child("users").child(user.getUid()).setValue(user);
                 }
-
+System.out.println("VERET: Cloustore login success");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                System.out.println("VERET: Cloustore login cancelled");
             }
 
         });
@@ -75,13 +75,15 @@ public class FirebaseCloudStore implements CloudStore {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
-                    String id = (String) routeSnapshot.child("id").getValue();
-                    routes.add(id);
-                    System.out.println("VERRET: Routes is now: " + routes);
-                    System.out.println("VERRET: Route id is: " + id);
+
+                    Route route = routeSnapshot.getValue(Route.class);
+//                    String id = (String) routeSnapshot.child("id").getValue();
+//                    routes.add(id);
+//                    System.out.println("VERRET: Routes is now: " + routes);
+//                    System.out.println("VERRET: Route id is: " + id);
 //                    Route route = routeSnapshot.getValue(Route.class);
 //                    routes.add(route.getClass().toString());
-//                    System.out.println("VERRET: Route is: " + route.getClass().toString());
+                    System.out.println("VERRET: Route is: " + route.toString());
                 }
                 System.out.println("VERRET: routes to return is: " + routes);
                 callback.receive(routes);
