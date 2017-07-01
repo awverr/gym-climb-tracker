@@ -1,5 +1,6 @@
 package com.awverret.gymclimbtracker.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -169,6 +170,8 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         long dateInMillis = date.getTime();
 
         store.saveRoute(new Route(type, grade, "unnamed", setter, color, wall, dateInMillis));
+
+        startActivity(new Intent(AddRouteActivity.this, MainActivity.class));
 
 //        if(routeType.equals(LEAD)){
 //            RopeGrade grade = RopeGrade.fromString(stringGrade);
