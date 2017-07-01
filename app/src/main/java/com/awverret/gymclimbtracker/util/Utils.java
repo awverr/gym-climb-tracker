@@ -15,7 +15,7 @@ public class Utils {
         return null;
     }
 
-    public String createRouteName(Route route){
+    public static String createRouteName(Route route){
 
         return route.getWall().toString() + " " + route.getColor() + " " + route.getRouteGrade().toString();
     }
