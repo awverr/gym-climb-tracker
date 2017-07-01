@@ -27,5 +27,9 @@
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"></activity>
     </application>
+    <activity
+        android:name=".activities.AddRouteActivity"
+        android:label="@string/title_activity_add_route"
+        android:theme="@style/AppTheme.NoActionBar"></activity>
 
 </manifest>
