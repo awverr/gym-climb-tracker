@@ -68,8 +68,8 @@ System.out.println("VERET: Cloustore login success");
     }
 
     @Override
-    public void lookUpRoutes(final Callback<ArrayList<String>> callback) {
-        final ArrayList<String> routes = new ArrayList<>();
+    public void lookUpRoutes(final Callback<ArrayList<Route>> callback) {
+        final ArrayList<Route> routes = new ArrayList<>();
 
         db.child("routes").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -77,15 +77,8 @@ System.out.println("VERET: Cloustore login success");
                 for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
 
                     Route route = routeSnapshot.getValue(Route.class);
-//                    String id = (String) routeSnapshot.child("id").getValue();
-//                    routes.add(id);
-//                    System.out.println("VERRET: Routes is now: " + routes);
-//                    System.out.println("VERRET: Route id is: " + id);
-//                    Route route = routeSnapshot.getValue(Route.class);
-//                    routes.add(route.getClass().toString());
-                    System.out.println("VERRET: Route is: " + route.toString());
+                    routes.add(route);
                 }
-                System.out.println("VERRET: routes to return is: " + routes);
                 callback.receive(routes);
             }
 
