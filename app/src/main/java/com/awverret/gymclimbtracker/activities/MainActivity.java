@@ -3,12 +3,16 @@ package com.awverret.gymclimbtracker.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
@@ -22,7 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.awverret.gymclimbtracker.R.id.activity_main;
-import static com.awverret.gymclimbtracker.R.id.routes_list_view;
+
+import static com.awverret.gymclimbtracker.util.Utils.createRouteName;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -30,11 +35,16 @@ public class MainActivity extends AppCompatActivity{
 
     LocalStore localStore = new PreferencesLocalStore(this);
 
-    Spinner routeSpinner;
+//    Spinner routeSpinner;
 
     ListView routesView;
 
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private RouteRecyclerAdapter recyclerAdapter;
+
     ArrayList<String> routes = new ArrayList<>();
+    ArrayList<Route> routeList = new ArrayList<>(); //For use in recylcer view.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +54,39 @@ public class MainActivity extends AppCompatActivity{
 
         store = new FirebaseCloudStore(this);
 
-        routeSpinner = (Spinner) findViewById(R.id.route_spinner);
+ //       routeSpinner = (Spinner) findViewById(R.id.route_spinner);
 
-        routesView = (ListView) findViewById(routes_list_view);
+  //      routesView = (ListView) findViewById(routes_list_view);
+
+        initializeRecyclerView(this);
+
+
+
+//        mLinearLayoutManager = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         load();
 
-        displayRoutes(this);
+   //     displayRoutes(this);
+    }
+
+    private void initializeRecyclerView(MainActivity view) {
+        store.lookUpRoutes(new Callback<ArrayList<Route>>() {
+            @Override
+            public void receive(ArrayList<Route> strings) {
+
+                for(Route r : strings){
+                    routes.add(createRouteName(r));
+                    routeList.add(r);
+                }
+                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+                recyclerAdapter = new RouteRecyclerAdapter(routeList);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                mRecyclerView.setAdapter(recyclerAdapter);
+            }
+        });
     }
 
     private void load() {
@@ -63,12 +99,12 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void initializeRouteSpinner(Spinner spinner){
-
-        ArrayAdapter<String> routeSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routes);
-        routeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        routeSpinner.setAdapter(routeSpinnerAdapter);
-    }
+//    public void initializeRouteSpinner(Spinner spinner){
+//
+//        ArrayAdapter<String> routeSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routes);
+//        routeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        routeSpinner.setAdapter(routeSpinnerAdapter);
+//    }
 
     public void initializeListView(ListView lv){
 
@@ -78,13 +114,17 @@ public class MainActivity extends AppCompatActivity{
 
     public void displayRoutes(MainActivity view){
 
-       store.lookUpRoutes(new Callback<ArrayList<String>>() {
+       store.lookUpRoutes(new Callback<ArrayList<Route>>() {
            @Override
-           public void receive(ArrayList<String> strings) {
+           public void receive(ArrayList<Route> strings) {
 
-               routes = strings;
-               initializeRouteSpinner(routeSpinner);
-               initializeListView(routesView);
+               for(Route r : strings){
+                   routes.add(createRouteName(r));
+                   routeList.add(r);
+               }
+               System.out.println("VERRET: routelist: " + routeList);
+            //   initializeRouteSpinner(routeSpinner);
+         //      initializeListView(routesView);
                System.out.println("VERRET: Routes are: " + strings);
            }
        });
