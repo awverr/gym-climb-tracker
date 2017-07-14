@@ -169,22 +169,9 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         Date date = formatter.parse(stringDate);
         long dateInMillis = date.getTime();
 
-        store.saveRoute(new Route(type, grade, "unnamed", setter, color, wall, dateInMillis));
+        store.saveRoute(new Route(type, grade, null, setter, color, wall, dateInMillis));
 
         startActivity(new Intent(AddRouteActivity.this, MainActivity.class));
-
-//        if(routeType.equals(LEAD)){
-//            RopeGrade grade = RopeGrade.fromString(stringGrade);
-//            store.saveRoute(new LeadRoute(grade, "unnamed", setter, color, wall, dateInMillis));
-//        }
-//        if(routeType.equals(TOP_ROPE)){
-//            RopeGrade grade = RopeGrade.fromString(stringGrade);
-//            store.saveRoute(new TopRopeRoute(grade, "unnamed", setter, color, wall, dateInMillis));
-//        }
-//        if(routeType.equals(BOULDER)){
-//            BoulderGrade grade = BoulderGrade.fromString(stringGrade);
-//            store.saveRoute(new BoulderRoute(grade, "unnamed", setter, color, wall, dateInMillis));
-//        }
     }
 
 }
