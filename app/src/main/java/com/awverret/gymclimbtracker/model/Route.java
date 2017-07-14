@@ -2,6 +2,7 @@ package com.awverret.gymclimbtracker.model;
 
 import java.util.Date;
 
+import static com.awverret.gymclimbtracker.util.Utils.createRouteName;
 import static java.util.UUID.randomUUID;
 
 /**
@@ -29,11 +30,21 @@ public class Route {
         this.type = type;
         id = randomUUID().toString();
         this.routeGrade = routeGrade;
-        this.name = name;
         this.setter = setter;
         this.color = color;
         this.wall = wall;
         this.setDate = setDate;
+
+        if(name == null) {
+            this.name = createRouteName();
+        }else {
+            this.name = name;
+        }
+    }
+
+    public String createRouteName(){
+
+        return wall.getText() + "/ " + color.getText() + "/ " + routeGrade.getText();
     }
 
     public RouteType getType() {return type;}
