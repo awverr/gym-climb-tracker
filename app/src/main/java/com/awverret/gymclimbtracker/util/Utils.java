@@ -11,12 +11,8 @@ import com.awverret.gymclimbtracker.model.Route;
 
 public class Utils {
 
-    public RopeGrade gradeStringToGradeEnum(String grade){
-        return null;
-    }
-
     public static String createRouteName(Route route){
 
-        return route.getWall().toString() + " " + route.getColor() + " " + route.getRouteGrade().toString();
+        return route.getWall().getText() + "/ " + route.getColor().getText() + "/ " + route.getRouteGrade().getText();
     }
 }
