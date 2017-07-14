@@ -17,7 +17,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:onClick="logout"
-        android:layout_alignTop="@+id/save_route_button"
         android:text="@string/logout" />
 
     <Button
@@ -27,23 +26,27 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="clickAddRoute"
-        android:text="Add Route" />
+        android:text="@string/add_route" />
 
-    <Spinner
-        android:id="@+id/route_spinner"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:layout_below="@+id/logout_button"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="12dp" />
 
-    <ListView
+  <!-- <ListView
         android:id="@+id/routes_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/logout_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/route_spinner"
-        android:layout_marginTop="14dp" />
+        android:layout_marginTop="14dp" /> -->
 
 </RelativeLayout>
