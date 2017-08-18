@@ -142,4 +142,5 @@
     <string name="logout">Logout</string>
     <string name="save">Save</string>
     <string name="add_route">Add Route</string>
+    <string name="add_to_history">Add To History</string>
 </resources>
