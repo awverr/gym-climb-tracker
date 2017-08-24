@@ -188,7 +188,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 firebaseAuthWithGoogle(account);
                 handleSignInResult(result);
             } else {
+                System.out.println("VERRET: onActivityResult NOT success");
                 result.getStatus().getStatusMessage();
+                System.out.println("VERRET: " + result.getStatus().getStatusMessage());
 
                 // Google Sign In failed, update UI appropriately
                 // ...
