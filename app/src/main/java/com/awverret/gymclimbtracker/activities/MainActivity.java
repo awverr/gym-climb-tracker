@@ -35,12 +35,7 @@ public class MainActivity extends AppCompatActivity{
 
     LocalStore localStore = new PreferencesLocalStore(this);
 
-//    Spinner routeSpinner;
-
-    ListView routesView;
-
     private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
     private RouteRecyclerAdapter recyclerAdapter;
 
     ArrayList<String> routes = new ArrayList<>();
@@ -54,20 +49,9 @@ public class MainActivity extends AppCompatActivity{
 
         store = new FirebaseCloudStore(this);
 
- //       routeSpinner = (Spinner) findViewById(R.id.route_spinner);
-
-  //      routesView = (ListView) findViewById(routes_list_view);
-
         initializeRecyclerView(this);
 
-
-
-//        mLinearLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
         load();
-
-   //     displayRoutes(this);
     }
 
     private void initializeRecyclerView(MainActivity view) {
@@ -99,37 +83,13 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-//    public void initializeRouteSpinner(Spinner spinner){
+    //Button on recylcer view click handler
+//    public void onClickAddToHistory(View view){
 //
-//        ArrayAdapter<String> routeSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routes);
-//        routeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        routeSpinner.setAdapter(routeSpinnerAdapter);
 //    }
 
-    public void initializeListView(ListView lv){
-
-        ArrayAdapter<String> routesViewAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, routes);
-        routesView.setAdapter(routesViewAdapter);
-    }
-
-    public void displayRoutes(MainActivity view){
-
-       store.lookUpRoutes(new Callback<ArrayList<Route>>() {
-           @Override
-           public void receive(ArrayList<Route> strings) {
-
-               for(Route r : strings){
-                   routes.add(createRouteName(r));
-                   routeList.add(r);
-               }
-               System.out.println("VERRET: routelist: " + routeList);
-            //   initializeRouteSpinner(routeSpinner);
-         //      initializeListView(routesView);
-               System.out.println("VERRET: Routes are: " + strings);
-           }
-       });
-
-
+    public void onClickRouteName(View view){
+        System.out.println("VERRETAUBRY: Click!");
     }
 
     public void clickAddRoute(View view){
