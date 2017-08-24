@@ -23,4 +23,5 @@ public interface CloudStore {
     void googleLogin(User user);
     void googleLogout();
     void lookUpRoutes(Callback<ArrayList<Route>> callback);
+
 }
