@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity{
 //    }
 
     public void onClickRouteName(View view){
-        System.out.println("VERRETAUBRY: Click!");
+
+        Intent intent = new Intent(MainActivity.this, ViewRouteActivity.class);
+        Bundle b = new Bundle();
     }
 
     public void clickAddRoute(View view){
