@@ -1,5 +1,6 @@
 package com.awverret.gymclimbtracker.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import static com.awverret.gymclimbtracker.util.Utils.createRouteName;
@@ -9,7 +10,7 @@ import static java.util.UUID.randomUUID;
  * Created by aubry on 2/24/17.
  */
 
-public class Route {
+public class Route implements Serializable{
 
     public RouteType type;
     public String id;
