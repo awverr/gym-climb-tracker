@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private RouteRecyclerAdapter recyclerAdapter;
 
-    ArrayList<String> routes = new ArrayList<>();
+//    ArrayList<String> routes = new ArrayList<>();
     ArrayList<Route> routeList = new ArrayList<>(); //For use in recylcer view.
 
     @Override
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
             public void receive(ArrayList<Route> strings) {
 
                 for(Route r : strings){
-                    routes.add(createRouteName(r));
+        //            routes.add(r.getName());
                     routeList.add(r);
                 }
                 mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity{
 
     public void onClickRouteName(View view){
 
-        Intent intent = new Intent(MainActivity.this, ViewRouteActivity.class);
-        Bundle b = new Bundle();
+      //  Intent intent = new Intent(MainActivity.this, ViewRouteActivity.class);
+
+      //  Bundle b = new Bundle();
     }
 
     public void clickAddRoute(View view){
