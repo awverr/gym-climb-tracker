@@ -11,8 +11,9 @@
         android:layout_gravity="top|start"
         android:layout_weight="3"
         android:text="Route name"
-        android:onClick="onClickRouteName"
         android:clickable="true"/>
+      <!--  android:onClick="onClickRouteName" -->
+
     <Button
         android:id="@+id/add_to_history_button"
         android:layout_width="wrap_content"
