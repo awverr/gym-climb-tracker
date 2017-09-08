@@ -83,18 +83,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    //Button on recylcer view click handler
-//    public void onClickAddToHistory(View view){
-//
-//    }
-
-    public void onClickRouteName(View view){
-
-      //  Intent intent = new Intent(MainActivity.this, ViewRouteActivity.class);
-
-      //  Bundle b = new Bundle();
-    }
-
     public void clickAddRoute(View view){
         startActivity(new Intent(MainActivity.this, AddRouteActivity.class));
     }
