@@ -45,7 +45,7 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Route route = routesList.get(position);
+        final Route route = routesList.get(position);
         System.out.println("VERRET: onBindViewHolder" + route.getName());
         holder.routeName.setText(route.getName());
 
@@ -54,7 +54,9 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
             @Override
             public void onClick(View view) {
 
-                view.getContext().startActivity(new Intent(view.getContext(), ViewRouteActivity.class));
+                Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
+                intent.putExtra("route", route);
+                view.getContext().startActivity(intent);
 
 
             }
