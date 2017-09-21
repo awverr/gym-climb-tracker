@@ -32,7 +32,6 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
 
     public RouteRecyclerAdapter(List<Route> routesList) {
      //   System.out.println("VERRET: Created adapter");
-        System.out.println("VERRET: Adapter: routesList: " + routesList);
         this.routesList = routesList;
     }
 
@@ -55,7 +54,8 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
             @Override
             public void onClick(View view) {
 
-                   // Toast.makeText(view.getContext(), "Clicked!", Toast.LENGTH_SHORT).show();
+                view.getContext().startActivity(new Intent(view.getContext(), ViewRouteActivity.class));
+
 
             }
 
