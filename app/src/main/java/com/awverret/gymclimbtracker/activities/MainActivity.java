@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity{
         load();
     }
 
-    private void initializeRecyclerView(MainActivity view) {
+    private void initializeRecyclerView(final MainActivity view) {
         store.lookUpRoutes(new Callback<ArrayList<Route>>() {
             @Override
             public void receive(ArrayList<Route> strings) {
