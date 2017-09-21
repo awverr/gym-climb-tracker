@@ -30,6 +30,10 @@
             android:name=".activities.AddRouteActivity"
             android:label="@string/title_activity_add_route"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.ViewRouteActivity"
+            android:label="ViewRouteActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
