@@ -3,47 +3,121 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/route_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Route Name: " />
     <TextView
         android:id="@+id/route_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:text="TextView" />
-
-    <TextView
-        android:id="@+id/route_type_text_view"
+</LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Route Type: " />
+        <TextView
+            android:id="@+id/route_type_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_grade_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Route Grade: " />
     <TextView
         android:id="@+id/route_grade_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_color_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Route Color: " />
     <TextView
         android:id="@+id/route_color_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_wall_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Route Wall: " />
     <TextView
         android:id="@+id/route_wall_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_setter_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Route Setter: " />
     <TextView
         android:id="@+id/route_setter_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_set_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Route Set Date: " />
     <TextView
         android:id="@+id/route_set_date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
+    </LinearLayout>
 </LinearLayout>
