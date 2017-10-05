@@ -1,6 +1,7 @@
 package com.awverret.gymclimbtracker.store;
 
 import com.awverret.gymclimbtracker.model.BoulderRoute;
+import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.LeadRoute;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.TopRopeRoute;
@@ -16,12 +17,10 @@ import java.util.List;
 
 public interface CloudStore {
 
-//    void saveRoute(LeadRoute route);
-//    void saveRoute(TopRopeRoute route);
-//    void saveRoute(BoulderRoute route);
     void saveRoute(Route route);
     void googleLogin(User user);
     void googleLogout();
     void lookUpRoutes(Callback<ArrayList<Route>> callback);
+    void saveClimb(Climb climb);
 
 }
