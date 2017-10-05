@@ -3,10 +3,12 @@ package com.awverret.gymclimbtracker.store;
 import android.content.Context;
 
 import com.awverret.gymclimbtracker.model.BoulderRoute;
+import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.LeadRoute;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.model.User;
+import com.awverret.gymclimbtracker.model.UserRouteHistory;
 import com.awverret.gymclimbtracker.util.Callback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -51,12 +53,12 @@ public class FirebaseCloudStore implements CloudStore {
                 else{
                     db.child("users").child(user.getUid()).setValue(user);
                 }
-System.out.println("VERET: Cloustore login success");
+                System.out.println("VERRET: Cloustore login success");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("VERET: Cloustore login cancelled");
+                System.out.println("VERRET: Cloustore login cancelled");
             }
 
         });
@@ -89,4 +91,10 @@ System.out.println("VERET: Cloustore login success");
 
         });
     }
+
+    @Override
+    public void saveClimb(Climb climb) {
+        db.child("climbs").child(climb.getId()).setValue(climb);
+    }
+
 }
