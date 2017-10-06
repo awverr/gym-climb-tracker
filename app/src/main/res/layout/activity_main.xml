@@ -23,10 +23,13 @@
         android:id="@+id/add_route_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:onClick="clickAddRoute"
-        android:text="@string/add_route" />
+        android:text="@string/add_route"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_toEndOf="@+id/button2"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -40,13 +43,23 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="12dp" />
 
-  <!-- <ListView
-        android:id="@+id/routes_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/logout_button"
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp" /> -->
+        android:layout_alignParentTop="true"
+        android:onClick="clickViewHistory"
+        android:text="View History" />
+
+    <!-- <ListView
+          android:id="@+id/routes_list_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_below="@+id/logout_button"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_marginTop="14dp" /> -->
 
 </RelativeLayout>
