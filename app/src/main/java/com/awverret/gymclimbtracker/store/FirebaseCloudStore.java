@@ -93,8 +93,31 @@ public class FirebaseCloudStore implements CloudStore {
     }
 
     @Override
-    public void saveClimb(Climb climb) {
+    public void saveClimb(final Climb climb) {
         db.child("climbs").child(climb.getId()).setValue(climb);
+    }
+
+    @Override
+    public void lookupClimbs(final Callback<ArrayList<Climb>> callback) {
+        final ArrayList<Climb> climbs = new ArrayList<>();
+
+        db.child("climbs").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot climbSnapshot : snapshot.getChildren()) {
+
+                    Climb climb = climbSnapshot.getValue(Climb.class);
+                    climbs.add(climb);
+                }
+                callback.receive(climbs);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
     }
 
 }
