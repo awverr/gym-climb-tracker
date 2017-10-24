@@ -91,4 +91,8 @@ public class MainActivity extends AppCompatActivity{
         store.googleLogout();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
+
+    public void clickViewHistory(View view){
+
+    }
 }
