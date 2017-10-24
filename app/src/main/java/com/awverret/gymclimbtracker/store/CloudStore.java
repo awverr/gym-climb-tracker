@@ -22,5 +22,6 @@ public interface CloudStore {
     void googleLogout();
     void lookUpRoutes(Callback<ArrayList<Route>> callback);
     void saveClimb(Climb climb);
+    void lookupClimbs(Callback<ArrayList<Climb>> callback);
 
 }
