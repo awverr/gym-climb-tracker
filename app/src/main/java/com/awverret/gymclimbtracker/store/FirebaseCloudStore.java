@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -95,7 +97,20 @@ public class FirebaseCloudStore implements CloudStore {
     @Override
     public void saveClimb(final Climb climb) {
         db.child("climbs").child(climb.getId()).setValue(climb);
-    }
+
+       db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
+           @Override
+           public Transaction.Result doTransaction(MutableData mutableData) {
+               return null;
+           }
+
+           @Override
+           public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+           }
+       });
+
+       }
 
     @Override
     public void lookupClimbs(final Callback<ArrayList<Climb>> callback) {
