@@ -101,12 +101,27 @@ public class FirebaseCloudStore implements CloudStore {
        db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
            @Override
            public Transaction.Result doTransaction(MutableData mutableData) {
-               return null;
+
+               List<String> climbs =
+                       mutableData.getValue(new GenericTypeIndicator<List<String>>() {});
+
+               if (climbs == null) {
+                   climbs = new ArrayList<>();
+               }
+
+               if (!climbs.contains(climb.getId())) {
+                   climbs.add(climb.getId());
+                   mutableData.setValue(climbs);
+                   return Transaction.success(mutableData);
+               }
+
+               return Transaction.abort();
            }
 
            @Override
            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
+               System.out.println("databaseError = " + databaseError);
+               System.out.println("Complete = " + dataSnapshot);
            }
        });
 
