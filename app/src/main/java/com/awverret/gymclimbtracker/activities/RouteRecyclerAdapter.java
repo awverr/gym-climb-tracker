@@ -1,15 +1,21 @@
 package com.awverret.gymclimbtracker.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.Route;
+import com.awverret.gymclimbtracker.model.User;
+import com.awverret.gymclimbtracker.store.CloudStore;
+import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 
 import java.util.List;
 
@@ -19,20 +25,27 @@ import java.util.List;
 
 public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdapter.MyViewHolder> {
 
+    CloudStore store;
+    private Context context;
     private List<Route> routesList;
+    private User user;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView routeName;
+        public Button addToHistoryButton;
 
         public MyViewHolder(View view) {
             super(view);
             routeName = (TextView) view.findViewById(R.id.route_name);
+            addToHistoryButton = (Button) view.findViewById(R.id.add_to_history_button);
         }
     }
 
-    public RouteRecyclerAdapter(List<Route> routesList) {
+    public RouteRecyclerAdapter(List<Route> routesList, User user, Context context) {
      //   System.out.println("VERRET: Created adapter");
         this.routesList = routesList;
+        this.user = user;
+        this.context = context;
     }
 
     @Override
@@ -61,6 +74,18 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
 
             }
 
+        });
+
+        holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                store = new FirebaseCloudStore(context);
+
+                Climb climb = new Climb(user.getUid(), route.getId());
+                store.saveClimb(climb);
+                Toast.makeText(context, "Added to history!",
+                        Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
