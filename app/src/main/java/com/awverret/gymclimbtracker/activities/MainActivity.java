@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
                     routeList.add(r);
                 }
                 mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-                recyclerAdapter = new RouteRecyclerAdapter(routeList);
+                recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), MainActivity.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -93,6 +93,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void clickViewHistory(View view){
-
+        startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
     }
 }
