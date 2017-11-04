@@ -13,6 +13,10 @@ public class Climb {
     String routeId;
     //need to add send date
 
+    public Climb(){
+
+    }
+
     public Climb(String userId, String routeId){
         id = randomUUID().toString();
         this.userId = userId;
