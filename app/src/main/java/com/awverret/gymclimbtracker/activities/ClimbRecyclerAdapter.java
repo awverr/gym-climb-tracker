@@ -58,15 +58,12 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
         store = new FirebaseCloudStore(context);
         final Climb climb = climbsList.get(position);
 
-        String routeName = store.lookupRouteName(climb.getRouteId(), new Callback<String>() {
+        store.lookupRouteName(climb.getRouteId(), new Callback<String>() {
             @Override
             public void receive(String string) {
-
+                holder.climbName.setText(string);
             }
         });
-
-        holder.climbName.setText(routeName);
-
 
     }
 
