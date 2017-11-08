@@ -6,6 +6,7 @@
         <item>Lead</item>
     </string-array>
     <string-array name="route_grade_array">
+        <item>5.?</item>
         <item>5.5</item>
         <item>5.6</item>
         <item>5.7</item>
@@ -28,6 +29,7 @@
         <item>5.13c</item>
         <item>5.13d</item>
         <item>5.14</item>
+        <item>v?</item>
         <item>v0</item>
         <item>v1</item>
         <item>v2</item>
