@@ -90,35 +90,51 @@ public class FirebaseCloudStore implements CloudStore {
 
     @Override
     public void saveClimb(final Climb climb) {
-        db.child("climbs").child(climb.getId()).setValue(climb);
 
-       db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
-           @Override
-           public Transaction.Result doTransaction(MutableData mutableData) {
+        final ArrayList<String> savedClimbRouteIds = new ArrayList<>();
 
-               List<String> climbs =
-                       mutableData.getValue(new GenericTypeIndicator<List<String>>() {});
+        lookupClimbs(new Callback<ArrayList<Climb>>() {
+            @Override
+            public void receive(ArrayList<Climb> strings) {
+                for(Climb c : strings){
+                    savedClimbRouteIds.add(c.getRouteId());
+                }
+            }
+        });
 
-               if (climbs == null) {
-                   climbs = new ArrayList<>();
-               }
+        System.out.println("VERRET: SavedClimbRouteIds" + savedClimbRouteIds);
 
-               if (!climbs.contains(climb.getId())) {
-                   climbs.add(climb.getId());
-                   mutableData.setValue(climbs);
-                   return Transaction.success(mutableData);
-               }
+        if(!savedClimbRouteIds.contains(climb.getRouteId())) {
+            db.child("climbs").child(climb.getId()).setValue(climb);
 
-               return Transaction.abort();
-           }
+            db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
+                @Override
+                public Transaction.Result doTransaction(MutableData mutableData) {
 
-           @Override
-           public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-               System.out.println("databaseError = " + databaseError);
-               System.out.println("Complete = " + dataSnapshot);
-           }
-       });
+                    List<String> climbs =
+                            mutableData.getValue(new GenericTypeIndicator<List<String>>() {
+                            });
 
+                    if (climbs == null) {
+                        climbs = new ArrayList<>();
+                    }
+
+                    if (!climbs.contains(climb.getId())) {
+                        climbs.add(climb.getId());
+                        mutableData.setValue(climbs);
+                        return Transaction.success(mutableData);
+                    }
+
+                    return Transaction.abort();
+                }
+
+                @Override
+                public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                    System.out.println("databaseError = " + databaseError);
+                    System.out.println("Complete = " + dataSnapshot);
+                }
+            });
+        }
        }
 
     @Override
@@ -133,8 +149,9 @@ public class FirebaseCloudStore implements CloudStore {
                     Climb climb = climbSnapshot.getValue(Climb.class);
                     climbs.add(climb);
                 }
+                System.out.println("VERRET: Climbs " + climbs);
                 callback.receive(climbs);
-            }
+        }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
