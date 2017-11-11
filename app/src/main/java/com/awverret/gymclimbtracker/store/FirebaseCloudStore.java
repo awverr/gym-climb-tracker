@@ -25,7 +25,7 @@ import java.util.List;
 
 public class FirebaseCloudStore implements CloudStore {
 
- private DatabaseReference db;
+    private DatabaseReference db;
 
     public FirebaseCloudStore(Context context) {
 
@@ -97,44 +97,45 @@ public class FirebaseCloudStore implements CloudStore {
             @Override
             public void receive(ArrayList<Climb> strings) {
                 for(Climb c : strings){
+                    System.out.println("VERRET: ClimbId " + c.getRouteId());
                     savedClimbRouteIds.add(c.getRouteId());
+                }
+                System.out.println("VERRET: SavedClimbRouteIds" + savedClimbRouteIds);
+
+                if(!savedClimbRouteIds.contains(climb.getRouteId())) {
+                    db.child("climbs").child(climb.getId()).setValue(climb);
+
+                    db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
+                        @Override
+                        public Transaction.Result doTransaction(MutableData mutableData) {
+
+                            List<String> climbs =
+                                    mutableData.getValue(new GenericTypeIndicator<List<String>>() {
+                                    });
+
+                            if (climbs == null) {
+                                climbs = new ArrayList<>();
+                            }
+
+                            if (!climbs.contains(climb.getId())) {
+                                climbs.add(climb.getId());
+                                mutableData.setValue(climbs);
+                                return Transaction.success(mutableData);
+                            }
+
+                            return Transaction.abort();
+                        }
+
+                        @Override
+                        public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                            System.out.println("databaseError = " + databaseError);
+                            System.out.println("Complete = " + dataSnapshot);
+                        }
+                    });
                 }
             }
         });
 
-        System.out.println("VERRET: SavedClimbRouteIds" + savedClimbRouteIds);
-
-        if(!savedClimbRouteIds.contains(climb.getRouteId())) {
-            db.child("climbs").child(climb.getId()).setValue(climb);
-
-            db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
-                @Override
-                public Transaction.Result doTransaction(MutableData mutableData) {
-
-                    List<String> climbs =
-                            mutableData.getValue(new GenericTypeIndicator<List<String>>() {
-                            });
-
-                    if (climbs == null) {
-                        climbs = new ArrayList<>();
-                    }
-
-                    if (!climbs.contains(climb.getId())) {
-                        climbs.add(climb.getId());
-                        mutableData.setValue(climbs);
-                        return Transaction.success(mutableData);
-                    }
-
-                    return Transaction.abort();
-                }
-
-                @Override
-                public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-                    System.out.println("databaseError = " + databaseError);
-                    System.out.println("Complete = " + dataSnapshot);
-                }
-            });
-        }
        }
 
     @Override
@@ -149,7 +150,6 @@ public class FirebaseCloudStore implements CloudStore {
                     Climb climb = climbSnapshot.getValue(Climb.class);
                     climbs.add(climb);
                 }
-                System.out.println("VERRET: Climbs " + climbs);
                 callback.receive(climbs);
         }
 
