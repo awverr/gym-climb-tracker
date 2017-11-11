@@ -5,6 +5,7 @@ package com.awverret.gymclimbtracker.model;
  */
 
 public enum RouteGrade {
+    FIVE_UNKNOWN("5.?"),
     FIVE_FIVE("5.5"),
     FIVE_SIX("5.6"),
     FIVE_SEVEN("5.7"),
@@ -27,6 +28,7 @@ public enum RouteGrade {
     FIVE_THIRTEEN_C("5.13c"),
     FIVE_THIRTEEN_D("5.13d"),
     FIVE_FOURTEEN("5.14"),
+    V_UNKNOWN("v?"),
     V_ZERO("v0"),
     V_ONE("v1"),
     V_TWO("v2"),
@@ -53,6 +55,8 @@ public enum RouteGrade {
         RouteGrade enumValue = null;
 
         switch(text) {
+            case "5.?":  enumValue = FIVE_UNKNOWN;
+                break;
             case "5.5":  enumValue = FIVE_FIVE;
                 break;
             case "5.6":  enumValue = FIVE_SIX;
@@ -96,6 +100,8 @@ public enum RouteGrade {
             case "5.13d":  enumValue = FIVE_THIRTEEN_D;
                 break;
             case "5.14":  enumValue = FIVE_FOURTEEN;
+                break;
+            case "v?":  enumValue = V_UNKNOWN;
                 break;
             case "v0":  enumValue = V_ZERO;
                 break;
