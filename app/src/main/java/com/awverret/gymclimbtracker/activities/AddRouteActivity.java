@@ -149,7 +149,7 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void saveRoute(View view) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("MM/dd", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+        DateFormat formatter = new SimpleDateFormat("MM/DD/YYYY", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
 
         String stringType = (String) routeTypeSpinner.getSelectedItem();
         String stringGrade = (String) routeGradeSpinner.getSelectedItem();
