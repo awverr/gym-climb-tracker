@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.awverret.gymclimbtracker.R;
 import com.awverret.gymclimbtracker.model.Route;
 
+import org.joda.time.Instant;
+
 /**
  * Created by aubry on 8/24/2017.
  */
@@ -36,6 +38,9 @@ public class ViewRouteActivity extends AppCompatActivity {
     }
 
     public void initializeRoute(Route route){
+
+        Instant inst = new Instant(route.getSetDate());
+
         routeNameTextView.setText(route.getName());
         routeTypeTextView.setText(route.getType().getText());
         routeGradeTextView.setText(route.getRouteGrade().getText());
