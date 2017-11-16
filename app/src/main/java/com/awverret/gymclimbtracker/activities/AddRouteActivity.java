@@ -30,6 +30,7 @@ import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -149,7 +150,7 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void saveRoute(View view) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("MM/DD/YYYY", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
 
         String stringType = (String) routeTypeSpinner.getSelectedItem();
         String stringGrade = (String) routeGradeSpinner.getSelectedItem();
@@ -165,9 +166,10 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         RouteWall wall = RouteWall.fromString(stringWall);
 
         System.out.println("Date string is: " + stringDate);
-
+        Calendar calendar = Calendar.getInstance();
         Date date = formatter.parse(stringDate);
-        long dateInMillis = date.getTime();
+        calendar.setTime(date);
+        long dateInMillis = calendar.getTimeInMillis();
 
         store.saveRoute(new Route(type, grade, null, setter, color, wall, dateInMillis));
 
