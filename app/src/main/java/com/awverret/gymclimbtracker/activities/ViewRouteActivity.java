@@ -42,7 +42,7 @@ public class ViewRouteActivity extends AppCompatActivity {
 
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
-       // System.out.println("VERRET: localDate: " + localDate);
+        System.out.println("VERRET: localDate: " + localDate);
 
         routeNameTextView.setText(route.getName());
         routeTypeTextView.setText(route.getType().getText());
