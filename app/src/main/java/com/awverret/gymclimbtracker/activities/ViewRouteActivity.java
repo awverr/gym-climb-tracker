@@ -49,7 +49,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         routeGradeTextView.setText(route.getRouteGrade().getText());
         routeColorTextView.setText(route.getColor().getText());
         routeWallTextView.setText(route.getWall().getText());
-        routeSetterTextView.setText(route.getSetter().getText());
+        routeSetterTextView.setText(route.getSetter());
         routeSetDateTextView.setText(localDate.toString());
 
     }
