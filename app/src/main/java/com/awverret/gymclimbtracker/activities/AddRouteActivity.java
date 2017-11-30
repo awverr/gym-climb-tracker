@@ -168,6 +168,7 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         System.out.println("Date string is: " + stringDate);
         Calendar calendar = Calendar.getInstance();
         Date date = formatter.parse(stringDate);
+        //System.out.println("Date is: " + date);
         calendar.setTime(date);
         long dateInMillis = calendar.getTimeInMillis();
 
