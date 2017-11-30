@@ -36,9 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.awverret.gymclimbtracker.R;
-import com.awverret.gymclimbtracker.model.BoulderRoute;
-import com.awverret.gymclimbtracker.model.LeadRoute;
-import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
