@@ -21,7 +21,7 @@ public class Route implements Parcelable{
     public RouteColor color;
     public RouteWall wall;
     public String name;
-    public RouteSetter setter;
+    public String setter;
     //Date setDate;
     public long setDate;
 
@@ -39,7 +39,7 @@ public class Route implements Parcelable{
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Route(RouteType type, RouteGrade routeGrade, String name, RouteSetter setter, RouteColor color, RouteWall wall, long setDate) {
+    public Route(RouteType type, RouteGrade routeGrade, String name, String setter, RouteColor color, RouteWall wall, long setDate) {
         this.type = type;
         id = randomUUID().toString();
         this.routeGrade = routeGrade;
@@ -68,7 +68,7 @@ public class Route implements Parcelable{
         return routeGrade;
     }
 
-    public RouteSetter getSetter() {
+    public String getSetter() {
         return setter;
     }
 
@@ -100,7 +100,7 @@ public class Route implements Parcelable{
         this.color = (RouteColor) in.readSerializable();
         this.wall = (RouteWall) in.readSerializable();
         this.name = in.readString();
-        this.setter = (RouteSetter) in.readSerializable();
+        this.setter = (String) in.readSerializable();
         this.setDate = in.readLong();
     }
 
