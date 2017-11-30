@@ -26,21 +26,12 @@
         android:id="@+id/grade_spinner" />
 
     <Spinner
-        android:id="@+id/route_setter_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/grade_spinner"
-        android:layout_marginTop="50dp" />
-
-    <Spinner
         android:id="@+id/route_color_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/route_setter_spinner"
+        android:layout_below="@+id/route_setter_text_view"
         android:layout_marginTop="50dp"/>
 
     <Spinner
@@ -71,6 +62,18 @@
         android:onClick="saveRoute"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/route_setter_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/grade_spinner"
+        android:layout_marginTop="50dp"
+        android:hint="Enter Route Setter" />
 
 
 </RelativeLayout>
