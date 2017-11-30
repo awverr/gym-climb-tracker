@@ -2,28 +2,20 @@ package com.awverret.gymclimbtracker.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.awverret.gymclimbtracker.R;
-import com.awverret.gymclimbtracker.model.BoulderGrade;
-import com.awverret.gymclimbtracker.model.BoulderRoute;
-import com.awverret.gymclimbtracker.model.LeadRoute;
-import com.awverret.gymclimbtracker.model.RopeGrade;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.RouteColor;
 import com.awverret.gymclimbtracker.model.RouteGrade;
-import com.awverret.gymclimbtracker.model.RouteSetter;
 import com.awverret.gymclimbtracker.model.RouteType;
 import com.awverret.gymclimbtracker.model.RouteWall;
-import com.awverret.gymclimbtracker.model.TopRopeRoute;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 
@@ -34,13 +26,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.awverret.gymclimbtracker.model.RouteType.BOULDER;
-import static com.awverret.gymclimbtracker.model.RouteType.LEAD;
-import static com.awverret.gymclimbtracker.model.RouteType.TOP_ROPE;
-
 public class AddRouteActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    Spinner routeTypeSpinner, routeGradeSpinner, routeSetterSpinner, routeWallSpinner, routeColorSpinner;
+    Spinner routeTypeSpinner, routeGradeSpinner, routeWallSpinner, routeColorSpinner;
   //  RouteType routeType = TOP_ROPE;
     CloudStore store;
 
@@ -51,16 +39,15 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
 
         routeTypeSpinner = (Spinner) findViewById(R.id.route_type_spinner);
         routeGradeSpinner = (Spinner) findViewById(R.id.grade_spinner);
-        routeSetterSpinner = (Spinner) findViewById(R.id.route_setter_spinner);
         routeWallSpinner = (Spinner) findViewById(R.id.route_wall_spinner);
         routeColorSpinner = (Spinner) findViewById(R.id.route_color_spinner);
         initializeRouteTypeSpinner(routeTypeSpinner);
         initializeRouteGradeSpinner(routeGradeSpinner);
-        initializeRouteSetterSpinner(routeSetterSpinner);
+       // initializeRouteSetterSpinner(routeSetterSpinner);
         initializeRouteWallSpinner(routeWallSpinner);
         initializeRouteColorSpinner(routeColorSpinner);
         routeTypeSpinner.setOnItemSelectedListener(this);
-        routeSetterSpinner.setOnItemSelectedListener(this);
+      //  routeSetterSpinner.setOnItemSelectedListener(this);
         routeWallSpinner.setOnItemSelectedListener(this);
         routeColorSpinner.setOnItemSelectedListener(this);
 
@@ -85,14 +72,14 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         spinner.setAdapter(routeGradeAdapter);
     }
 
-    public void initializeRouteSetterSpinner(Spinner spinner){
-        //route_setter_spinner
-
-        ArrayAdapter<CharSequence> routeSetterAdapter = ArrayAdapter.createFromResource(this,
-                R.array.route_setter_array, android.R.layout.simple_spinner_item);
-        routeSetterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(routeSetterAdapter);
-    }
+//    public void initializeRouteSetterSpinner(Spinner spinner){
+//        //route_setter_spinner
+//
+//        ArrayAdapter<CharSequence> routeSetterAdapter = ArrayAdapter.createFromResource(this,
+//                R.array.route_setter_array, android.R.layout.simple_spinner_item);
+//        routeSetterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(routeSetterAdapter);
+//    }
 
     public void initializeRouteColorSpinner(Spinner spinner){
         //route_color_spinner
@@ -156,12 +143,13 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         String stringGrade = (String) routeGradeSpinner.getSelectedItem();
         EditText editTextDate = (EditText) findViewById(R.id.date_text_box);
         String stringDate = editTextDate.getText().toString();
-        String stringSetter = (String) routeSetterSpinner.getSelectedItem();
+        EditText editTextSetter = (EditText) findViewById(R.id.route_setter_text_view);
         String stringColor = (String) routeColorSpinner.getSelectedItem();
         String stringWall = (String) routeWallSpinner.getSelectedItem();
         RouteType type = RouteType.fromString(stringType);
         RouteGrade grade = RouteGrade.fromString(stringGrade);
-        RouteSetter setter = RouteSetter.fromString(stringSetter);
+       // RouteSetter setter = RouteSetter.fromString(stringSetter);
+        String stringSetter = editTextSetter.getText().toString();
         RouteColor color = RouteColor.fromString(stringColor);
         RouteWall wall = RouteWall.fromString(stringWall);
 
@@ -172,7 +160,7 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         calendar.setTime(date);
         long dateInMillis = calendar.getTimeInMillis();
 
-        store.saveRoute(new Route(type, grade, null, setter, color, wall, dateInMillis));
+        store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
 
         startActivity(new Intent(AddRouteActivity.this, MainActivity.class));
     }
