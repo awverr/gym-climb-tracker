@@ -9,6 +9,8 @@ import com.awverret.gymclimbtracker.model.Route;
 
 import org.joda.time.Instant;
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * Created by aubry on 8/24/2017.
@@ -42,6 +44,8 @@ public class ViewRouteActivity extends AppCompatActivity {
 
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/d/yyyy");
+        String stringDate = localDate.toString(fmt);
         System.out.println("VERRET: localDate: " + localDate);
 
         routeNameTextView.setText(route.getName());
@@ -50,7 +54,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         routeColorTextView.setText(route.getColor().getText());
         routeWallTextView.setText(route.getWall().getText());
         routeSetterTextView.setText(route.getSetter());
-        routeSetDateTextView.setText(localDate.toString());
+        routeSetDateTextView.setText(stringDate);
 
     }
 
