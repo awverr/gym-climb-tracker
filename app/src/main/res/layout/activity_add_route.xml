@@ -50,6 +50,7 @@
         android:layout_below="@+id/route_wall_spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:hint="mm/dd/yyyy"
         android:ems="10"
         android:layout_marginTop="50dp"
         android:inputType="date" />
