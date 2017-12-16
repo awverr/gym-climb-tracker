@@ -36,7 +36,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ViewClimbsActivity"
-            android:label="ViewClimbsActivity"/>
+            android:label="ViewClimbsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
