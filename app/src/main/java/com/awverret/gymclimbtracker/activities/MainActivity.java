@@ -1,11 +1,15 @@
 package com.awverret.gymclimbtracker.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,7 +33,7 @@ import static com.awverret.gymclimbtracker.R.id.activity_main;
 
 import static com.awverret.gymclimbtracker.util.Utils.createRouteName;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     CloudStore store;
 
@@ -50,6 +54,12 @@ public class MainActivity extends AppCompatActivity{
         store = new FirebaseCloudStore(this);
 
         initializeRecyclerView(this);
+
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.setDrawerListener(new DrawerLayout.DrawerListener(this, drawer, toolbar));
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
 
         load();
     }
@@ -94,5 +104,32 @@ public class MainActivity extends AppCompatActivity{
 
     public void clickViewHistory(View view){
         startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_account) {
+//            Intent intent;
+//            if (localStore.getUser().isPresent()) {
+//                intent = new Intent(this, LogoutActivity.class);
+//            } else {
+//                intent = new Intent(this, LoginActivity.class);
+//            }
+//
+//            startActivity(intent);
+//        } else if (id == R.id.nav_invitations) {
+//            Intent intent = new Intent(this, InvitationsActivity.class);
+//
+//            startActivity(intent);
+//        }
+//
+//        // Otherwise just close the drawer
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+       return true;
     }
 }
