@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initializeRecyclerView(this);
 
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        drawer.setDrawerListener(new DrawerLayout.DrawerListener(this, drawer, toolbar));
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
@@ -109,27 +109,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_account) {
-//            Intent intent;
-//            if (localStore.getUser().isPresent()) {
-//                intent = new Intent(this, LogoutActivity.class);
-//            } else {
-//                intent = new Intent(this, LoginActivity.class);
-//            }
-//
-//            startActivity(intent);
-//        } else if (id == R.id.nav_invitations) {
-//            Intent intent = new Intent(this, InvitationsActivity.class);
-//
-//            startActivity(intent);
-//        }
-//
-//        // Otherwise just close the drawer
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
+        int id = item.getItemId();
+
+        if (id == R.id.view_history) {
+            Intent intent = new Intent(this, ViewClimbsActivity.class);
+
+            startActivity(intent);
+
+        } else if (id == R.id.add_route) {
+            Intent intent = new Intent(this, AddRouteActivity.class);
+
+            startActivity(intent);
+
+        } else if (id == R.id.log_out) {
+            Intent intent = new Intent(this, LoginActivity.class);
+
+            startActivity(intent);
+        }
+
        return true;
     }
 }
