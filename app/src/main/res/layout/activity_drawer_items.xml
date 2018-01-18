@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</LinearLayout>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent" android:layout_width="wrap_content">
+
+    <item
+        android:id="@+id/view_history"
+        android:title="View History" />
+    <item
+        android:id="@+id/add_route"
+        android:title="Add Route" />
+    <item
+        android:id="@+id/log_out"
+        android:title="Log Out" />
+
+
+</menu>
