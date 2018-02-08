@@ -3,6 +3,7 @@ package com.awverret.gymclimbtracker.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    ArrayList<String> routes = new ArrayList<>();
     ArrayList<Route> routeList = new ArrayList<>(); //For use in recylcer view.
 
+    DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initializeRecyclerView(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        drawer.setDrawerListener(new DrawerLayout.DrawerListener(this, drawer, toolbar));
 
         mDrawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
@@ -169,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_drawer) {
+            drawer.openDrawer(GravityCompat.START);
             return true;
         }
 
