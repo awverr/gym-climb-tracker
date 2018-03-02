@@ -27,9 +27,6 @@ public class ViewRouteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        Bundle data = getIntent().getExtras();
-        route = (Route) data.getParcelable("route");
-
         routeNameTextView = (TextView) container.findViewById(R.id.route_name_text_view);
         routeTypeTextView = (TextView) container.findViewById(R.id.route_type_text_view);
         routeGradeTextView = (TextView) container.findViewById(R.id.route_grade_text_view);
