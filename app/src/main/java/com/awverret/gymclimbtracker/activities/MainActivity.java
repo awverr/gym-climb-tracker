@@ -1,5 +1,6 @@
 package com.awverret.gymclimbtracker.activities;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -78,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewAllRoutesFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, viewAllRoutesFragment).commit();
+            int fragment_container = R.id.fragment_container;
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewAllRoutesFragment).commit();
         }
 
        // initializeRecyclerView(this); Commented out for fragment testing
