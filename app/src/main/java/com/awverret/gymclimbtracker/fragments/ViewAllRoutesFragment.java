@@ -18,6 +18,7 @@ import com.awverret.gymclimbtracker.activities.RouteRecyclerAdapter;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
+import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.awverret.gymclimbtracker.store.LocalStore;
 import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.awverret.gymclimbtracker.util.Callback;
@@ -32,6 +33,8 @@ import java.util.List;
 public class ViewAllRoutesFragment extends Fragment {
 
     CloudStore store;
+
+    LocalStore localStore;
 
     ArrayList<Route> routeList = new ArrayList<>(); //For use in recylcer view.
 
@@ -51,12 +54,14 @@ public class ViewAllRoutesFragment extends Fragment {
         }
     }
 
-    LocalStore localStore = new PreferencesLocalStore(activity);
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
+
+        store = new FirebaseCloudStore(activity);
+
+        localStore = new PreferencesLocalStore(activity);
 
         initializeRecyclerView();
 
