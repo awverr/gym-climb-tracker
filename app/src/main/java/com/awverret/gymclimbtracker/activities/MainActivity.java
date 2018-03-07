@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
@@ -60,7 +61,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         store = new FirebaseCloudStore(this);
 
-        initializeRecyclerView(this);
+        if (findViewById(R.id.fragment_container) != null) {
+
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            // Create a new Fragment to be placed in the activity layout
+            ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            viewAllRoutesFragment.setArguments(getIntent().getExtras());
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, viewAllRoutesFragment).commit();
+        }
+
+       // initializeRecyclerView(this); Commented out for fragment testing
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        drawer.setDrawerListener(new DrawerLayout.DrawerListener(this, drawer, toolbar));
