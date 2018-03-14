@@ -1,7 +1,7 @@
 package com.awverret.gymclimbtracker.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,8 @@ import org.joda.time.format.DateTimeFormatter;
  */
 
 public class ViewRouteFragment extends Fragment {
+
+    final static Route ROUTE = null;
 
     TextView routeNameTextView, routeTypeTextView, routeGradeTextView, routeColorTextView, routeWallTextView, routeSetterTextView, routeSetDateTextView;
     Route route;
