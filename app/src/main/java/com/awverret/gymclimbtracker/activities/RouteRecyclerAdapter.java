@@ -2,6 +2,8 @@ package com.awverret.gymclimbtracker.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.fragments.ViewRouteFragment;
 import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
@@ -66,6 +69,22 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
 
             @Override
             public void onClick(View view) {
+
+                // Create fragment and give it an argument specifying the article it should show
+                ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
+                Bundle args = new Bundle();
+                args.putSerializable(ViewRouteFragment.ROUTE, route);
+                viewRouteFragment.setArguments(args);
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+                transaction.replace(R.id.fragment_container, viewRouteFragment);
+                transaction.addToBackStack(null);
+
+// Commit the transaction
+                transaction.commit();
 
                 Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
                 intent.putExtra("route", route);
