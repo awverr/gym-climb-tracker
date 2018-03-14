@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewAllRoutesFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            int fragment_container = R.id.fragment_container;
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewAllRoutesFragment).commit();
         }
 
