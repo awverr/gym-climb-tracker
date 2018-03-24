@@ -42,7 +42,6 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
         public MyViewHolder(View view) {
             super(view);
             routeName = (TextView) view.findViewById(R.id.route_name);
-            addToHistoryButton = (Button) view.findViewById(R.id.add_to_history_button);
         }
     }
 
@@ -64,12 +63,10 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Route route = routesList.get(position);
-        System.out.println("VERRET: onBindViewHolder" + route.getName());
+
         holder.routeName.setText(route.getName());
 
         holder.routeName.setOnClickListener(new View.OnClickListener(){
-
-            private SharedViewModel model;
 
             @Override
             public void onClick(View view) {
