@@ -21,13 +21,15 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class ViewRouteFragment extends Fragment {
 
-    final static Route ROUTE = null;
-
     TextView routeNameTextView, routeTypeTextView, routeGradeTextView, routeColorTextView, routeWallTextView, routeSetterTextView, routeSetDateTextView;
     Route route;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        Bundle bundle=getArguments();
+
+        route = bundle.getParcelable("route");
 
         routeNameTextView = (TextView) container.findViewById(R.id.route_name_text_view);
         routeTypeTextView = (TextView) container.findViewById(R.id.route_type_text_view);
