@@ -4,7 +4,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,26 +73,42 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
-                intent.putExtra("route", route);
-                view.getContext().startActivity(intent);
+                ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("route", route);
+
+                viewRouteFragment.setArguments(bundle);
+
+                FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                transaction.replace(R.id.fragment_container, viewRouteFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+
+ //               Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
+ //               intent.putExtra("route", route);
+ //               view.getContext().startActivity(intent);
 
 
             }
 
         });
 
-        holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                store = new FirebaseCloudStore(context);
-
-                Climb climb = new Climb(user.getUid(), route.getId());
-                store.saveClimb(climb);
-                Toast.makeText(context, "Added to history!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+//        holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                store = new FirebaseCloudStore(context);
+//
+//                Climb climb = new Climb(user.getUid(), route.getId());
+//                store.saveClimb(climb);
+//                Toast.makeText(context, "Added to history!",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
