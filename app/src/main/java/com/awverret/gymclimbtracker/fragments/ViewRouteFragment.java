@@ -27,24 +27,30 @@ public class ViewRouteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
+        View rootView = inflater.inflate(R.layout.activity_view_route, container, false);
+
         Bundle bundle=getArguments();
 
         route = bundle.getParcelable("route");
 
-        routeNameTextView = (TextView) container.findViewById(R.id.route_name_text_view);
-        routeTypeTextView = (TextView) container.findViewById(R.id.route_type_text_view);
-        routeGradeTextView = (TextView) container.findViewById(R.id.route_grade_text_view);
-        routeColorTextView = (TextView) container.findViewById(R.id.route_color_text_view);
-        routeWallTextView = (TextView) container.findViewById(R.id.route_wall_text_view);
-        routeSetterTextView = (TextView) container.findViewById(R.id.route_setter_text_view);
-        routeSetDateTextView = (TextView) container.findViewById(R.id.route_set_date_text_view);
+        routeNameTextView = (TextView) rootView.findViewById(R.id.route_name_text_view);
+        routeTypeTextView = (TextView) rootView.findViewById(R.id.route_type_text_view);
+        routeGradeTextView = (TextView) rootView.findViewById(R.id.route_grade_text_view);
+        routeColorTextView = (TextView) rootView.findViewById(R.id.route_color_text_view);
+        routeWallTextView = (TextView) rootView.findViewById(R.id.route_wall_text_view);
+        routeSetterTextView = (TextView) rootView.findViewById(R.id.route_setter_text_view);
+        routeSetDateTextView = (TextView) rootView.findViewById(R.id.route_set_date_text_view);
+
+        System.out.println("VERRET: routeNameTextView: " + routeNameTextView);
 
         initializeRoute(route);
 
-        return inflater.inflate(R.layout.activity_view_route, container, false);
+        return rootView;
     }
 
     public void initializeRoute(Route route){
+
+        System.out.println("VERRET: route is: " + route);
 
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
