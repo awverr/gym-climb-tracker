@@ -57,13 +57,15 @@ public class ViewAllRoutesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
+        if(view == null) {
+            view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
 
-        store = new FirebaseCloudStore(activity);
+            store = new FirebaseCloudStore(activity);
 
-        localStore = new PreferencesLocalStore(activity);
+            localStore = new PreferencesLocalStore(activity);
 
-        initializeRecyclerView();
+            initializeRecyclerView();
+        }
 
         return view;
     }
