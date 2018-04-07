@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,8 +23,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.fragments.AddRouteFragment;
 import com.awverret.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.awverret.gymclimbtracker.fragments.ViewHistoryFragment;
+import com.awverret.gymclimbtracker.fragments.ViewRouteFragment;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
@@ -182,9 +185,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            startActivity(intent);
 
         } else if (id == R.id.add_route) {
-            Intent intent = new Intent(this, AddRouteActivity.class);
 
-            startActivity(intent);
+            AddRouteFragment addRouteFragment = new AddRouteFragment();
+
+            addRouteFragment.setArguments(getIntent().getExtras());
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.fragment_container, addRouteFragment);
+            transaction.addToBackStack(null);
+
+            transaction.commit();
+
+//            Intent intent = new Intent(this, AddRouteActivity.class);
+//
+//            startActivity(intent);
 
         } else if (id == R.id.log_out) {
             Intent intent = new Intent(this, LoginActivity.class);
