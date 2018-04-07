@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
@@ -152,15 +153,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void clickViewHistory(View view){
-        // Create a new Fragment to be placed in the activity layout
-        ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
-
-        // In case this activity was started with special instructions from an
-        // Intent, pass the Intent's extras to the fragment as arguments
-        viewHistoryFragment.setArguments(getIntent().getExtras());
-
-        // Add the fragment to the 'fragment_container' FrameLayout
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewHistoryFragment).commit();
 
     //    startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
     }
@@ -171,9 +163,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.view_history) {
-            Intent intent = new Intent(this, ViewClimbsActivity.class);
 
-            startActivity(intent);
+            // Create a new Fragment to be placed in the activity layout
+            ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            viewHistoryFragment.setArguments(getIntent().getExtras());
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            transaction.replace(R.id.fragment_container, viewHistoryFragment).commit();
+            transaction.addToBackStack(null);
+
+//            Intent intent = new Intent(this, ViewClimbsActivity.class);
+//
+//            startActivity(intent);
 
         } else if (id == R.id.add_route) {
             Intent intent = new Intent(this, AddRouteActivity.class);
