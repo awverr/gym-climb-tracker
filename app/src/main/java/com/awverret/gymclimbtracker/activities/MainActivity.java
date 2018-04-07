@@ -22,6 +22,7 @@ import android.widget.Spinner;
 
 import com.awverret.gymclimbtracker.R;
 import com.awverret.gymclimbtracker.fragments.ViewAllRoutesFragment;
+import com.awverret.gymclimbtracker.fragments.ViewHistoryFragment;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
@@ -151,7 +152,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void clickViewHistory(View view){
-        startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
+        // Create a new Fragment to be placed in the activity layout
+        ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
+
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+        viewHistoryFragment.setArguments(getIntent().getExtras());
+
+        // Add the fragment to the 'fragment_container' FrameLayout
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewHistoryFragment).commit();
+
+    //    startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
     }
 
     @Override
