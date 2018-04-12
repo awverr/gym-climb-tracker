@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<Route> routeList = new ArrayList<>(); //For use in recylcer view.
 
     DrawerLayout drawer;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Set the drawer toggle as the DrawerListener
         drawer.setDrawerListener(mDrawerToggle);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
 
         load();
@@ -167,6 +168,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.view_history) {
 
+            if (drawer != null) {
+                drawer.closeDrawer(navigationView);
+            }
+
             // Create a new Fragment to be placed in the activity layout
             ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
 
@@ -186,6 +191,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.add_route) {
 
+            if (drawer != null) {
+                drawer.closeDrawer(navigationView);
+            }
+
             AddRouteFragment addRouteFragment = new AddRouteFragment();
 
             addRouteFragment.setArguments(getIntent().getExtras());
@@ -202,6 +211,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            startActivity(intent);
 
         } else if (id == R.id.log_out) {
+            if (drawer != null) {
+                drawer.closeDrawer(navigationView);
+            }
+
             Intent intent = new Intent(this, LoginActivity.class);
 
             startActivity(intent);
