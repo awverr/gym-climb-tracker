@@ -1,6 +1,11 @@
 package com.awverret.gymclimbtracker.activities;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.fragments.ViewRouteFragment;
 import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
@@ -64,6 +70,42 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
                 holder.climbName.setText(string);
             }
         });
+
+        holder.climbName.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+                store.lookupRouteFromClimb(climb, new Callback<Route>() {
+                    @Override
+                    public void receive(Route route) {
+                        ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("route", route);
+
+                        viewRouteFragment.setArguments(bundle);
+
+                        FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+
+                        FragmentTransaction transaction = manager.beginTransaction();
+
+                        transaction.replace(R.id.fragment_container, viewRouteFragment);
+                        transaction.addToBackStack(null);
+
+                        transaction.commit();
+                    }
+                });
+
+                //               Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
+                //               intent.putExtra("route", route);
+                //               view.getContext().startActivity(intent);
+
+
+            }
+
+        });
+
 
     }
 
