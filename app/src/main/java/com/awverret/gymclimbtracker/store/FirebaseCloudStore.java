@@ -188,4 +188,31 @@ public class FirebaseCloudStore implements CloudStore {
         });
     }
 
+    @Override
+    public void lookupRouteFromClimb(final Climb climb, final Callback<Route> callback) {
+
+        db.child("routes").addListenerForSingleValueEvent(new ValueEventListener() {
+            Route route = new Route();
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
+
+                    if(routeSnapshot.getKey().equals(climb.getRouteId())) {
+                        route = routeSnapshot.getValue(Route.class);
+                        break;
+                    }
+                }
+
+                callback.receive(route);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
 }
