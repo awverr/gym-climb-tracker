@@ -20,5 +20,6 @@ public interface CloudStore {
     void saveClimb(Climb climb);
     void lookupClimbs(Callback<ArrayList<Climb>> callback);
     void lookupRouteName(String uid, Callback<String> callback);
+    void lookupRouteFromClimb(Climb climb, Callback<Route> callback);
 
 }
