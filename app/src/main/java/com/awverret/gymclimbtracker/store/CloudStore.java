@@ -3,6 +3,7 @@ package com.awverret.gymclimbtracker.store;
 import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
+import com.awverret.gymclimbtracker.model.UserRouteInfo;
 import com.awverret.gymclimbtracker.util.Callback;
 
 import java.util.ArrayList;
@@ -21,5 +22,6 @@ public interface CloudStore {
     void lookupClimbs(Callback<ArrayList<Climb>> callback);
     void lookupRouteName(String uid, Callback<String> callback);
     void lookupRouteFromClimb(Climb climb, Callback<Route> callback);
+    void saveUserRouteInfo(UserRouteInfo info);
 
 }
