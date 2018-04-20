@@ -1,26 +1,45 @@
 package com.awverret.gymclimbtracker.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import static java.util.UUID.randomUUID;
 
 /**
  * Created by aubry on 4/9/18.
  */
 
-public class UserRouteInfo {
+public class UserRouteInfo implements Parcelable{
 
-    String userId;
-    String routeId;
+    public String id;
+    public String userId;
+    public String routeId;
 
     int numAttempts;
     String routeNotes;
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public UserRouteInfo createFromParcel(Parcel in) {
+            return new UserRouteInfo(in);
+        }
+
+        public UserRouteInfo[] newArray(int size) {
+            return new UserRouteInfo[size];
+        }
+    };
 
     public UserRouteInfo(){
 
     }
 
     public UserRouteInfo(String userId, String routeId){
+        id = randomUUID().toString();
         this.userId = userId;
         this.routeId = routeId;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getNumAttempts() {
@@ -45,6 +64,24 @@ public class UserRouteInfo {
 
     public String getRouteId() {
         return routeId;
+    }
+
+    public UserRouteInfo(Parcel in){
+        this.id = in.readString();
+        this.userId = in.readString();
+        this.routeId = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.userId);
+        dest.writeString(this.routeId);
     }
 
 }
