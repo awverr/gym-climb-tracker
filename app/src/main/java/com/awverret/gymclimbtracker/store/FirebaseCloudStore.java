@@ -221,4 +221,9 @@ public class FirebaseCloudStore implements CloudStore {
         db.child("userRouteInfo").child(info.getId()).setValue(info);
     }
 
+    @Override
+    public void lookupUserRouteInfo(Callback<UserRouteInfo> callback) {
+
+    }
+
 }
