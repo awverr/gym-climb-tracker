@@ -3,6 +3,9 @@ package com.awverret.gymclimbtracker.store;
 import android.content.Context;
 
 import com.awverret.gymclimbtracker.model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.common.base.Optional;
 
 /**
