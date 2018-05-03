@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.awverret.gymclimbtracker.R;
 import com.awverret.gymclimbtracker.fragments.AddRouteFragment;
@@ -34,6 +35,12 @@ import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.awverret.gymclimbtracker.store.LocalStore;
 import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.awverret.gymclimbtracker.util.Callback;
+import com.firebase.ui.auth.util.GoogleSignInHelper;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
 import com.google.firebase.FirebaseApp;
 
@@ -59,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     DrawerLayout drawer;
     NavigationView navigationView;
+
+    GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,27 +124,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         load();
     }
 
-    private void initializeRecyclerView(final MainActivity view) {
-        store.lookUpRoutes(new Callback<ArrayList<Route>>() {
-            @Override
-            public void receive(ArrayList<Route> strings) {
-
-                for(Route r : strings){
-        //            routes.add(r.getName());
-                    routeList.add(r);
-                }
-                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-                recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), MainActivity.this);
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                mRecyclerView.setAdapter(recyclerAdapter);
-            }
-        });
-    }
+//    private void initializeRecyclerView(final MainActivity view) {
+//        store.lookUpRoutes(new Callback<ArrayList<Route>>() {
+//            @Override
+//            public void receive(ArrayList<Route> strings) {
+//
+//                for(Route r : strings){
+//        //            routes.add(r.getName());
+//                    routeList.add(r);
+//                }
+//                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+//                recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), MainActivity.this);
+//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//                mRecyclerView.setLayoutManager(mLayoutManager);
+//                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//                mRecyclerView.setAdapter(recyclerAdapter);
+//            }
+//        });
+//    }
 
     private void load() {
         Optional<User> user = localStore.getUser();
@@ -147,18 +164,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void clickAddRoute(View view){
-        startActivity(new Intent(MainActivity.this, AddRouteActivity.class));
-    }
+//    public void clickAddRoute(View view){
+//        startActivity(new Intent(MainActivity.this, AddRouteActivity.class));
+//    }
 
-    public void logout(View view){
-        store.googleLogout();
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-    }
+//    public void logout(View view){
+//        store.googleLogout();
+//        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//    }
 
-    public void clickViewHistory(View view){
+//    public void clickViewHistory(View view){
+//
+//    //    startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
+//    }
 
-    //    startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(MainActivity.this, "You are completely signed out", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override
@@ -214,6 +241,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (drawer != null) {
                 drawer.closeDrawer(navigationView);
             }
+
+            store.googleLogout();
+            localStore.clearUser();
+            signOut();
+
+            Toast.makeText(this, "Signed out", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, LoginActivity.class);
 
