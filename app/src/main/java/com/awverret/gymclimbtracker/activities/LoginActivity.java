@@ -42,7 +42,9 @@ import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.awverret.gymclimbtracker.store.LocalStore;
 import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -78,6 +80,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private LocalStore localStore = new PreferencesLocalStore(this);
     private CloudStore cloudStore = new FirebaseCloudStore(this);
 
+    private GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +95,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //Build GoogleApiClient with access to Google Sign-In API and the options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -163,6 +169,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 break;
             // ...
         }
+    }
+
+    private void signOut(){
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(LoginActivity.this, "You have completely signed out.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void signIn() {
