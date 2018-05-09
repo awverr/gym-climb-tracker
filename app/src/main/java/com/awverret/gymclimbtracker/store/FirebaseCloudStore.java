@@ -89,6 +89,8 @@ public class FirebaseCloudStore implements CloudStore {
         });
     }
 
+    //Need to rework this method to take different users into account.
+
     @Override
     public void saveClimb(final Climb climb) {
 
@@ -103,7 +105,7 @@ public class FirebaseCloudStore implements CloudStore {
                 }
                 System.out.println("VERRET: SavedClimbRouteIds" + savedClimbRouteIds);
 
-                if(!savedClimbRouteIds.contains(climb.getRouteId())) {
+ //               if(!savedClimbRouteIds.contains(climb.getRouteId())) {
                     db.child("climbs").child(climb.getId()).setValue(climb);
 
                     db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
@@ -134,7 +136,7 @@ public class FirebaseCloudStore implements CloudStore {
                         }
                     });
                 }
-            }
+  //          }
         });
 
        }
