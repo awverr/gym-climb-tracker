@@ -44,6 +44,7 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
         public MyViewHolder(View view) {
             super(view);
             routeName = (TextView) view.findViewById(R.id.route_name);
+            addToHistoryButton = (Button) view.findViewById(R.id.add_to_history_button);
         }
     }
 
@@ -98,17 +99,17 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
 
         });
 
-//        holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                store = new FirebaseCloudStore(context);
-//
-//                Climb climb = new Climb(user.getUid(), route.getId());
-//                store.saveClimb(climb);
-//                Toast.makeText(context, "Added to history!",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                store = new FirebaseCloudStore(context);
+
+                Climb climb = new Climb(user.getUid(), route.getId());
+                store.saveClimb(climb);
+                Toast.makeText(context, "Added to history!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
