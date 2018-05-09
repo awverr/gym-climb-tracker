@@ -35,7 +35,6 @@ import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.awverret.gymclimbtracker.store.LocalStore;
 import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.awverret.gymclimbtracker.util.Callback;
-import com.firebase.ui.auth.util.GoogleSignInHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
