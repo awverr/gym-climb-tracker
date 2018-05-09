@@ -80,7 +80,11 @@ public class ViewAllRoutesFragment extends Fragment {
                     routeList.add(r);
                 }
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-                recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), activity);
+
+                if(localStore.getUser().isPresent()) {
+                    recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), activity);
+                }
+
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());
