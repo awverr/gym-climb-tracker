@@ -19,7 +19,7 @@ public interface CloudStore {
     void googleLogout();
     void lookUpRoutes(Callback<ArrayList<Route>> callback);
     void saveClimb(Climb climb);
-    void lookupClimbs(Callback<ArrayList<Climb>> callback);
+    void lookupClimbsForUser(Callback<ArrayList<Climb>> callback);
     void lookupRouteName(String uid, Callback<String> callback);
     void lookupRouteFromClimb(Climb climb, Callback<Route> callback);
     void saveUserRouteInfo(UserRouteInfo info);
