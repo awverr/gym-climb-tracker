@@ -96,7 +96,7 @@ public class FirebaseCloudStore implements CloudStore {
 
         final ArrayList<String> savedClimbRouteIds = new ArrayList<>();
 
-        lookupClimbs(new Callback<ArrayList<Climb>>() {
+        lookupClimbsForUser(new Callback<ArrayList<Climb>>() {
             @Override
             public void receive(ArrayList<Climb> strings) {
                 for(Climb c : strings){
@@ -142,7 +142,7 @@ public class FirebaseCloudStore implements CloudStore {
        }
 
     @Override
-    public void lookupClimbs(final Callback<ArrayList<Climb>> callback) {
+    public void lookupClimbsForUser(final Callback<ArrayList<Climb>> callback) {
         final ArrayList<Climb> climbs = new ArrayList<>();
 
         db.child("climbs").addListenerForSingleValueEvent(new ValueEventListener() {
