@@ -105,7 +105,7 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
                 store = new FirebaseCloudStore(context);
 
                 Climb climb = new Climb(user.getUid(), route.getId());
-                store.saveClimb(climb);
+                store.saveClimb(climb, user);
                 Toast.makeText(context, "Added to history!",
                         Toast.LENGTH_SHORT).show();
             }
