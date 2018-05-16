@@ -92,11 +92,11 @@ public class FirebaseCloudStore implements CloudStore {
     //Need to rework this method to take different users into account.
 
     @Override
-    public void saveClimb(final Climb climb) {
+    public void saveClimb(final Climb climb, final User user) {
 
         final ArrayList<String> savedClimbRouteIds = new ArrayList<>();
 
-        lookupClimbsForUser(new Callback<ArrayList<Climb>>() {
+        lookupClimbsForUser(user, new Callback<ArrayList<Climb>>() {
             @Override
             public void receive(ArrayList<Climb> strings) {
                 for(Climb c : strings){
@@ -105,7 +105,7 @@ public class FirebaseCloudStore implements CloudStore {
                 }
                 System.out.println("VERRET: SavedClimbRouteIds" + savedClimbRouteIds);
 
- //               if(!savedClimbRouteIds.contains(climb.getRouteId())) {
+                if(!savedClimbRouteIds.contains(climb.getRouteId())) {
                     db.child("climbs").child(climb.getId()).setValue(climb);
 
                     db.child("userToClimbsIndex").child(climb.getUserId()).runTransaction(new Transaction.Handler() {
@@ -136,13 +136,13 @@ public class FirebaseCloudStore implements CloudStore {
                         }
                     });
                 }
-  //          }
+            }
         });
 
        }
 
     @Override
-    public void lookupClimbsForUser(final Callback<ArrayList<Climb>> callback) {
+    public void lookupClimbsForUser(final User user, final Callback<ArrayList<Climb>> callback) {
         final ArrayList<Climb> climbs = new ArrayList<>();
 
         db.child("climbs").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -151,7 +151,10 @@ public class FirebaseCloudStore implements CloudStore {
                 for (DataSnapshot climbSnapshot : snapshot.getChildren()) {
 
                     Climb climb = climbSnapshot.getValue(Climb.class);
-                    climbs.add(climb);
+
+                    if(climb.getUserId() == user.getUid()) {
+                        climbs.add(climb);
+                    }
                 }
                 callback.receive(climbs);
         }
