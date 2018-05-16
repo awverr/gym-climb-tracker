@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.awverret.gymclimbtracker.R;
 import com.awverret.gymclimbtracker.model.Climb;
+import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
 import com.awverret.gymclimbtracker.util.Callback;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 public class ViewClimbsActivity extends AppCompatActivity {
 
     CloudStore store;
+
+    User user; //Need to initialize!!
 
     private RecyclerView mRecyclerView;
     private ClimbRecyclerAdapter recyclerAdapter;
@@ -34,7 +37,7 @@ public class ViewClimbsActivity extends AppCompatActivity {
     }
 
     private void initializeRecyclerView(final ViewClimbsActivity view) {
-        store.lookupClimbs(new Callback<ArrayList<Climb>>() {
+        store.lookupClimbsForUser(user, new Callback<ArrayList<Climb>>() {
             @Override
             public void receive(ArrayList<Climb> strings) {
 
