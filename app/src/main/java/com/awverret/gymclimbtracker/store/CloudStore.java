@@ -18,8 +18,8 @@ public interface CloudStore {
     void googleLogin(User user);
     void googleLogout();
     void lookUpRoutes(Callback<ArrayList<Route>> callback);
-    void saveClimb(Climb climb);
-    void lookupClimbsForUser(Callback<ArrayList<Climb>> callback);
+    void saveClimb(Climb climb, User user);
+    void lookupClimbsForUser(User user, Callback<ArrayList<Climb>> callback);
     void lookupRouteName(String uid, Callback<String> callback);
     void lookupRouteFromClimb(Climb climb, Callback<Route> callback);
     void saveUserRouteInfo(UserRouteInfo info);
