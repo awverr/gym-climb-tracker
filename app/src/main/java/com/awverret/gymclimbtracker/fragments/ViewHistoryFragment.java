@@ -13,14 +13,10 @@ import android.view.ViewGroup;
 import com.awverret.gymclimbtracker.R;
 import com.awverret.gymclimbtracker.activities.ClimbRecyclerAdapter;
 import com.awverret.gymclimbtracker.activities.MainActivity;
-import com.awverret.gymclimbtracker.activities.RouteRecyclerAdapter;
-import com.awverret.gymclimbtracker.activities.ViewClimbsActivity;
 import com.awverret.gymclimbtracker.model.Climb;
-import com.awverret.gymclimbtracker.model.Route;
+import com.awverret.gymclimbtracker.model.User;
 import com.awverret.gymclimbtracker.store.CloudStore;
 import com.awverret.gymclimbtracker.store.FirebaseCloudStore;
-import com.awverret.gymclimbtracker.store.LocalStore;
-import com.awverret.gymclimbtracker.store.PreferencesLocalStore;
 import com.awverret.gymclimbtracker.util.Callback;
 
 import java.util.ArrayList;
@@ -28,6 +24,8 @@ import java.util.ArrayList;
 public class ViewHistoryFragment extends Fragment {
 
     CloudStore store;
+
+    User user;
 
     private RecyclerView mRecyclerView;
     private ClimbRecyclerAdapter recyclerAdapter;
@@ -53,6 +51,10 @@ public class ViewHistoryFragment extends Fragment {
         if(view == null) {
             view = inflater.inflate(R.layout.activity_view_climbs, container, false);
 
+            Bundle bundle=getArguments();
+
+            user = bundle.getParcelable("user");
+
             store = new FirebaseCloudStore(activity);
 
             initializeRecyclerView();
@@ -62,7 +64,7 @@ public class ViewHistoryFragment extends Fragment {
     }
 
     private void initializeRecyclerView() {
-        store.lookupClimbs(new Callback<ArrayList<Climb>>() {
+        store.lookupClimbsForUser(user, new Callback<ArrayList<Climb>>() {
             @Override
             public void receive(ArrayList<Climb> strings) {
 
