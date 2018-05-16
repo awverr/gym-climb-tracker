@@ -201,6 +201,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Create a new Fragment to be placed in the activity layout
             ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
 
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("user", localStore.getUser().get());
+
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
             viewHistoryFragment.setArguments(getIntent().getExtras());
