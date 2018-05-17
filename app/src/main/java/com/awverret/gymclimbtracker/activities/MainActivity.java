@@ -202,13 +202,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
 
             Bundle bundle = new Bundle();
+            System.out.println("VERRET: User in MainActivity is: " + localStore.getUser().get());
             bundle.putParcelable("user", localStore.getUser().get());
 
             viewHistoryFragment.setArguments(bundle);
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
-            viewHistoryFragment.setArguments(getIntent().getExtras());
+            //viewHistoryFragment.setArguments(getIntent().getExtras());
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
