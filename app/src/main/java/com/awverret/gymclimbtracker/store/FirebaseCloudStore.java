@@ -152,7 +152,7 @@ public class FirebaseCloudStore implements CloudStore {
 
                     Climb climb = climbSnapshot.getValue(Climb.class);
 
-                    if(climb.getUserId() == user.getUid()) {
+                    if(climb.getUserId().equals(user.getUid())) {
                         climbs.add(climb);
                     }
                 }
