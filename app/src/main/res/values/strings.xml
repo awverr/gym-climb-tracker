@@ -117,15 +117,7 @@
         <item>Wave</item>
         <item>Corner-Copia</item>
     </string-array>
-    <string-array name="route_setter_array">
-        <item>Smash</item>
-        <item>DH</item>
-        <item>Monkey Face</item>
-        <item>Meerkat</item>
-        <item>JD</item>
-        <item>Cam</item>
-        <item>MZ</item>
-    </string-array>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -148,4 +140,13 @@
     <string name="drawer_open">open drawer</string>
     <string name="drawer_close">closed drawer</string>
     <string name="action_drawer_logo">action drawer logo</string>
+
+    <!-- Strings related to route -->
+    <string name="route_name">Route Name:</string>
+    <string name="route_type">Route Type:</string>
+    <string name="route_grade">Route Grade:</string>
+    <string name="route_color">Route Color:</string>
+    <string name="route_wall">Route Wall:</string>
+    <string name="route_setter">Route Setter:</string>
+    <string name="route_set_date">Route Set Date:</string>
 </resources>
