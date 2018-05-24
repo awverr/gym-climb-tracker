@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_name" />
+        <TextView
+            android:id="@+id/route_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_type" />
+        <TextView
+            android:id="@+id/route_type_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_grade_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_grade" />
+        <TextView
+            android:id="@+id/route_grade_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_color_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_color" />
+        <TextView
+            android:id="@+id/route_color_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_wall_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_wall" />
+        <TextView
+            android:id="@+id/route_wall_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_setter_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_setter" />
+        <TextView
+            android:id="@+id/route_setter_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/route_set_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="20sp"
+            android:text="@string/route_set_date" />
+        <TextView
+            android:id="@+id/route_set_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <include android:id="@+id/fragment_user_route_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/fragment_user_route_info"/>
+
+</LinearLayout>
