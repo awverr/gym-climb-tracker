@@ -144,7 +144,6 @@
     </LinearLayout>
 
     <include android:id="@+id/fragment_user_route_info"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         layout="@layout/fragment_user_route_info"/>
