@@ -16,6 +16,9 @@ public class Climb implements Parcelable {
     public String routeId;
     //need to add send date
 
+    int numAttempts;
+    String routeNotes;
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Climb createFromParcel(Parcel in) {
             return new Climb(in);
@@ -48,10 +51,20 @@ public class Climb implements Parcelable {
         return routeId;
     }
 
+    public int getNumAttempts() {
+        return numAttempts;
+    }
+
+    public String getRouteNotes() {
+        return routeNotes;
+    }
+
     public Climb(Parcel in){
         this.id = in.readString();
         this.userId = in.readString();
         this.routeId = in.readString();
+        this.numAttempts = in.readInt();
+        this.routeNotes = in.readString();
     }
 
     @Override
@@ -64,5 +77,7 @@ public class Climb implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.userId);
         dest.writeString(this.routeId);
+        dest.writeInt(this.numAttempts);
+        dest.writeString(this.routeNotes);
     }
 }
