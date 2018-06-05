@@ -16,8 +16,8 @@ public class Climb implements Parcelable {
     public String routeId;
     //need to add send date
 
-    int numAttempts;
-    String routeNotes;
+    public int numAttempts;
+    public String routeNotes;
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Climb createFromParcel(Parcel in) {
