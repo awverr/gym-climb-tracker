@@ -16,12 +16,11 @@
             android:paddingRight="20dp"
             android:textSize="20dp"
             android:text="Number of Attempts: " />
-        <EditText
-            android:id="@+id/num_attempt_edittext"
+        <TextView
+            android:id="@+id/num_attempt_textview"
             android:layout_width="125dp"
             android:layout_height="72dp"
-            android:ems="10"
-            android:inputType="number" />
+            android:ems="10" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,12 +35,11 @@
             android:paddingRight="20dp"
             android:textSize="20dp"
             android:text="Route Notes: " />
-        <EditText
-            android:id="@+id/route_notes_edittext"
+        <TextView
+            android:id="@+id/route_notes_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine" />\
+            android:ems="10"/>\
     </LinearLayout>
 
 </LinearLayout>
