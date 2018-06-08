@@ -9,12 +9,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,25 +45,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
 import com.google.firebase.FirebaseApp;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.awverret.gymclimbtracker.R.id.activity_main;
-
-import static com.awverret.gymclimbtracker.util.Utils.createRouteName;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     CloudStore store;
 
     LocalStore localStore = new PreferencesLocalStore(this);
 
-    private RecyclerView mRecyclerView;
-    private RouteRecyclerAdapter recyclerAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
-
-//    ArrayList<String> routes = new ArrayList<>();
-    ArrayList<Route> routeList = new ArrayList<>(); //For use in recylcer view.
 
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -73,6 +63,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_action_name);
 
         store = new FirebaseCloudStore(this);
 
@@ -95,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewAllRoutesFragment).commit();
         }
-
-       // initializeRecyclerView(this); Commented out for fragment testing
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        drawer.setDrawerListener(new DrawerLayout.DrawerListener(this, drawer, toolbar));
@@ -134,25 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         load();
     }
 
-//    private void initializeRecyclerView(final MainActivity view) {
-//        store.lookUpRoutes(new Callback<ArrayList<Route>>() {
-//            @Override
-//            public void receive(ArrayList<Route> strings) {
-//
-//                for(Route r : strings){
-//        //            routes.add(r.getName());
-//                    routeList.add(r);
-//                }
-//                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-//                recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), MainActivity.this);
-//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//                mRecyclerView.setLayoutManager(mLayoutManager);
-//                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//                mRecyclerView.setAdapter(recyclerAdapter);
-//            }
-//        });
-//    }
-
     private void load() {
         Optional<User> user = localStore.getUser();
 
@@ -162,20 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
     }
-
-//    public void clickAddRoute(View view){
-//        startActivity(new Intent(MainActivity.this, AddRouteActivity.class));
-//    }
-
-//    public void logout(View view){
-//        store.googleLogout();
-//        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//    }
-
-//    public void clickViewHistory(View view){
-//
-//    //    startActivity(new Intent(MainActivity.this, ViewClimbsActivity.class));
-//    }
 
     private void signOut() {
         mGoogleSignInClient.signOut()
@@ -217,10 +178,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.replace(R.id.fragment_container, viewHistoryFragment).commit();
             transaction.addToBackStack(null);
 
-//            Intent intent = new Intent(this, ViewClimbsActivity.class);
-//
-//            startActivity(intent);
-
         } else if (id == R.id.add_route) {
 
             if (drawer != null) {
@@ -237,10 +194,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.addToBackStack(null);
 
             transaction.commit();
-
-//            Intent intent = new Intent(this, AddRouteActivity.class);
-//
-//            startActivity(intent);
 
         } else if (id == R.id.log_out) {
             if (drawer != null) {
@@ -264,23 +217,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+     //   getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_drawer) {
-            drawer.openDrawer(GravityCompat.START);
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
