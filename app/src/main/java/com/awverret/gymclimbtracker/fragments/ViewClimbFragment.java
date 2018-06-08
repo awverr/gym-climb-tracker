@@ -30,7 +30,7 @@ public class ViewClimbFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        View rootView = inflater.inflate(R.layout.activity_view_route, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_view_climb, container, false);
 
        // Bundle bundle=getArguments();
 
@@ -75,6 +75,14 @@ public class ViewClimbFragment extends Fragment {
         routeWallTextView.setText(route.getWall().getText());
         routeSetterTextView.setText(route.getSetter());
         routeSetDateTextView.setText(stringDate);
+        numAttempts.setText("0");
+
+        if(climb.getUserId() == null){
+            numAttempts.setText("0");
+        }
+        if(climb.getRouteNotes() == null){
+            routeNotes.setText("0");
+        }
 
 
     }
