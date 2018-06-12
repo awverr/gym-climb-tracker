@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("Aubry: " + "onCreatee us called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
@@ -70,13 +71,14 @@ public class MainActivity extends AppCompatActivity {
         store = new FirebaseCloudStore(this);
 
         if (findViewById(R.id.fragment_container) != null) {
-
+            System.out.println("Aubry: " + "made it heer");
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
-            if (savedInstanceState != null) {
-                return;
-            }
+//            if (savedInstanceState != null) {
+//                System.out.println("Aubry: " + "savedInstanceState does not = null");
+//                return;
+//            }
 
             // Create a new Fragment to be placed in the activity layout
             ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
@@ -88,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewAllRoutesFragment).commit();
         }
-
+        System.out.println("Aubry: " + "made it here too");
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        System.out.println("Drawer is: " + drawer);
+        System.out.println("Aubry: Drawer is: " + drawer);
 
         navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(
