@@ -45,13 +45,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
 import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     CloudStore store;
-
     LocalStore localStore = new PreferencesLocalStore(this);
-
-    private ActionBarDrawerToggle mDrawerToggle;
 
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -93,30 +90,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.setDrawerListener(new DrawerLayout.DrawerListener(this, drawer, toolbar));
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-            //    getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-         //       getActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        drawer.setDrawerListener(mDrawerToggle);
+        System.out.println("Drawer is: " + drawer);
 
         navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                            // Handle navigation view item clicks here.
+                            int id = item.getItemId();
 
+                            if (id == R.id.view_history) {
+
+                                if (drawer != null) {
+                                    item.setChecked(true);
+                                    drawer.closeDrawer(navigationView);
+                                }
+
+                                // Create a new Fragment to be placed in the activity layout
+                                ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
+
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("user", localStore.getUser().get());
+
+                                viewHistoryFragment.setArguments(bundle);
+
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                                // Add the fragment to the 'fragment_container' FrameLayout
+                                transaction.replace(R.id.fragment_container, viewHistoryFragment).commit();
+                                transaction.addToBackStack(null);
+
+                            } else if (id == R.id.add_route) {
+
+                                if (drawer != null) {
+                                    drawer.closeDrawer(navigationView);
+                                }
+
+                                AddRouteFragment addRouteFragment = new AddRouteFragment();
+
+                                addRouteFragment.setArguments(getIntent().getExtras());
+
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                                transaction.replace(R.id.fragment_container, addRouteFragment);
+                                transaction.addToBackStack(null);
+
+                                transaction.commit();
+
+                            } else if (id == R.id.log_out) {
+                                if (drawer != null) {
+                                    drawer.closeDrawer(navigationView);
+                                }
+
+                                store.googleLogout();
+                                localStore.clearUser();
+                                signOut();
+
+                                Toast.makeText(MainActivity.this, "Signed out", Toast.LENGTH_LONG).show();
+
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+
+                                startActivity(intent);
+                            }
+
+                            return true;
+                        }
+                });
         //Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -146,72 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Toast.makeText(MainActivity.this, "You are completely signed out", Toast.LENGTH_LONG).show();
                     }
                 });
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.view_history) {
-
-            if (drawer != null) {
-                drawer.closeDrawer(navigationView);
-            }
-
-            // Create a new Fragment to be placed in the activity layout
-            ViewHistoryFragment viewHistoryFragment = new ViewHistoryFragment();
-
-            Bundle bundle = new Bundle();
-            System.out.println("VERRET: User in MainActivity is: " + localStore.getUser().get());
-            bundle.putParcelable("user", localStore.getUser().get());
-
-            viewHistoryFragment.setArguments(bundle);
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            //viewHistoryFragment.setArguments(getIntent().getExtras());
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            transaction.replace(R.id.fragment_container, viewHistoryFragment).commit();
-            transaction.addToBackStack(null);
-
-        } else if (id == R.id.add_route) {
-
-            if (drawer != null) {
-                drawer.closeDrawer(navigationView);
-            }
-
-            AddRouteFragment addRouteFragment = new AddRouteFragment();
-
-            addRouteFragment.setArguments(getIntent().getExtras());
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            transaction.replace(R.id.fragment_container, addRouteFragment);
-            transaction.addToBackStack(null);
-
-            transaction.commit();
-
-        } else if (id == R.id.log_out) {
-            if (drawer != null) {
-                drawer.closeDrawer(navigationView);
-            }
-
-            store.googleLogout();
-            localStore.clearUser();
-            signOut();
-
-            Toast.makeText(this, "Signed out", Toast.LENGTH_LONG).show();
-
-            Intent intent = new Intent(this, LoginActivity.class);
-
-            startActivity(intent);
-        }
-
-       return true;
     }
 
     @Override
