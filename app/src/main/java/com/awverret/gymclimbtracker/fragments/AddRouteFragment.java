@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -39,6 +41,8 @@ import java.util.Locale;
 public class AddRouteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     Spinner routeTypeSpinner, routeGradeSpinner, routeWallSpinner, routeColorSpinner;
+
+    Button saveRouteButton;
 
     private MainActivity activity;
 
@@ -76,6 +80,51 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
             routeTypeSpinner.setOnItemSelectedListener(this);
             routeWallSpinner.setOnItemSelectedListener(this);
             routeColorSpinner.setOnItemSelectedListener(this);
+
+            saveRouteButton = view.findViewById(R.id.save_route_button);
+            saveRouteButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+
+                    String stringType = (String) routeTypeSpinner.getSelectedItem();
+                    String stringGrade = (String) routeGradeSpinner.getSelectedItem();
+                    EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
+                    String stringDate = editTextDate.getText().toString();
+                    EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
+                    String stringColor = (String) routeColorSpinner.getSelectedItem();
+                    String stringWall = (String) routeWallSpinner.getSelectedItem();
+                    RouteType type = RouteType.fromString(stringType);
+                    RouteGrade grade = RouteGrade.fromString(stringGrade);
+                    // RouteSetter setter = RouteSetter.fromString(stringSetter);
+                    String stringSetter = editTextSetter.getText().toString();
+                    RouteColor color = RouteColor.fromString(stringColor);
+                    RouteWall wall = RouteWall.fromString(stringWall);
+
+                    System.out.println("Date string is: " + stringDate);
+                    Calendar calendar = Calendar.getInstance();
+                    Date date = null;
+                    try {
+                        date = formatter.parse(stringDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    //System.out.println("Date is: " + date);
+                    calendar.setTime(date);
+                    long dateInMillis = calendar.getTimeInMillis();
+
+                    store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
+
+                    // Now return to the viewAllRoutesFragment
+                    ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
+
+                    viewAllRoutesFragment.setArguments(getActivity().getIntent().getExtras());
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                    transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
+                    transaction.addToBackStack(null);
+                }
+            });
 
             store = new FirebaseCloudStore(activity);
         }
@@ -129,41 +178,41 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     }
 
-    public void saveRoute(View view) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
-
-        String stringType = (String) routeTypeSpinner.getSelectedItem();
-        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-        EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
-        String stringDate = editTextDate.getText().toString();
-        EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
-        String stringColor = (String) routeColorSpinner.getSelectedItem();
-        String stringWall = (String) routeWallSpinner.getSelectedItem();
-        RouteType type = RouteType.fromString(stringType);
-        RouteGrade grade = RouteGrade.fromString(stringGrade);
-        // RouteSetter setter = RouteSetter.fromString(stringSetter);
-        String stringSetter = editTextSetter.getText().toString();
-        RouteColor color = RouteColor.fromString(stringColor);
-        RouteWall wall = RouteWall.fromString(stringWall);
-
-        System.out.println("Date string is: " + stringDate);
-        Calendar calendar = Calendar.getInstance();
-        Date date = formatter.parse(stringDate);
-        //System.out.println("Date is: " + date);
-        calendar.setTime(date);
-        long dateInMillis = calendar.getTimeInMillis();
-
-        store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
-
-        // Now return to the viewAllRoutesFragment
-        ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
-
-        viewAllRoutesFragment.setArguments(((AppCompatActivity)context).getIntent().getExtras());
-
-        FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
-        transaction.addToBackStack(null);
-    }
+//    public void saveRoute(View view) throws ParseException {
+//        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+//
+//        String stringType = (String) routeTypeSpinner.getSelectedItem();
+//        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
+//        EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
+//        String stringDate = editTextDate.getText().toString();
+//        EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
+//        String stringColor = (String) routeColorSpinner.getSelectedItem();
+//        String stringWall = (String) routeWallSpinner.getSelectedItem();
+//        RouteType type = RouteType.fromString(stringType);
+//        RouteGrade grade = RouteGrade.fromString(stringGrade);
+//        // RouteSetter setter = RouteSetter.fromString(stringSetter);
+//        String stringSetter = editTextSetter.getText().toString();
+//        RouteColor color = RouteColor.fromString(stringColor);
+//        RouteWall wall = RouteWall.fromString(stringWall);
+//
+//        System.out.println("Date string is: " + stringDate);
+//        Calendar calendar = Calendar.getInstance();
+//        Date date = formatter.parse(stringDate);
+//        //System.out.println("Date is: " + date);
+//        calendar.setTime(date);
+//        long dateInMillis = calendar.getTimeInMillis();
+//
+//        store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
+//
+//        // Now return to the viewAllRoutesFragment
+//        ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
+//
+//        viewAllRoutesFragment.setArguments(((AppCompatActivity)context).getIntent().getExtras());
+//
+//        FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
+//
+//        transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
+//        transaction.addToBackStack(null);
+//    }
 
 }
