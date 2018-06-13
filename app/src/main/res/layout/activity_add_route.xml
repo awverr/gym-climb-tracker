@@ -59,10 +59,9 @@
         android:id="@+id/save_route_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Route"
-        android:onClick="saveRoute"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Save Route" />
 
     <EditText
         android:id="@+id/route_setter_text_view"
