@@ -136,33 +136,33 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
-    public void saveRoute(View view) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
-
-        String stringType = (String) routeTypeSpinner.getSelectedItem();
-        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-        EditText editTextDate = (EditText) findViewById(R.id.date_text_box);
-        String stringDate = editTextDate.getText().toString();
-        EditText editTextSetter = (EditText) findViewById(R.id.route_setter_text_view);
-        String stringColor = (String) routeColorSpinner.getSelectedItem();
-        String stringWall = (String) routeWallSpinner.getSelectedItem();
-        RouteType type = RouteType.fromString(stringType);
-        RouteGrade grade = RouteGrade.fromString(stringGrade);
-       // RouteSetter setter = RouteSetter.fromString(stringSetter);
-        String stringSetter = editTextSetter.getText().toString();
-        RouteColor color = RouteColor.fromString(stringColor);
-        RouteWall wall = RouteWall.fromString(stringWall);
-
-        System.out.println("Date string is: " + stringDate);
-        Calendar calendar = Calendar.getInstance();
-        Date date = formatter.parse(stringDate);
-        //System.out.println("Date is: " + date);
-        calendar.setTime(date);
-        long dateInMillis = calendar.getTimeInMillis();
-
-        store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
-
-        startActivity(new Intent(AddRouteActivity.this, MainActivity.class));
-    }
+//    public void saveRoute(View view) throws ParseException {
+//        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+//
+//        String stringType = (String) routeTypeSpinner.getSelectedItem();
+//        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
+//        EditText editTextDate = (EditText) findViewById(R.id.date_text_box);
+//        String stringDate = editTextDate.getText().toString();
+//        EditText editTextSetter = (EditText) findViewById(R.id.route_setter_text_view);
+//        String stringColor = (String) routeColorSpinner.getSelectedItem();
+//        String stringWall = (String) routeWallSpinner.getSelectedItem();
+//        RouteType type = RouteType.fromString(stringType);
+//        RouteGrade grade = RouteGrade.fromString(stringGrade);
+//       // RouteSetter setter = RouteSetter.fromString(stringSetter);
+//        String stringSetter = editTextSetter.getText().toString();
+//        RouteColor color = RouteColor.fromString(stringColor);
+//        RouteWall wall = RouteWall.fromString(stringWall);
+//
+//        System.out.println("Date string is: " + stringDate);
+//        Calendar calendar = Calendar.getInstance();
+//        Date date = formatter.parse(stringDate);
+//        //System.out.println("Date is: " + date);
+//        calendar.setTime(date);
+//        long dateInMillis = calendar.getTimeInMillis();
+//
+//        store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
+//
+//        startActivity(new Intent(AddRouteActivity.this, MainActivity.class));
+//    }
 
 }
