@@ -33,7 +33,7 @@ import java.util.List;
 
 public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdapter.MyViewHolder> {
 
-    CloudStore store;
+    private CloudStore store;
     private Context context;
     private List<Climb> climbsList;
 
@@ -42,7 +42,7 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
 
         public MyViewHolder(View view) {
             super(view);
-            climbName = (TextView) view.findViewById(R.id.climb_name);
+            climbName = view.findViewById(R.id.climb_name);
         }
     }
 
@@ -64,21 +64,16 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
         store = new FirebaseCloudStore(context);
         final Climb climb = climbsList.get(position);
 
-        store.lookupRouteName(climb.getRouteId(), new Callback<String>() {
+        store.lookupRouteFromClimb(climb, new Callback<Route>() {
             @Override
-            public void receive(String string) {
-                holder.climbName.setText(string);
-            }
-        });
+            public void receive(final Route route) {
+                holder.climbName.setText(route.getName());
 
-        holder.climbName.setOnClickListener(new View.OnClickListener(){
+                holder.climbName.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
-
-                store.lookupRouteFromClimb(climb, new Callback<Route>() {
                     @Override
-                    public void receive(Route route) {
+                    public void onClick(View view) {
+
                         ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
 
                         Bundle bundle = new Bundle();
@@ -94,19 +89,12 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
                         transaction.addToBackStack(null);
 
                         transaction.commit();
+
                     }
+
                 });
-
-                //               Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
-                //               intent.putExtra("route", route);
-                //               view.getContext().startActivity(intent);
-
-
             }
-
         });
-
-
     }
 
     @Override
