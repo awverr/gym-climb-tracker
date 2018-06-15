@@ -149,4 +149,8 @@
     <string name="route_wall">Route Wall:</string>
     <string name="route_setter">Route Setter:</string>
     <string name="route_set_date">Route Set Date:</string>
+
+    <!-- Strings related to user route info -->
+    <string name="num_attempts_label">Number of Attempts:</string>
+    <string name="route_notes_label">Route Notes:</string>
 </resources>
