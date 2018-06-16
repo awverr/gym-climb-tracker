@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.awverret.gymclimbtracker.R;
+import com.awverret.gymclimbtracker.fragments.ViewClimbFragment;
 import com.awverret.gymclimbtracker.fragments.ViewRouteFragment;
 import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.Route;
@@ -74,18 +75,19 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
                     @Override
                     public void onClick(View view) {
 
-                        ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
+                        ViewClimbFragment viewClimbFragment = new ViewClimbFragment();
 
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("route", route);
+                        bundle.putParcelable("climb", climb);
 
-                        viewRouteFragment.setArguments(bundle);
+                        viewClimbFragment.setArguments(bundle);
 
                         FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
 
                         FragmentTransaction transaction = manager.beginTransaction();
 
-                        transaction.replace(R.id.fragment_container, viewRouteFragment);
+                        transaction.replace(R.id.fragment_container, viewClimbFragment);
                         transaction.addToBackStack(null);
 
                         transaction.commit();
