@@ -32,23 +32,19 @@ public class ViewClimbFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_view_climb, container, false);
 
-       // Bundle bundle=getArguments();
-
-      //  route = bundle.getParcelable("route");
-
         Bundle bundle=getArguments();
 
         route = bundle.getParcelable("route");
 
         climb = bundle.getParcelable("climb");
 
-        routeNameTextView = (TextView) rootView.findViewById(R.id.route_name_text_view);
-        routeTypeTextView = (TextView) rootView.findViewById(R.id.route_type_text_view);
-        routeGradeTextView = (TextView) rootView.findViewById(R.id.route_grade_text_view);
-        routeColorTextView = (TextView) rootView.findViewById(R.id.route_color_text_view);
-        routeWallTextView = (TextView) rootView.findViewById(R.id.route_wall_text_view);
-        routeSetterTextView = (TextView) rootView.findViewById(R.id.route_setter_text_view);
-        routeSetDateTextView = (TextView) rootView.findViewById(R.id.route_set_date_text_view);
+        routeNameTextView = (TextView) rootView.findViewById(R.id.climb_name_text_view);
+        routeTypeTextView = (TextView) rootView.findViewById(R.id.climb_type_text_view);
+        routeGradeTextView = (TextView) rootView.findViewById(R.id.climb_grade_text_view);
+        routeColorTextView = (TextView) rootView.findViewById(R.id.climb_color_text_view);
+        routeWallTextView = (TextView) rootView.findViewById(R.id.climb_wall_text_view);
+        routeSetterTextView = (TextView) rootView.findViewById(R.id.climb_setter_text_view);
+        routeSetDateTextView = (TextView) rootView.findViewById(R.id.climb_set_date_text_view);
         numAttempts = (TextView) rootView.findViewById(R.id.num_attempt_textview);
         routeNotes = (TextView) rootView.findViewById(R.id.route_notes_textview);
 
@@ -60,13 +56,11 @@ public class ViewClimbFragment extends Fragment {
     }
 
     public void initializeClimb(Climb climb, Route route){
-        //System.out.println("VERRET: route is: " + route);
 
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
         DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/d/yyyy");
         String stringDate = localDate.toString(fmt);
-        System.out.println("VERRET: localDate: " + localDate);
 
         routeNameTextView.setText(route.getName());
         routeTypeTextView.setText(route.getType().getText());
@@ -75,13 +69,10 @@ public class ViewClimbFragment extends Fragment {
         routeWallTextView.setText(route.getWall().getText());
         routeSetterTextView.setText(route.getSetter());
         routeSetDateTextView.setText(stringDate);
-        numAttempts.setText("0");
+        numAttempts.setText(String.valueOf(climb.getNumAttempts()));
 
-        if(climb.getUserId() == null){
-            numAttempts.setText("0");
-        }
         if(climb.getRouteNotes() == null){
-            routeNotes.setText("0");
+            routeNotes.setText("No notes");
         }
 
 
