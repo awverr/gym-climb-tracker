@@ -45,7 +45,7 @@ public class ViewClimbsActivity extends AppCompatActivity {
                     climbList.add(c);
                 }
                 mRecyclerView = (RecyclerView) findViewById(R.id.climb_recycler_view);
-                recyclerAdapter = new ClimbRecyclerAdapter(ViewClimbsActivity.this, climbList);
+                recyclerAdapter = new ClimbRecyclerAdapter(ViewClimbsActivity.this, climbList, user);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());
