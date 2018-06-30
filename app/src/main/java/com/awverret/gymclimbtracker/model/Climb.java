@@ -55,6 +55,14 @@ public class Climb implements Parcelable {
         return numAttempts;
     }
 
+    public void setNumAttempts(int numAttempts){
+        this.numAttempts = numAttempts;
+    }
+
+    public void setRouteNotes(String routeNotes){
+        this.routeNotes = routeNotes;
+    }
+
     public String getRouteNotes() {
         return routeNotes;
     }
