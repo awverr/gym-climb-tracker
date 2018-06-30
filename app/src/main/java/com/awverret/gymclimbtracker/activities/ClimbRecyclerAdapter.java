@@ -34,6 +34,7 @@ import java.util.List;
 
 public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdapter.MyViewHolder> {
 
+    private User user;
     private CloudStore store;
     private Context context;
     private List<Climb> climbsList;
@@ -47,9 +48,10 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
         }
     }
 
-    public ClimbRecyclerAdapter(Context context, List<Climb> climbsList) {
+    public ClimbRecyclerAdapter(Context context, List<Climb> climbsList, User user) {
         this.context = context;
         this.climbsList = climbsList;
+        this.user = user;
     }
 
     @Override
@@ -80,6 +82,7 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("route", route);
                         bundle.putParcelable("climb", climb);
+                        bundle.putParcelable("user", user);
 
                         viewClimbFragment.setArguments(bundle);
 
