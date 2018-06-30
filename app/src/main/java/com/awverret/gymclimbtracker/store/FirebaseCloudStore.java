@@ -231,4 +231,14 @@ public class FirebaseCloudStore implements CloudStore {
 
     }
 
+    @Override
+    public void updateNumAttempts(Climb climb, int numAttempts) {
+        db.child("climbs").child(climb.getId()).child("numAttempts").setValue(numAttempts);
+    }
+
+    @Override
+    public void updateRouteNotes(Climb climb, String routeNotes) {
+        db.child("climbs").child(climb.getId()).child("routeNotes").setValue(routeNotes);
+    }
+
 }
