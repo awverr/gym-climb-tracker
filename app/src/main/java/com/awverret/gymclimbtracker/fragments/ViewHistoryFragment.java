@@ -72,7 +72,7 @@ public class ViewHistoryFragment extends Fragment {
                     climbList.add(c);
                 }
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.climb_recycler_view);
-                recyclerAdapter = new ClimbRecyclerAdapter(activity, climbList);
+                recyclerAdapter = new ClimbRecyclerAdapter(activity, climbList, user);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());
