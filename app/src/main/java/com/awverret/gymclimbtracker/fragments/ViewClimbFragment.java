@@ -125,7 +125,7 @@ public class ViewClimbFragment extends Fragment {
                 int newNumAttempts = Integer.parseInt(input.getText().toString());
                 climb.setNumAttempts(newNumAttempts);
                 store.updateNumAttempts(climb, newNumAttempts);
-                // load();
+                initializeClimb(climb, route);
             }
         });
         builder.setNegativeButton("Cancel", null);
@@ -150,7 +150,7 @@ public class ViewClimbFragment extends Fragment {
                 String newRouteNotes = input.getText().toString();
                 climb.setRouteNotes(newRouteNotes);
                 store.updateRouteNotes(climb, newRouteNotes);
-                // load();
+                initializeClimb(climb, route);
             }
         });
         builder.setNegativeButton("Cancel", null);
