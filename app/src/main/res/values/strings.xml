@@ -153,4 +153,5 @@
     <!-- Strings related to user route info -->
     <string name="num_attempts_label">Number of Attempts:</string>
     <string name="route_notes_label">Route Notes:</string>
+    <string name="sent_spinner_label">Sent:</string>
 </resources>
