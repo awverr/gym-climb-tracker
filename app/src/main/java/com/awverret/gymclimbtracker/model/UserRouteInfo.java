@@ -17,6 +17,7 @@ public class UserRouteInfo implements Parcelable{
 
     int numAttempts;
     String routeNotes;
+    boolean sent = false;
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public UserRouteInfo createFromParcel(Parcel in) {
@@ -66,10 +67,17 @@ public class UserRouteInfo implements Parcelable{
         return routeId;
     }
 
+    public boolean getSent() {
+        return sent;
+    }
+
     public UserRouteInfo(Parcel in){
         this.id = in.readString();
         this.userId = in.readString();
         this.routeId = in.readString();
+        this.numAttempts = in.readInt();
+        this.routeNotes = in.readString();
+        this.sent = in.readInt() == 1 ? true : false;
     }
 
     @Override
@@ -82,6 +90,9 @@ public class UserRouteInfo implements Parcelable{
         dest.writeString(this.id);
         dest.writeString(this.userId);
         dest.writeString(this.routeId);
+        dest.writeInt(this.numAttempts);
+        dest.writeString(this.routeNotes);
+        dest.writeInt(sent ? 1 : 0);
     }
 
 }
