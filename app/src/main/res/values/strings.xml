@@ -157,7 +157,7 @@
 
     <!-- Strings related to sent spinner -->
     <string-array name="sent_array">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 </resources>
