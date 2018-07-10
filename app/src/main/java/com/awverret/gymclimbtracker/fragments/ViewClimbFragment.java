@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.awverret.gymclimbtracker.R;
@@ -28,6 +30,8 @@ import org.joda.time.format.DateTimeFormatter;
 public class ViewClimbFragment extends Fragment {
 
     TextView routeNameTextView, routeTypeTextView, routeGradeTextView, routeColorTextView, routeWallTextView, routeSetterTextView, routeSetDateTextView, numAttempts, routeNotes;
+
+    Spinner sentSpinner;
 
     Climb climb;
 
@@ -61,6 +65,7 @@ public class ViewClimbFragment extends Fragment {
         routeSetDateTextView = (TextView) rootView.findViewById(R.id.climb_set_date_text_view);
         numAttempts = (TextView) rootView.findViewById(R.id.num_attempt_textview);
         routeNotes = (TextView) rootView.findViewById(R.id.route_notes_textview);
+        sentSpinner = (Spinner) rootView.findViewById(R.id.sent_spinner);
 
         //System.out.println("VERRET: routeNameTextView: " + routeNameTextView);
 
@@ -105,6 +110,14 @@ public class ViewClimbFragment extends Fragment {
                 editRouteNotes();
             }
         });
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.sent_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        sentSpinner.setAdapter(adapter);
 
     }
 
