@@ -18,6 +18,7 @@ public class Climb implements Parcelable {
 
     public int numAttempts = 0;
     public String routeNotes;
+    boolean sent = false;
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Climb createFromParcel(Parcel in) {
@@ -67,12 +68,17 @@ public class Climb implements Parcelable {
         return routeNotes;
     }
 
+    public boolean getSent() {
+        return sent;
+    }
+
     public Climb(Parcel in){
         this.id = in.readString();
         this.userId = in.readString();
         this.routeId = in.readString();
         this.numAttempts = in.readInt();
         this.routeNotes = in.readString();
+        this.sent = in.readInt() == 1 ? true : false;
     }
 
     @Override
@@ -87,5 +93,6 @@ public class Climb implements Parcelable {
         dest.writeString(this.routeId);
         dest.writeInt(this.numAttempts);
         dest.writeString(this.routeNotes);
+        dest.writeInt(sent ? 1 : 0);
     }
 }
