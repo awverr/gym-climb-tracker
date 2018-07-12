@@ -72,6 +72,10 @@ public class Climb implements Parcelable {
         return sent;
     }
 
+    public void setSent(boolean sent){
+        this.sent = sent;
+    }
+
     public Climb(Parcel in){
         this.id = in.readString();
         this.userId = in.readString();
