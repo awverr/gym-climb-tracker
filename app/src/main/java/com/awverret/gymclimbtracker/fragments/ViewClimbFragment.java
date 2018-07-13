@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -27,7 +28,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-public class ViewClimbFragment extends Fragment {
+public class ViewClimbFragment extends Fragment{
 
     TextView routeNameTextView, routeTypeTextView, routeGradeTextView, routeColorTextView, routeWallTextView, routeSetterTextView, routeSetDateTextView, numAttempts, routeNotes;
 
@@ -74,7 +75,7 @@ public class ViewClimbFragment extends Fragment {
         return rootView;
     }
 
-    public void initializeClimb(final Climb climb, Route route) {
+    public void initializeClimb(final Climb climb, final Route route) {
 
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
@@ -118,7 +119,26 @@ public class ViewClimbFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         sentSpinner.setAdapter(adapter);
+        sentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String newSentValString = parent.getItemAtPosition(position).toString();
+                System.out.println("VERRET: BooleanString is: " + newSentValString);
+                boolean newSentVal = false;
+                if(newSentValString == "Yes"){
+                    newSentVal = true;
+                }
+                System.out.println("VERRET: Boolean is: " + newSentVal);
+                climb.setSent(newSentVal);
+                store.updateSent(climb, newSentVal);
+                initializeClimb(climb, route);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Another interface callback
+            }
+        });
     }
 
     private void editNumAttempts(){
