@@ -77,6 +77,8 @@ public class ViewClimbFragment extends Fragment{
 
     public void initializeClimb(final Climb climb, final Route route) {
 
+        //System.out.println("VERRET: initializeClimb called");
+
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
         DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/d/yyyy");
@@ -112,6 +114,15 @@ public class ViewClimbFragment extends Fragment{
             }
         });
 
+
+        //Initialize sentSpinner
+        String compareValue;
+        if(climb.getSent() == true){
+            compareValue = "Yes";
+        }else{
+            compareValue = "No";
+        }
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.sent_array, android.R.layout.simple_spinner_item);
@@ -119,19 +130,24 @@ public class ViewClimbFragment extends Fragment{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         sentSpinner.setAdapter(adapter);
+        if (compareValue != null) {
+            int spinnerPosition = adapter.getPosition(compareValue);
+            sentSpinner.setSelection(spinnerPosition);
+        }
         sentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String newSentValString = parent.getItemAtPosition(position).toString();
                 System.out.println("VERRET: BooleanString is: " + newSentValString);
-                boolean newSentVal = false;
-                if(newSentValString == "Yes"){
+                boolean newSentVal;
+                if(newSentValString.equals("Yes")){
                     newSentVal = true;
+                } else{
+                    newSentVal = false;
                 }
                 System.out.println("VERRET: Boolean is: " + newSentVal);
                 climb.setSent(newSentVal);
                 store.updateSent(climb, newSentVal);
-                initializeClimb(climb, route);
             }
 
             @Override
