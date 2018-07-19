@@ -160,4 +160,14 @@
         <item>No</item>
         <item>Yes</item>
     </string-array>
+
+    <!-- ViewClimbFragment Strings -->
+    <string name="date_format_string">MM/d/yyyy</string>
+    <string name="no_notes_string">No Notes</string>
+    <string name="edit_number_of_attempts_string">Edit Number Of Attempts</string>
+    <string name="how_many_attempts_string">How many attempts did this climb require?</string>
+    <string name="save_button_string">Save</string>
+    <string name="cancel_button_string">Cancel</string>
+    <string name="edit_route_notes_string">Edit Your Route Notes</string>
+    <string name="what_are_your_notes_string">What would you like to say about this route?</string>
 </resources>
