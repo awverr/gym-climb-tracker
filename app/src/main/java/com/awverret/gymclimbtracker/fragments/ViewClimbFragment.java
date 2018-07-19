@@ -68,8 +68,6 @@ public class ViewClimbFragment extends Fragment{
         routeNotes = (TextView) rootView.findViewById(R.id.route_notes_textview);
         sentSpinner = (Spinner) rootView.findViewById(R.id.sent_spinner);
 
-        //System.out.println("VERRET: routeNameTextView: " + routeNameTextView);
-
         initializeClimb(climb, route);
 
         return rootView;
@@ -77,11 +75,9 @@ public class ViewClimbFragment extends Fragment{
 
     public void initializeClimb(final Climb climb, final Route route) {
 
-        //System.out.println("VERRET: initializeClimb called");
-
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/d/yyyy");
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(getResources().getString(R.string.date_format_string));
         String stringDate = localDate.toString(fmt);
 
         routeNameTextView.setText(route.getName());
@@ -101,7 +97,7 @@ public class ViewClimbFragment extends Fragment{
         });
 
         if (climb.getRouteNotes() == null) {
-            routeNotes.setText("No notes");
+            routeNotes.setText(getResources().getString(R.string.no_notes_string));
         }
         else{
             routeNotes.setText(climb.getRouteNotes());
@@ -123,12 +119,9 @@ public class ViewClimbFragment extends Fragment{
             compareValue = "No";
         }
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.sent_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         sentSpinner.setAdapter(adapter);
         if (compareValue != null) {
             int spinnerPosition = adapter.getPosition(compareValue);
@@ -138,29 +131,27 @@ public class ViewClimbFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String newSentValString = parent.getItemAtPosition(position).toString();
-                System.out.println("VERRET: BooleanString is: " + newSentValString);
                 boolean newSentVal;
                 if(newSentValString.equals("Yes")){
                     newSentVal = true;
                 } else{
                     newSentVal = false;
                 }
-                System.out.println("VERRET: Boolean is: " + newSentVal);
                 climb.setSent(newSentVal);
                 store.updateSent(climb, newSentVal);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //Another interface callback
+
             }
         });
     }
 
     private void editNumAttempts(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Edit Number of Attempts");
-        builder.setMessage("How many attempts did this climb require?");
+        builder.setTitle(getResources().getString(R.string.edit_number_of_attempts_string));
+        builder.setMessage(getResources().getString(R.string.how_many_attempts_string));
 
         final EditText input = new EditText(getActivity());
 
@@ -168,7 +159,7 @@ public class ViewClimbFragment extends Fragment{
 
         builder.setView(input);
 
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.save_button_string), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int newNumAttempts = Integer.parseInt(input.getText().toString());
@@ -177,15 +168,15 @@ public class ViewClimbFragment extends Fragment{
                 initializeClimb(climb, route);
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getResources().getString(R.string.cancel_button_string), null);
 
         builder.show();
     }
 
     private void editRouteNotes(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Edit Your Route Notes");
-        builder.setMessage("What would you like to say about this route?");
+        builder.setTitle(getResources().getString(R.string.edit_route_notes_string));
+        builder.setMessage(getResources().getString(R.string.what_are_your_notes_string));
 
         final EditText input = new EditText(getActivity());
 
@@ -193,7 +184,7 @@ public class ViewClimbFragment extends Fragment{
 
         builder.setView(input);
 
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.save_button_string), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newRouteNotes = input.getText().toString();
@@ -202,7 +193,7 @@ public class ViewClimbFragment extends Fragment{
                 initializeClimb(climb, route);
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getResources().getString(R.string.cancel_button_string), null);
 
         builder.show();
     }
