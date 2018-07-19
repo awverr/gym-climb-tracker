@@ -84,7 +84,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
             saveRouteButton = view.findViewById(R.id.save_route_button);
             saveRouteButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
+                    DateFormat formatter = new SimpleDateFormat(getResources().getString(R.string.date_format_string), Locale.ENGLISH); // Make sure user insert date into edittext in this format.
 
                     String stringType = (String) routeTypeSpinner.getSelectedItem();
                     String stringGrade = (String) routeGradeSpinner.getSelectedItem();
@@ -95,12 +95,10 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     String stringWall = (String) routeWallSpinner.getSelectedItem();
                     RouteType type = RouteType.fromString(stringType);
                     RouteGrade grade = RouteGrade.fromString(stringGrade);
-                    // RouteSetter setter = RouteSetter.fromString(stringSetter);
                     String stringSetter = editTextSetter.getText().toString();
                     RouteColor color = RouteColor.fromString(stringColor);
                     RouteWall wall = RouteWall.fromString(stringWall);
 
-                    System.out.println("Date string is: " + stringDate);
                     Calendar calendar = Calendar.getInstance();
                     Date date = null;
                     try {
@@ -108,7 +106,6 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    //System.out.println("Date is: " + date);
                     calendar.setTime(date);
                     long dateInMillis = calendar.getTimeInMillis();
 
@@ -177,42 +174,4 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-//    public void saveRoute(View view) throws ParseException {
-//        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH); // Make sure user insert date into edittext in this format.
-//
-//        String stringType = (String) routeTypeSpinner.getSelectedItem();
-//        String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-//        EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
-//        String stringDate = editTextDate.getText().toString();
-//        EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
-//        String stringColor = (String) routeColorSpinner.getSelectedItem();
-//        String stringWall = (String) routeWallSpinner.getSelectedItem();
-//        RouteType type = RouteType.fromString(stringType);
-//        RouteGrade grade = RouteGrade.fromString(stringGrade);
-//        // RouteSetter setter = RouteSetter.fromString(stringSetter);
-//        String stringSetter = editTextSetter.getText().toString();
-//        RouteColor color = RouteColor.fromString(stringColor);
-//        RouteWall wall = RouteWall.fromString(stringWall);
-//
-//        System.out.println("Date string is: " + stringDate);
-//        Calendar calendar = Calendar.getInstance();
-//        Date date = formatter.parse(stringDate);
-//        //System.out.println("Date is: " + date);
-//        calendar.setTime(date);
-//        long dateInMillis = calendar.getTimeInMillis();
-//
-//        store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
-//
-//        // Now return to the viewAllRoutesFragment
-//        ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
-//
-//        viewAllRoutesFragment.setArguments(((AppCompatActivity)context).getIntent().getExtras());
-//
-//        FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
-//
-//        transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
-//        transaction.addToBackStack(null);
-//    }
-
 }
