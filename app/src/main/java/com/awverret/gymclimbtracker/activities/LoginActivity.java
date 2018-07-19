@@ -114,10 +114,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+//                    Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
                 // ...
             }
@@ -139,20 +139,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+ //       Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+ //                       Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
+ //                           Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -189,22 +189,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("VERRET: Made it to onActivityResult");
         super.onActivityResult(requestCode, resultCode, data);
 
        if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 
             if (result.isSuccess()) {
-                System.out.println("VERRET: onActivityResult success");
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
                 handleSignInResult(result);
             } else {
-                System.out.println("VERRET: onActivityResult NOT success");
                 result.getStatus().getStatusMessage();
-                System.out.println("VERRET: " + result.getStatus().getStatusMessage());
 
                 // Google Sign In failed, update UI appropriately
                 // ...
@@ -213,20 +209,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
-        System.out.println("VERRET: Made it to handleSignInResult");
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+ //       Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
            User user = new User(acct.getId(), acct.getEmail(), acct.getDisplayName(), acct.getFamilyName());
             localStore.setUser(user);
-            System.out.println("VERRET: LocalStore user is: " + localStore.getUser());
             cloudStore.googleLogin(user);
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
          //   mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
         } else {
-            System.out.println("VERRET: Login unsuccessful");
             // Signed out, show unauthenticated UI.
             updateUI(false);
         }
