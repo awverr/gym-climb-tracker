@@ -50,12 +50,11 @@ public class FirebaseCloudStore implements CloudStore {
                 else{
                     db.child("users").child(user.getUid()).setValue(user);
                 }
-                System.out.println("VERRET: Cloustore login success");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("VERRET: Cloustore login cancelled");
+
             }
 
         });
@@ -89,8 +88,6 @@ public class FirebaseCloudStore implements CloudStore {
         });
     }
 
-    //Need to rework this method to take different users into account.
-
     @Override
     public void saveClimb(final Climb climb, final User user) {
 
@@ -100,10 +97,8 @@ public class FirebaseCloudStore implements CloudStore {
             @Override
             public void receive(ArrayList<Climb> strings) {
                 for(Climb c : strings){
-                    System.out.println("VERRET: ClimbId " + c.getRouteId());
                     savedClimbRouteIds.add(c.getRouteId());
                 }
-                System.out.println("VERRET: SavedClimbRouteIds" + savedClimbRouteIds);
 
                 if(!savedClimbRouteIds.contains(climb.getRouteId())) {
                     db.child("climbs").child(climb.getId()).setValue(climb);
@@ -131,8 +126,7 @@ public class FirebaseCloudStore implements CloudStore {
 
                         @Override
                         public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-                            System.out.println("databaseError = " + databaseError);
-                            System.out.println("Complete = " + dataSnapshot);
+
                         }
                     });
                 }
