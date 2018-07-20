@@ -51,7 +51,7 @@ public class AddRouteActivity extends AppCompatActivity implements AdapterView.O
         routeWallSpinner.setOnItemSelectedListener(this);
         routeColorSpinner.setOnItemSelectedListener(this);
 
-        store = new FirebaseCloudStore(this);
+        store = new FirebaseCloudStore();
     }
 
     public void initializeRouteTypeSpinner(Spinner spinner){
