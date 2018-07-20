@@ -6,13 +6,14 @@
 
     <TextView
         android:id="@+id/climb_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
         android:layout_marginTop="8dp"
         android:layout_weight="3"
         android:clickable="true"
-        android:text="Climb name" />
+        android:focusable="true"
+        android:text="@string/climb_name_string"/>
 
 
 </LinearLayout>
