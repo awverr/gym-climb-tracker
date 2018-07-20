@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     GoogleApiClient mGoogleApiClient;
 
     private LocalStore localStore = new PreferencesLocalStore(this);
-    private CloudStore cloudStore = new FirebaseCloudStore(this);
+    private CloudStore cloudStore = new FirebaseCloudStore();
 
     private GoogleSignInClient mGoogleSignInClient;
 
