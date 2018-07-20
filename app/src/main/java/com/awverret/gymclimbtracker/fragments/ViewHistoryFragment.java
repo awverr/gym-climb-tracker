@@ -55,7 +55,7 @@ public class ViewHistoryFragment extends Fragment {
 
             user = bundle.getParcelable("user");
 
-            store = new FirebaseCloudStore(activity);
+            store = new FirebaseCloudStore();
 
             initializeRecyclerView();
         }
