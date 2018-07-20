@@ -123,7 +123,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                 }
             });
 
-            store = new FirebaseCloudStore(activity);
+            store = new FirebaseCloudStore();
         }
 
         return view;
