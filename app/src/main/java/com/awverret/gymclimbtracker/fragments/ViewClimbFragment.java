@@ -47,7 +47,7 @@ public class ViewClimbFragment extends Fragment{
 
         View rootView = inflater.inflate(R.layout.fragment_view_climb, container, false);
 
-        store = new FirebaseCloudStore(getActivity());
+        store = new FirebaseCloudStore();
 
         Bundle bundle=getArguments();
 
