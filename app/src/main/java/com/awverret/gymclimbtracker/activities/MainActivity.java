@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_action_name);
 
-        store = new FirebaseCloudStore(this);
+        store = new FirebaseCloudStore();
 
         if (findViewById(R.id.fragment_container) != null) {
             // Create a new Fragment to be placed in the activity layout
