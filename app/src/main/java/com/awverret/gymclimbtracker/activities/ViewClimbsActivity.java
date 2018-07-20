@@ -31,7 +31,7 @@ public class ViewClimbsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_climbs);
 
-        store = new FirebaseCloudStore(this);
+        store = new FirebaseCloudStore();
 
         initializeRecyclerView(this);
     }
