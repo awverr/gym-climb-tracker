@@ -22,8 +22,6 @@ public interface CloudStore {
     void lookupClimbsForUser(User user, Callback<ArrayList<Climb>> callback);
     void lookupRouteName(String uid, Callback<String> callback);
     void lookupRouteFromClimb(Climb climb, Callback<Route> callback);
-    void saveUserRouteInfo(UserRouteInfo info);
-    void lookupUserRouteInfo(Callback<UserRouteInfo> callback);
     void updateNumAttempts(Climb climb, int numAttempts);
     void updateRouteNotes(Climb climb, String routeNotes);
     void updateSent(Climb climb, boolean sent);
