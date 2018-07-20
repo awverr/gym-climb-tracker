@@ -41,8 +41,6 @@ public class ViewRouteFragment extends Fragment {
         routeSetterTextView = (TextView) rootView.findViewById(R.id.route_setter_text_view);
         routeSetDateTextView = (TextView) rootView.findViewById(R.id.route_set_date_text_view);
 
-        System.out.println("VERRET: routeNameTextView: " + routeNameTextView);
-
         initializeRoute(route);
 
         return rootView;
@@ -50,13 +48,10 @@ public class ViewRouteFragment extends Fragment {
 
     public void initializeRoute(Route route){
 
-        System.out.println("VERRET: route is: " + route);
-
         Instant inst = new Instant(route.getSetDate());
         LocalDate localDate = LocalDate.fromDateFields(inst.toDate());
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/d/yyyy");
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(getResources().getString(R.string.date_format_string));
         String stringDate = localDate.toString(fmt);
-        System.out.println("VERRET: localDate: " + localDate);
 
         routeNameTextView.setText(route.getName());
         routeTypeTextView.setText(route.getType().getText());
