@@ -28,7 +28,7 @@ public class FirebaseCloudStore implements CloudStore {
 
     private DatabaseReference db;
 
-    public FirebaseCloudStore(Context context) {
+    public FirebaseCloudStore() {
 
        db = FirebaseDatabase.getInstance().getReference();
 
@@ -146,7 +146,7 @@ public class FirebaseCloudStore implements CloudStore {
 
                     Climb climb = climbSnapshot.getValue(Climb.class);
 
-                    if(climb.getUserId().equals(user.getUid())) {
+                    if(climb.getUserId() != null && climb.getUserId().equals(user.getUid())) {
                         climbs.add(climb);
                     }
                 }
