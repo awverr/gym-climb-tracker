@@ -102,7 +102,7 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
         holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                store = new FirebaseCloudStore(context);
+                store = new FirebaseCloudStore();
 
                 Climb climb = new Climb(user.getUid(), route.getId());
                 store.saveClimb(climb, user);
