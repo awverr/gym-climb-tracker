@@ -5,7 +5,6 @@ import android.content.Context;
 import com.awverret.gymclimbtracker.model.Climb;
 import com.awverret.gymclimbtracker.model.Route;
 import com.awverret.gymclimbtracker.model.User;
-import com.awverret.gymclimbtracker.model.UserRouteInfo;
 import com.awverret.gymclimbtracker.util.Callback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -213,16 +212,6 @@ public class FirebaseCloudStore implements CloudStore {
             }
 
         });
-    }
-
-    @Override
-    public void saveUserRouteInfo(UserRouteInfo info) {
-        db.child("userRouteInfo").child(info.getId()).setValue(info);
-    }
-
-    @Override
-    public void lookupUserRouteInfo(Callback<UserRouteInfo> callback) {
-
     }
 
     @Override
