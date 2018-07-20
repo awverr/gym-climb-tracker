@@ -64,7 +64,7 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        store = new FirebaseCloudStore(context);
+        store = new FirebaseCloudStore();
         final Climb climb = climbsList.get(position);
 
         store.lookupRouteFromClimb(climb, new Callback<Route>() {
