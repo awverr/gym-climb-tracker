@@ -171,4 +171,6 @@
     <string name="edit_route_notes_string">Edit Your Route Notes</string>
     <string name="what_are_your_notes_string">What would you like to say about this route?</string>
     <string name="menu_string">Menu</string>
+    <string name="climb_name_string">Climb name</string>
+    <string name="route_name_string">Route name</string>
 </resources>
