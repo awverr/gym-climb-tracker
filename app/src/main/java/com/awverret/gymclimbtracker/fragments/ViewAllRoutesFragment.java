@@ -60,7 +60,7 @@ public class ViewAllRoutesFragment extends Fragment {
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
 
-            store = new FirebaseCloudStore(activity);
+            store = new FirebaseCloudStore();
 
             localStore = new PreferencesLocalStore(activity);
 
