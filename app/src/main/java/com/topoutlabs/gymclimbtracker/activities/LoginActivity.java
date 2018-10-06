@@ -35,6 +35,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.common.api.ApiException;
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
@@ -114,10 +115,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-//                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
                 // ...
             }
@@ -127,7 +128,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+  //      mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
@@ -139,7 +143,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
- //       Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -147,16 +151,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
  //                       Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
- //                           Log.w(TAG, "signInWithCredential", task.getException());
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        // ...
                     }
                 });
     }
@@ -172,6 +175,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void signOut(){
+        // Firebase sign out
+        mAuth.signOut();
+        // Google sign out
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
@@ -190,44 +196,64 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-       if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-
-            if (result.isSuccess()) {
+        if (requestCode == RC_SIGN_IN) {
+        // The Task returned from this call is always completed, no need to attach
+        // a listener.
+        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
                 // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
+                GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
-                handleSignInResult(result);
-            } else {
-                result.getStatus().getStatusMessage();
-
+            } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e);
                 // ...
             }
+
+        handleSignInResult(task);
         }
     }
 
-    private void handleSignInResult(GoogleSignInResult result) {
- //       Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+
+        try {
+            System.out.println("VERRET: Made it to handleSighnInResult()");
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-           User user = new User(acct.getId(), acct.getEmail(), acct.getDisplayName(), acct.getFamilyName());
+            User user = new User(account.getId(), account.getEmail(), account.getDisplayName(), account.getFamilyName());
             localStore.setUser(user);
             cloudStore.googleLogin(user);
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-         //   mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            updateUI(true);
-        } else {
-            // Signed out, show unauthenticated UI.
-            updateUI(false);
+//            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+//            updateUI(null);
         }
+
+// //       Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+//        if (result.isSuccess()) {
+//            // Signed in successfully, show authenticated UI.
+//            System.out.println("VERRET: Signin sucess!!!");
+//            GoogleSignInAccount acct = result.getSignInAccount();
+//           User user = new User(acct.getId(), acct.getEmail(), acct.getDisplayName(), acct.getFamilyName());
+//            localStore.setUser(user);
+//            cloudStore.googleLogin(user);
+//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//         //   mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+//            updateUI(true);
+//        } else {
+//            System.out.println("VERRET: Signin fail!!!");
+//            // Signed out, show unauthenticated UI.
+//            updateUI(false);
+//        }
     }
 
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
         } else {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         }
