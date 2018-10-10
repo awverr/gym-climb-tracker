@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -154,6 +154,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            System.out.println("Aubry: Firebase User user.getUid() is" + user.getUid());
+                            handleSignInResult(acct);
                             updateUI(user);
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -204,32 +206,34 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
                 // ...
             }
 
-        handleSignInResult(task);
+
         }
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+    private void handleSignInResult(GoogleSignInAccount account) {
 
-        try {
+ //       try {
             System.out.println("VERRET: Made it to handleSighnInResult()");
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+          //  GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
-            User user = new User(account.getId(), account.getEmail(), account.getDisplayName(), account.getFamilyName());
+            User user = new User(mAuth.getCurrentUser().getUid(), account.getEmail(), account.getDisplayName(), account.getFamilyName());
             localStore.setUser(user);
             cloudStore.googleLogin(user);
 //            updateUI(account);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
-        }
+ //       }
+//        catch (ApiException e) {
+//            // The ApiException status code indicates the detailed failure reason.
+//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+////            updateUI(null);
+//        }
 
 // //       Log.d(TAG, "handleSignInResult:" + result.isSuccess());
 //        if (result.isSuccess()) {
