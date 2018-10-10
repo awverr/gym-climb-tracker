@@ -40,14 +40,16 @@ public class FirebaseCloudStore implements CloudStore {
 
     @Override
     public void googleLogin(final User user) {
-        System.out.println("Made it to Google login method");
+//        System.out.println("Made it to Google login method");
+//        System.out.println("Aubry: user.getUid() is" + user.getUid());
         db.child("users").child(user.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() { //.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {}
                 else{
-                    System.out.println("Made it to here in Google login method");
+               //     System.out.println("Made it to here in Google login method");
+
                     db.child("users").child(user.getUid()).setValue(user);
                 }
             }
