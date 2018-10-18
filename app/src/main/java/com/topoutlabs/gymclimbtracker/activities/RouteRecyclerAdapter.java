@@ -65,51 +65,54 @@ public class RouteRecyclerAdapter extends RecyclerView.Adapter<RouteRecyclerAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Route route = routesList.get(position);
 
-        holder.routeName.setText(route.getName());
+        if(!routesList.isEmpty()) {
+            final Route route = routesList.get(position);
 
-        holder.routeName.setOnClickListener(new View.OnClickListener(){
+            holder.routeName.setText(route.getName());
 
-            @Override
-            public void onClick(View view) {
+            holder.routeName.setOnClickListener(new View.OnClickListener() {
 
-                ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
+                @Override
+                public void onClick(View view) {
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("route", route);
+                    ViewRouteFragment viewRouteFragment = new ViewRouteFragment();
 
-                viewRouteFragment.setArguments(bundle);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("route", route);
 
-                FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    viewRouteFragment.setArguments(bundle);
 
-                FragmentTransaction transaction = manager.beginTransaction();
+                    FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
 
-                transaction.replace(R.id.fragment_container, viewRouteFragment);
-                transaction.addToBackStack(null);
+                    FragmentTransaction transaction = manager.beginTransaction();
 
-                transaction.commit();
+                    transaction.replace(R.id.fragment_container, viewRouteFragment);
+                    transaction.addToBackStack(null);
 
- //               Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
- //               intent.putExtra("route", route);
- //               view.getContext().startActivity(intent);
+                    transaction.commit();
+
+                    //               Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
+                    //               intent.putExtra("route", route);
+                    //               view.getContext().startActivity(intent);
 
 
-            }
+                }
 
-        });
+            });
 
-        holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                store = new FirebaseCloudStore();
+            holder.addToHistoryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    store = new FirebaseCloudStore();
 
-                Climb climb = new Climb(user.getUid(), route.getId());
-                store.saveClimb(climb, user);
-                Toast.makeText(context, "Added to history!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+                    Climb climb = new Climb(user.getUid(), route.getId());
+                    store.saveClimb(climb, user);
+                    Toast.makeText(context, "Added to history!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
