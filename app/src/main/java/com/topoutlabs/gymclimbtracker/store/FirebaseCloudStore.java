@@ -100,8 +100,10 @@ public class FirebaseCloudStore implements CloudStore {
         lookupClimbsForUser(user, new Callback<ArrayList<Climb>>() {
             @Override
             public void receive(ArrayList<Climb> strings) {
-                for(Climb c : strings){
-                    savedClimbRouteIds.add(c.getRouteId());
+                if(!strings.isEmpty()) {
+                    for (Climb c : strings) {
+                        savedClimbRouteIds.add(c.getRouteId());
+                    }
                 }
 
                 if(!savedClimbRouteIds.contains(climb.getRouteId())) {
