@@ -75,9 +75,11 @@ public class ViewAllRoutesFragment extends Fragment {
             @Override
             public void receive(ArrayList<Route> strings) {
 
-                for(Route r : strings){
-                    //            routes.add(r.getName());
-                    routeList.add(r);
+                if(!strings.isEmpty()) {
+                    for (Route r : strings) {
+                        //            routes.add(r.getName());
+                        routeList.add(r);
+                    }
                 }
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
