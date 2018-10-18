@@ -65,6 +65,8 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         store = new FirebaseCloudStore();
+
+        if(!climbsList.isEmpty()){
         final Climb climb = climbsList.get(position);
 
         store.lookupRouteFromClimb(climb, new Callback<Route>() {
@@ -72,7 +74,7 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
             public void receive(final Route route) {
                 holder.climbName.setText(route.getName());
 
-                holder.climbName.setOnClickListener(new View.OnClickListener(){
+                holder.climbName.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
@@ -86,7 +88,7 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
 
                         viewClimbFragment.setArguments(bundle);
 
-                        FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                        FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
 
                         FragmentTransaction transaction = manager.beginTransaction();
 
@@ -100,6 +102,7 @@ public class ClimbRecyclerAdapter extends RecyclerView.Adapter<ClimbRecyclerAdap
                 });
             }
         });
+    }
     }
 
     @Override
