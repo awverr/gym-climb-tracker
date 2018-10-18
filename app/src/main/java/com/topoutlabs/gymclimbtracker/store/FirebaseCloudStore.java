@@ -76,8 +76,10 @@ public class FirebaseCloudStore implements CloudStore {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
 
-                    Route route = routeSnapshot.getValue(Route.class);
-                    routes.add(route);
+                    if(routeSnapshot.exists()) {
+                        Route route = routeSnapshot.getValue(Route.class);
+                        routes.add(route);
+                    }
                 }
                 callback.receive(routes);
             }
