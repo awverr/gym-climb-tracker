@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ import java.util.List;
  * Created by aubry on 3/1/2018.
  */
 
-public class ViewAllRoutesFragment extends Fragment {
+public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     CloudStore store;
 
@@ -63,6 +65,10 @@ public class ViewAllRoutesFragment extends Fragment {
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
 
+            routeWallSpinner = (Spinner) view.findViewById(R.id.filter_route_wall_spinner);
+            initializeRouteWallSpinner(routeWallSpinner);
+            routeWallSpinner.setOnItemSelectedListener(this);
+
             store = new FirebaseCloudStore();
 
             localStore = new PreferencesLocalStore(activity);
@@ -71,6 +77,15 @@ public class ViewAllRoutesFragment extends Fragment {
         }
 
         return view;
+    }
+
+    private void initializeRouteWallSpinner(Spinner spinner){
+        //filter_route_wall_spinner
+
+        ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                R.array.route_wall_array, android.R.layout.simple_spinner_item);
+        routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(routeWallAdapter);
     }
 
     private void initializeRecyclerView() {
@@ -96,6 +111,16 @@ public class ViewAllRoutesFragment extends Fragment {
                 mRecyclerView.setAdapter(recyclerAdapter);
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
 
