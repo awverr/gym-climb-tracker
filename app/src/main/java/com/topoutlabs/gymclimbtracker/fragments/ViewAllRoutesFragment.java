@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
@@ -40,6 +41,8 @@ public class ViewAllRoutesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RouteRecyclerAdapter recyclerAdapter;
+
+    Spinner routeWallSpinner; //For filtering routes
 
     private MainActivity activity;
 
