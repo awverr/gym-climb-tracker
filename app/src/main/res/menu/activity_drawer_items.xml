@@ -2,7 +2,10 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-    <item
+        <item
+            android:id="@+id/route_list"
+            android:title="Route List" />
+        <item
         android:id="@+id/view_history"
         android:title="View History" />
     <item
