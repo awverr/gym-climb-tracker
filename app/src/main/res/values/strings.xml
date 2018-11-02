@@ -173,4 +173,34 @@
     <string name="menu_string">Menu</string>
     <string name="climb_name_string">Climb name</string>
     <string name="route_name_string">Route name</string>
+
+    <!--Array for filtering route view -->
+    <string-array name="route_wall_filter_array">
+        <item>All Walls</item>
+        <item>Welcome Wall</item>
+        <item>Left Cheek</item>
+        <item>Right Cheek</item>
+        <item>Bouldering Slabs</item>
+        <item>10 Degree Wall</item>
+        <item>Prow</item>
+        <item>Learning Center</item>
+        <item>Alcove</item>
+        <item>Storage Slabs</item>
+        <item>Tower</item>
+        <item>Gallery</item>
+        <item>Trophy Wall</item>
+        <item>Holiday Wall</item>
+        <item>Constant Wall</item>
+        <item>Crystal</item>
+        <item>Marathon Wall</item>
+        <item>Double Wave</item>
+        <item>Sun Wall</item>
+        <item>Mega Slab</item>
+        <item>Crows Nest</item>
+        <item>Crack Wall</item>
+        <item>Ice Box</item>
+        <item>Belly</item>
+        <item>Wave</item>
+        <item>Corner-Copia</item>
+    </string-array>
 </resources>
