@@ -28,6 +28,7 @@ import com.topoutlabs.gymclimbtracker.util.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by aubry on 3/1/2018.
@@ -73,7 +74,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
             localStore = new PreferencesLocalStore(activity);
 
-            initializeRecyclerView();
+            initializeRecyclerView("");
         }
 
         return view;
@@ -83,22 +84,28 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
         //filter_route_wall_spinner
 
         ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
-                R.array.route_wall_array, android.R.layout.simple_spinner_item);
+                R.array.route_wall_filter_array, android.R.layout.simple_spinner_item);
         routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(routeWallAdapter);
     }
 
-    private void initializeRecyclerView() {
+    private void initializeRecyclerView(final String filterSelection) {
+        routeList.clear();
         store.lookUpRoutes(new Callback<ArrayList<Route>>() {
             @Override
             public void receive(ArrayList<Route> strings) {
 
                 if(!strings.isEmpty()) {
                     for (Route r : strings) {
-                        //            routes.add(r.getName());
-                        routeList.add(r);
+                        if(r.wall.getText().equals(filterSelection) || filterSelection.equals("All Walls")) {
+                            //            routes.add(r.getName());
+                            routeList.add(r);
+                        }
                     }
                 }
+
+              //  routeList.stream().filter(S -> S.equals(filterSelection)).collect(Collectors.toList());
+
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
                 if(localStore.getUser().isPresent()) {
@@ -115,7 +122,8 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        String selection = (String) parent.getItemAtPosition(position);
+        initializeRecyclerView(selection);
     }
 
     @Override
