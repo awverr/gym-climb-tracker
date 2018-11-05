@@ -112,7 +112,17 @@ public class MainActivity extends AppCompatActivity {
                                 transaction.replace(R.id.fragment_container, viewHistoryFragment).commit();
                                 transaction.addToBackStack(null);
 
-                            } else if (id == R.id.add_route) {
+                            } else if (id == R.id.route_list) {
+
+                                if (drawer != null) {
+                                    drawer.closeDrawer(navigationView);
+                                }
+
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+
+                                startActivity(intent);
+
+                            }else if (id == R.id.add_route) {
 
                                 if (drawer != null) {
                                     drawer.closeDrawer(navigationView);
