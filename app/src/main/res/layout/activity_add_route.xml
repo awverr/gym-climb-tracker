@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.topoutlabs.gymclimbtracker.activities.AddRouteActivity">
+    tools:context="com.topoutlabs.gymclimbtracker.fragments.AddRouteFragment">
 
     <Spinner
         android:layout_width="match_parent"
@@ -47,6 +47,10 @@
         android:id="@+id/date_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/route_wall_spinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
         android:text="@string/pick_date"
         android:onClick="showDatePickerDialog" />
 
