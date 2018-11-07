@@ -1,8 +1,13 @@
 package com.topoutlabs.gymclimbtracker.fragments;
 
+import android.app.DatePickerDialog;
+
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,8 +18,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.activities.AddRouteActivity;
@@ -38,7 +45,7 @@ import java.util.Locale;
  * Created by aubry on 4/6/18.
  */
 
-public class AddRouteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AddRouteFragment extends DialogFragment implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener {
 
     Spinner routeTypeSpinner, routeGradeSpinner, routeWallSpinner, routeColorSpinner;
 
@@ -88,8 +95,8 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
                     String stringType = (String) routeTypeSpinner.getSelectedItem();
                     String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-                    EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
-                    String stringDate = editTextDate.getText().toString();
+                //    EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
+                 //   String stringDate = editTextDate.getText().toString();
                     EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
                     String stringColor = (String) routeColorSpinner.getSelectedItem();
                     String stringWall = (String) routeWallSpinner.getSelectedItem();
@@ -101,11 +108,11 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
                     Calendar calendar = Calendar.getInstance();
                     Date date = null;
-                    try {
-                        date = formatter.parse(stringDate);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        date = formatter.parse(stringDate);
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
                     calendar.setTime(date);
                     long dateInMillis = calendar.getTimeInMillis();
 
@@ -174,4 +181,26 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        // Do something with the date chosen by the user
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Use the current date as the default date in the picker
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        // Create a new instance of DatePickerDialog and return it
+        return new DatePickerDialog(getActivity(), this, year, month, day);
+    }
+
+//    public void showDatePickerDialog(View v) {
+//        DialogFragment newFragment = new DatePickerFragment();
+//        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+//    }
 }
