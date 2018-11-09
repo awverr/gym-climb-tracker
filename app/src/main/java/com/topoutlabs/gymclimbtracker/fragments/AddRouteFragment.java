@@ -45,9 +45,11 @@ import java.util.Locale;
  * Created by aubry on 4/6/18.
  */
 
-public class AddRouteFragment extends DialogFragment implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener {
+public class AddRouteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     Spinner routeTypeSpinner, routeGradeSpinner, routeWallSpinner, routeColorSpinner;
+
+    Button setDateButton;
 
     Button saveRouteButton;
 
@@ -87,6 +89,15 @@ public class AddRouteFragment extends DialogFragment implements AdapterView.OnIt
             routeTypeSpinner.setOnItemSelectedListener(this);
             routeWallSpinner.setOnItemSelectedListener(this);
             routeColorSpinner.setOnItemSelectedListener(this);
+
+            setDateButton = view.findViewById(R.id.date_picker);
+            setDateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogFragment newFragment = new DatePickerFragment();
+                    newFragment.show(getActivity().getSupportFragmentManager(), "date_Picker");
+                }
+            });
 
             saveRouteButton = view.findViewById(R.id.save_route_button);
             saveRouteButton.setOnClickListener(new View.OnClickListener() {
@@ -182,25 +193,8 @@ public class AddRouteFragment extends DialogFragment implements AdapterView.OnIt
 
     }
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        // Do something with the date chosen by the user
-    }
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the current date as the default date in the picker
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
-    }
-
 //    public void showDatePickerDialog(View v) {
 //        DialogFragment newFragment = new DatePickerFragment();
-//        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+//        newFragment.show(getActivity().getSupportFragmentManager(), "date_Picker");
 //    }
 }
