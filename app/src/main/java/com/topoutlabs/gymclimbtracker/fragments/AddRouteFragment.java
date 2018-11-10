@@ -45,7 +45,7 @@ import java.util.Locale;
  * Created by aubry on 4/6/18.
  */
 
-public class AddRouteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AddRouteFragment extends Fragment implements AdapterView.OnItemSelectedListener, DatePickerFragment.NoticeDialogListener {
 
     Spinner routeTypeSpinner, routeGradeSpinner, routeWallSpinner, routeColorSpinner;
 
@@ -95,7 +95,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                 @Override
                 public void onClick(View view) {
                     DialogFragment newFragment = new DatePickerFragment();
-                    newFragment.show(getActivity().getSupportFragmentManager(), "date_Picker");
+                    newFragment.show(getChildFragmentManager(), "date_Picker");
                 }
             });
 
@@ -191,6 +191,11 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onDatePicked(int year, int month, int day) {
+        System.out.println("Date info from parent Fragment: " + month + " " + day + " " + year);
     }
 
 //    public void showDatePickerDialog(View v) {
