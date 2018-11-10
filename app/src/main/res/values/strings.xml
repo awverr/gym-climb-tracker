@@ -179,7 +179,7 @@
     <string name="view_history_item">View History</string>
     <string name="add_route_item">Add Route</string>
     <string name="logout_item">Log Out</string>
-    <string name="pick_date">Pick Date</string>
+    <string name="pick_date">Pick Date Route Was Set</string>
 
     <!--Array for filtering route view -->
     <string-array name="route_wall_filter_array">
