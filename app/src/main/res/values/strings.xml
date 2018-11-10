@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">GymClimbTracker</string>
     <string-array name="route_type_array">
+        <item>Route/Problem Type</item>
         <item>Boulder</item>
         <item>Top Rope</item>
         <item>Lead</item>
     </string-array>
     <string-array name="route_grade_array">
+        <item>Route/Problem Grade</item>
         <item>5.?</item>
         <item>5.5</item>
         <item>5.6</item>
@@ -80,6 +82,7 @@
         <item>v10</item>
     </string-array>
     <string-array name="route_color_array">
+        <item>Route/Problem Color</item>
         <item>Black</item>
         <item>White</item>
         <item>Tan</item>
@@ -91,6 +94,7 @@
         <item>Yellow</item>
     </string-array>
     <string-array name="route_wall_array">
+        <item>Gym Wall Name</item>
         <item>Welcome Wall</item>
         <item>Left Cheek</item>
         <item>Right Cheek</item>
