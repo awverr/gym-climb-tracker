@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -23,29 +24,28 @@ public class DatePickerFragment extends DialogFragment
      * Each method passes the DialogFragment in case the host needs to query it. */
     public interface NoticeDialogListener {
         public void onDatePicked(int year, int month, int day);
-//        public void onDialogPositiveClick(DialogFragment dialog);
-//        public void onDialogNegativeClick(DialogFragment dialog);
     }
 
+    // Use this instance of the interface to deliver action events
     NoticeDialogListener mListener;
 
-    // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    //Custom onAttach method to attach to parent fragment
+    public void onAttachToParentFragment(Fragment fragment){
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (NoticeDialogListener) context;
+           mListener = (NoticeDialogListener) fragment;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(getActivity().toString()
+            throw new ClassCastException(getParentFragment().toString()
                     + " must implement NoticeDialogListener");
         }
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        onAttachToParentFragment(getParentFragment());
 
         // Use the current date as the default date in the picker
         final Calendar c = Calendar.getInstance();
@@ -57,35 +57,8 @@ public class DatePickerFragment extends DialogFragment
          return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
-    // Use this instance of the interface to deliver action events
-
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-
-        NoticeDialogListener listener = (NoticeDialogListener) getParentFragment();
-
-        listener.onDatePicked(year, month, day);
-
- //   System.out.println("Date info: " + month + " " + day + " " + year);
-
-    String dateString = String.valueOf(month + 1) + "/" + String.valueOf(day) + "/" + String.valueOf(year);
-
- //   System.out.println("Date info: " + dateString);
-
-        ViewClimbFragment viewClimbFragment = new ViewClimbFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putString("date", dateString);
-
-//        viewClimbFragment.setArguments(bundle);
-//
-//        FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
-//
-//        FragmentTransaction transaction = manager.beginTransaction();
-//
-//        transaction.replace(R.id.fragment_container, viewClimbFragment);
-//        transaction.addToBackStack(null);
-//
-//        transaction.commit();
+        mListener.onDatePicked(year, month, day);
     }
 }
