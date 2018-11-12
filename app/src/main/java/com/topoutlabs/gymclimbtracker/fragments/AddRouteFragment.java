@@ -1,30 +1,20 @@
 package com.topoutlabs.gymclimbtracker.fragments;
 
-import android.app.DatePickerDialog;
-
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 
 import com.topoutlabs.gymclimbtracker.R;
-import com.topoutlabs.gymclimbtracker.activities.AddRouteActivity;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.RouteColor;
@@ -42,7 +32,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by aubry on 4/6/18.
+ * Fragment that contains fields and button for adding a new route to the database.
  */
 
 public class AddRouteFragment extends Fragment implements AdapterView.OnItemSelectedListener, DatePickerFragment.NoticeDialogListener {
@@ -59,7 +49,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     CloudStore store;
 
-    private Context context;
+    String dateString = "No date Chosen";
 
     @Override
     public void onAttach(Context context){
@@ -75,8 +65,6 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
         if(view == null) {
             view = inflater.inflate(R.layout.activity_add_route, container, false);
-
-            context = getActivity().getApplicationContext();
 
             routeTypeSpinner = (Spinner) view.findViewById(R.id.route_type_spinner);
             routeGradeSpinner = (Spinner) view.findViewById(R.id.grade_spinner);
@@ -119,11 +107,12 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
                     Calendar calendar = Calendar.getInstance();
                     Date date = null;
-//                    try {
-//                        date = formatter.parse(stringDate);
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        System.out.println("Date string: " + dateString);
+                        date = formatter.parse(dateString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     calendar.setTime(date);
                     long dateInMillis = calendar.getTimeInMillis();
 
@@ -195,11 +184,10 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     @Override
     public void onDatePicked(int year, int month, int day) {
-        System.out.println("Date info from parent Fragment: " + month + " " + day + " " + year);
-    }
+        System.out.println("Date info from parent Fragment: " + (month+1) + " " + day + " " + year);
 
-//    public void showDatePickerDialog(View v) {
-//        DialogFragment newFragment = new DatePickerFragment();
-//        newFragment.show(getActivity().getSupportFragmentManager(), "date_Picker");
-//    }
+
+
+        dateString = String.valueOf(month + 1) + String.valueOf(day) + String.valueOf(year);
+    }
 }
