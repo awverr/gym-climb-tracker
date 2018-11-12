@@ -2,6 +2,7 @@ package com.topoutlabs.gymclimbtracker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
@@ -43,6 +45,8 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     Button saveRouteButton;
 
+    TextView datePicked;
+
     private MainActivity activity;
 
     View view;
@@ -66,6 +70,12 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
         if(view == null) {
             view = inflater.inflate(R.layout.activity_add_route, container, false);
 
+            //Set datePicked textView to current date as default when fragment is created.
+            datePicked = (TextView) view.findViewById(R.id.date_picked);
+            String pattern = "MM-dd-yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+            datePicked.setText(date.toString());
             routeTypeSpinner = (Spinner) view.findViewById(R.id.route_type_spinner);
             routeGradeSpinner = (Spinner) view.findViewById(R.id.grade_spinner);
             routeWallSpinner = (Spinner) view.findViewById(R.id.route_wall_spinner);
@@ -172,5 +182,12 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
         Calendar c = Calendar.getInstance();
         c.set(year, month, day, 0, 0);
         dateInMillis = c.getTimeInMillis();
+
+        //Set date_picked textView to chosen date.
+        datePicked = (TextView) view.findViewById(R.id.date_picked);
+        String pattern = "MM-dd-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(c.getTime());
+        datePicked.setText(date.toString());
     }
 }
