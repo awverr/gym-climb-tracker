@@ -49,7 +49,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     CloudStore store;
 
-    String dateString = "No date Chosen";
+    long dateInMillis = 0;
 
     @Override
     public void onAttach(Context context){
@@ -90,12 +90,8 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
             saveRouteButton = view.findViewById(R.id.save_route_button);
             saveRouteButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    DateFormat formatter = new SimpleDateFormat(getResources().getString(R.string.date_format_string), Locale.ENGLISH); // Make sure user insert date into edittext in this format.
-
                     String stringType = (String) routeTypeSpinner.getSelectedItem();
                     String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-                //    EditText editTextDate = (EditText) view.findViewById(R.id.date_text_box);
-                 //   String stringDate = editTextDate.getText().toString();
                     EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
                     String stringColor = (String) routeColorSpinner.getSelectedItem();
                     String stringWall = (String) routeWallSpinner.getSelectedItem();
@@ -104,17 +100,6 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     String stringSetter = editTextSetter.getText().toString();
                     RouteColor color = RouteColor.fromString(stringColor);
                     RouteWall wall = RouteWall.fromString(stringWall);
-
-                    Calendar calendar = Calendar.getInstance();
-                    Date date = null;
-                    try {
-                        System.out.println("Date string: " + dateString);
-                        date = formatter.parse(dateString);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    calendar.setTime(date);
-                    long dateInMillis = calendar.getTimeInMillis();
 
                     store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
 
@@ -184,10 +169,8 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     @Override
     public void onDatePicked(int year, int month, int day) {
-        System.out.println("Date info from parent Fragment: " + (month+1) + " " + day + " " + year);
-
-
-
-        dateString = String.valueOf(month + 1) + String.valueOf(day) + String.valueOf(year);
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day, 0, 0);
+        dateInMillis = c.getTimeInMillis();
     }
 }
