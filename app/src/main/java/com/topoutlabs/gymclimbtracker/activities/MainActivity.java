@@ -115,16 +115,25 @@ public class MainActivity extends AppCompatActivity {
                             } else if (id == R.id.route_list) {
 
                                 if (drawer != null) {
+                                    item.setChecked(true);
                                     drawer.closeDrawer(navigationView);
                                 }
 
-                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                // Create a new Fragment to be placed in the activity layout
+                                ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
 
-                                startActivity(intent);
+                                viewAllRoutesFragment.setArguments(getIntent().getExtras());
+
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                                // Add the fragment to the 'fragment_container' FrameLayout
+                                transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
+                                transaction.addToBackStack(null);
 
                             }else if (id == R.id.add_route) {
 
                                 if (drawer != null) {
+                                    item.setChecked(true);
                                     drawer.closeDrawer(navigationView);
                                 }
 
@@ -134,13 +143,12 @@ public class MainActivity extends AppCompatActivity {
 
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                                transaction.replace(R.id.fragment_container, addRouteFragment);
+                                transaction.replace(R.id.fragment_container, addRouteFragment).commit();
                                 transaction.addToBackStack(null);
-
-                                transaction.commit();
 
                             } else if (id == R.id.log_out) {
                                 if (drawer != null) {
+                                    item.setChecked(true);
                                     drawer.closeDrawer(navigationView);
                                 }
 
