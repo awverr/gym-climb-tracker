@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,18 +26,6 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".activities.AddRouteActivity"
-            android:label="@string/title_activity_add_route"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.ViewRouteActivity"
-            android:label="ViewRouteActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.ViewClimbsActivity"
-            android:label="ViewClimbsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
