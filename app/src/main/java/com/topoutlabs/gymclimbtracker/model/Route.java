@@ -16,6 +16,7 @@ import static java.util.UUID.randomUUID;
 public class Route implements Parcelable{
 
     public RouteType type;
+    public String gymId;
     public String id;
     public RouteGrade routeGrade;
     public RouteColor color;
@@ -39,9 +40,10 @@ public class Route implements Parcelable{
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Route(RouteType type, RouteGrade routeGrade, String name, String setter, RouteColor color, RouteWall wall, long setDate) {
+    public Route(RouteType type, String gymId, RouteGrade routeGrade, String name, String setter, RouteColor color, RouteWall wall, long setDate) {
         this.type = type;
         id = randomUUID().toString();
+        this.gymId = gymId;
         this.routeGrade = routeGrade;
         this.setter = setter;
         this.color = color;
@@ -63,6 +65,10 @@ public class Route implements Parcelable{
     public RouteType getType() {return type;}
 
     public String getId() {return id;}
+
+    public String getGymId() {
+        return gymId;
+    }
 
     public RouteGrade getRouteGrade() {
         return routeGrade;
@@ -96,6 +102,7 @@ public class Route implements Parcelable{
     public Route(Parcel in){
         this.type = (RouteType) in.readSerializable();
         this.id = in.readString();
+        this.gymId = in.readString();
         this.routeGrade = (RouteGrade) in.readSerializable();
         this.color = (RouteColor) in.readSerializable();
         this.wall = (RouteWall) in.readSerializable();
@@ -114,6 +121,7 @@ public class Route implements Parcelable{
 
         dest.writeSerializable(this.type);
         dest.writeString(this.id);
+        dest.writeString(this.gymId);
         dest.writeSerializable(this.routeGrade);
         dest.writeSerializable(this.color);
         dest.writeSerializable(this.wall);
