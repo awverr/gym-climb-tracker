@@ -122,6 +122,48 @@
         <item>Corner-Copia</item>
     </string-array>
 
+    <string-array name="englewood_route_wall_array">
+        <item>Gym Wall Name</item>
+        <item>45</item>
+        <item>Arch</item>
+        <item>Arete</item>
+        <item>Column</item>
+        <item>Crystal</item>
+        <item>Cube</item>
+        <item>Egg</item>
+        <item>Freestanding Snail</item>
+        <item>Freestanding Topout</item>
+        <item>Heart</item>
+        <item>Hex</item>
+        <item>Instruction Wall</item>
+        <item>Island</item>
+        <item>Main Squeeze</item>
+        <item>Mega Roll</item>
+        <item>Party</item>
+        <item>Prow</item>
+        <item>Pump</item>
+        <item>Slab</item>
+        <item>Star</item>
+        <item>Steep</item>
+    </string-array>
+
+    <string-array name="golden_route_wall_array">
+        <item>Gym Wall Name</item>
+        <item>Arch</item>
+        <item>Barrel</item>
+        <item>Birthday Room #1</item>
+        <item>Birthday Room #2</item>
+        <item>Cat Walk</item>
+        <item>Coffin Wall</item>
+        <item>Hurricane Wall</item>
+        <item>Instruction Wall #1</item>
+        <item>Instruction Wall #2</item>
+        <item>Sickle</item>
+        <item>Topout Boulder</item>
+        <item>Wave Wall</item>
+        <item>World Cup Wall</item>
+    </string-array>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -214,4 +256,46 @@
         <item>Wave</item>
         <item>Corner-Copia</item>
     </string-array>
+    <string-array name="englewood_route_wall_filter_array">
+        <item>All Walls</item>
+        <item>45</item>
+        <item>Arch</item>
+        <item>Arete</item>
+        <item>Column</item>
+        <item>Crystal</item>
+        <item>Cube</item>
+        <item>Egg</item>
+        <item>Freestanding Snail</item>
+        <item>Freestanding Topout</item>
+        <item>Heart</item>
+        <item>Hex</item>
+        <item>Instruction Wall</item>
+        <item>Island</item>
+        <item>Main Squeeze</item>
+        <item>Mega Roll</item>
+        <item>Party</item>
+        <item>Prow</item>
+        <item>Pump</item>
+        <item>Slab</item>
+        <item>Star</item>
+        <item>Steep</item>
+    </string-array>
+
+    <string-array name="golden_route_wall_filter_array">
+        <item>All Walls</item>
+        <item>Arch</item>
+        <item>Barrel</item>
+        <item>Birthday Room #1</item>
+        <item>Birthday Room #2</item>
+        <item>Cat Walk</item>
+        <item>Coffin Wall</item>
+        <item>Hurricane Wall</item>
+        <item>Instruction Wall #1</item>
+        <item>Instruction Wall #2</item>
+        <item>Sickle</item>
+        <item>Topout Boulder</item>
+        <item>Wave Wall</item>
+        <item>World Cup Wall</item>
+    </string-array>
+
 </resources>
