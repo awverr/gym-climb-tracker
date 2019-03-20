@@ -220,6 +220,9 @@
     <string name="climb_name_string">Climb name</string>
     <string name="route_name_string">Route name</string>
 
+    <!-- ViewGymFragment Strings -->
+    <string name="gym_name_string">Climb name</string>
+
     <!--Activity drawer item names -->
     <string name="route_list_item">Route List</string>
     <string name="view_history_item">View History</string>
