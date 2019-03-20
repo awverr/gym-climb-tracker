@@ -14,6 +14,7 @@ import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
+import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 
 import java.util.List;
 
@@ -31,7 +32,13 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        store = new FirebaseCloudStore();
 
+        if(!gymsList.isEmpty()) {
+            final Gym gym = gymsList.get(position);
+
+            holder.gymName.setText(gym.getName());
+        }
     }
 
     @Override
