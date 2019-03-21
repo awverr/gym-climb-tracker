@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.topoutlabs.gymclimbtracker.R;
+import com.topoutlabs.gymclimbtracker.activities.GymRecyclerAdapter;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
 import com.topoutlabs.gymclimbtracker.activities.RouteRecyclerAdapter;
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
@@ -27,12 +30,12 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
 
     CloudStore store;
 
-    ArrayList<Route> gymList = new ArrayList<>(); //For use in recylcer view.
+    ArrayList<Gym> gymList = new ArrayList<>(); //For use in recylcer view.
 
     private RecyclerView mRecyclerView;
-    private RouteRecyclerAdapter recyclerAdapter;
+    private GymRecyclerAdapter recyclerAdapter;
 
-    Spinner gymStateSpinner; //For filtering routes
+    Spinner gymStateSpinner; //For filtering gyms
 
     private MainActivity activity;
 
@@ -65,28 +68,31 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
         return view;
     }
 
+    private void initializeGymStateSpinner(Spinner spinner){
+
+        ArrayAdapter<CharSequence> gymStateAdapter = ArrayAdapter.createFromResource(activity,
+                R.array.state_filter_array, android.R.layout.simple_spinner_item);
+        gymStateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(gymStateAdapter);
+    }
+
     private void initializeRecyclerView(final String filterSelection) {
         gymList.clear();
-        store.lookUpRoutes(new Callback<ArrayList<Route>>() {
+        store.lookUpGyms(new Callback<ArrayList<Gym>>() {
             @Override
-            public void receive(ArrayList<Route> strings) {
+            public void receive(ArrayList<Gym> strings) {
 
                 if(!strings.isEmpty()) {
-                    for (Route r : strings) {
-                        if(r.wall.getText().equals(filterSelection) || filterSelection.equals("All States")) {
-                            //            routes.add(r.getName());
-                            gymList.add(r);
+                    for (Gym g : strings) {
+                        if(g.state.equals(filterSelection) || filterSelection.equals("All States")) {
+                            gymList.add(g);
                         }
                     }
                 }
 
-                //  routeList.stream().filter(S -> S.equals(filterSelection)).collect(Collectors.toList());
-
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
-                if(localStore.getUser().isPresent()) {
-                    recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), activity);
-                }
+                recyclerAdapter = new GymRecyclerAdapter(gymList, activity);
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
