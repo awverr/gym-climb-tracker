@@ -3,10 +3,13 @@ package com.topoutlabs.gymclimbtracker.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import static java.util.UUID.randomUUID;
+
 public class Gym implements Parcelable {
 
     public String id;
     public String name;
+    public String state;
 
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -20,7 +23,13 @@ public class Gym implements Parcelable {
     };
 
     public Gym(){
+        //constructor required for calls to DataSnapshot.getValue(Gym.class)
+    }
 
+    public Gym(String name, String state){
+        id = randomUUID().toString();
+        this.name = name;
+        this.state = state;
     }
 
     public String getId() {
@@ -31,13 +40,15 @@ public class Gym implements Parcelable {
         return name;
     }
 
+    public String getState() {
+        return state;
+    }
+
     public Gym(Parcel in){
-//        this.id = in.readString();
-//        this.userId = in.readString();
-//        this.routeId = in.readString();
-//        this.numAttempts = in.readInt();
-//        this.routeNotes = in.readString();
-//        this.sent = in.readInt() == 1 ? true : false;
+        this.id = in.readString();
+        this.name = in.readString();
+        this.state = in.readString();
+
     }
 
     @Override
@@ -46,7 +57,9 @@ public class Gym implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
+    public void writeToParcel(Parcel dest, int i) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.state);
     }
 }
