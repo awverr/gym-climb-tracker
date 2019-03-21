@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
+import com.topoutlabs.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewClimbFragment;
 import com.topoutlabs.gymclimbtracker.model.Climb;
 import com.topoutlabs.gymclimbtracker.model.Gym;
@@ -60,7 +61,37 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
         if(!gymsList.isEmpty()) {
             final Gym gym = gymsList.get(position);
 
+            store.lookupGyms(new Callback<Gym>() {
+                @Override
+                public void receive(final Route route) {
+                    holder.gymName.setText(gym.getName());
 
+                    holder.gymName.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+
+                            ViewAllRoutesFragment viewRoutesFragment = new ViewAllRoutesFragment();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable("gym", gym);
+
+                            viewRoutesFragment.setArguments(bundle);
+
+                            FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+                            FragmentTransaction transaction = manager.beginTransaction();
+
+                            transaction.replace(R.id.fragment_container, viewRoutesFragment);
+                            transaction.addToBackStack(null);
+
+                            transaction.commit();
+
+                        }
+
+                    });
+                }
+            });
         }
     }
 
