@@ -3,6 +3,7 @@ package com.topoutlabs.gymclimbtracker.store;
 import android.content.Context;
 
 import com.topoutlabs.gymclimbtracker.model.Climb;
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.util.Callback;
@@ -234,6 +235,30 @@ public class FirebaseCloudStore implements CloudStore {
     @Override
     public void updateSent(Climb climb, boolean sent) {
         db.child("climbs").child(climb.getId()).child("sent").setValue(sent);
+    }
+
+    @Override
+    public void lookupGyms(final Callback<ArrayList<Gym>> callback) {
+        final ArrayList<Gym> gyms = new ArrayList<>();
+
+        db.child("gyms").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot gymSnapshot : snapshot.getChildren()) {
+
+                    Gym gym = gymSnapshot.getValue(Gym.class);
+
+                    gyms.add(gym);
+                }
+                callback.receive(gyms);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
     }
 
 }
