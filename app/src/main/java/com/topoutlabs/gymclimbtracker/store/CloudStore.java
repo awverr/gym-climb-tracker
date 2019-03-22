@@ -1,6 +1,7 @@
 package com.topoutlabs.gymclimbtracker.store;
 
 import com.topoutlabs.gymclimbtracker.model.Climb;
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.model.UserRouteInfo;
@@ -25,4 +26,5 @@ public interface CloudStore {
     void updateNumAttempts(Climb climb, int numAttempts);
     void updateRouteNotes(Climb climb, String routeNotes);
     void updateSent(Climb climb, boolean sent);
+    void lookupGyms(Callback<ArrayList<Gym>> callback);
 }
