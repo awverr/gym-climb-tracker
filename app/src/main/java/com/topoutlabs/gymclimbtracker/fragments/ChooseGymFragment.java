@@ -78,7 +78,7 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
 
     private void initializeRecyclerView(final String filterSelection) {
         gymList.clear();
-        store.lookUpGyms(new Callback<ArrayList<Gym>>() {
+        store.lookupGyms(new Callback<ArrayList<Gym>>() {
             @Override
             public void receive(ArrayList<Gym> strings) {
 
