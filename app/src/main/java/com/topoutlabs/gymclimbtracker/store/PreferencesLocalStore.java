@@ -2,6 +2,7 @@ package com.topoutlabs.gymclimbtracker.store;
 
 import android.content.Context;
 
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,6 +21,8 @@ public class PreferencesLocalStore implements LocalStore {
     public static final String FAMILY_NAME = "familyName";
 
     private final Context context;
+
+    public Gym gym;
 
     public PreferencesLocalStore(Context context) {
         this.context = context;
@@ -63,5 +66,14 @@ public class PreferencesLocalStore implements LocalStore {
         }
 
         return Optional.absent();
+    }
+
+    public Gym getGym() {
+        return gym;
+    }
+
+    public void setGym(Gym gym) {
+
+        this.gym = gym;
     }
 }
