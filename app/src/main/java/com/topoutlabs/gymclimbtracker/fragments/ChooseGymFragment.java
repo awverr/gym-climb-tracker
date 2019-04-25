@@ -21,6 +21,7 @@ import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
+import com.topoutlabs.gymclimbtracker.store.LocalStore;
 import com.topoutlabs.gymclimbtracker.store.PreferencesLocalStore;
 import com.topoutlabs.gymclimbtracker.util.Callback;
 
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     CloudStore store;
+
+    LocalStore localStore;
 
     ArrayList<Gym> gymList = new ArrayList<>(); //For use in recylcer view.
 
@@ -61,6 +64,7 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
             gymStateSpinner.setOnItemSelectedListener(this);
 
             store = new FirebaseCloudStore();
+            localStore = activity.getLocalStore();
 
             initializeRecyclerView("");
         }
@@ -104,7 +108,8 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        String selection = (String) adapterView.getItemAtPosition(i);
+        initializeRecyclerView(selection);
     }
 
     @Override
