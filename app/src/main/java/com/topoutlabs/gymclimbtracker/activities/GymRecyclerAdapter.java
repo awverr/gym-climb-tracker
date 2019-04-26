@@ -24,6 +24,7 @@ import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 import com.topoutlabs.gymclimbtracker.util.Callback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.MyViewHolder> {
@@ -61,9 +62,6 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
         if(!gymsList.isEmpty()) {
             final Gym gym = gymsList.get(position);
 
-            store.lookupGyms(new Callback<Gym>() {
-                @Override
-                public void receive(final Route route) {
                     holder.gymName.setText(gym.getName());
 
                     holder.gymName.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +84,6 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
                             transaction.addToBackStack(null);
 
                             transaction.commit();
-
-                        }
-
-                    });
                 }
             });
         }
