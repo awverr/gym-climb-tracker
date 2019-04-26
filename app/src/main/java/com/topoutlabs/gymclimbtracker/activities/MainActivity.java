@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.fragments.AddRouteFragment;
+import com.topoutlabs.gymclimbtracker.fragments.ChooseGymFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewHistoryFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewRouteFragment;
@@ -71,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (findViewById(R.id.fragment_container) != null) {
             // Create a new Fragment to be placed in the activity layout
-            ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
+            ChooseGymFragment chooseGymFragment = new ChooseGymFragment();
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
-            viewAllRoutesFragment.setArguments(getIntent().getExtras());
+            chooseGymFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, viewAllRoutesFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, chooseGymFragment).commit();
         }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
