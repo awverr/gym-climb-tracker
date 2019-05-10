@@ -69,7 +69,7 @@ public class FirebaseCloudStore implements CloudStore {
     }
 
     @Override
-    public void lookUpRoutes(final Callback<ArrayList<Route>> callback) {
+    public void lookUpRoutes(final Gym gym, final Callback<ArrayList<Route>> callback) {
         final ArrayList<Route> routes = new ArrayList<>();
 
         db.child("routes").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -79,7 +79,9 @@ public class FirebaseCloudStore implements CloudStore {
 
                     if(routeSnapshot.exists()) {
                         Route route = routeSnapshot.getValue(Route.class);
-                        routes.add(route);
+                        if(route.getGymId() == gym.getId()) {
+                            routes.add(route);
+                        }
                     }
                 }
                 callback.receive(routes);
