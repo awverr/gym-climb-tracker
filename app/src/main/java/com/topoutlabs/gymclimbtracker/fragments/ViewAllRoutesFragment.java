@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
 import com.topoutlabs.gymclimbtracker.activities.RouteRecyclerAdapter;
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
@@ -47,9 +48,13 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
     Spinner routeWallSpinner; //For filtering routes
 
+    ArrayAdapter<CharSequence> routeWallAdapter;
+
     private MainActivity activity;
 
     View view;
+
+    Gym gym;
 
     @Override
     public void onAttach(Context context){
@@ -74,6 +79,10 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
             localStore = new PreferencesLocalStore(activity);
 
+            Bundle bundle=getArguments();
+
+            gym = bundle.getParcelable("gym");
+
             initializeRecyclerView("");
         }
 
@@ -82,16 +91,23 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
     private void initializeRouteWallSpinner(Spinner spinner){
         //filter_route_wall_spinner
-
-        ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
-                R.array.route_wall_filter_array, android.R.layout.simple_spinner_item);
+        if(gym.getName().equals("Sunnyvale")) {
+            routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.route_wall_filter_array, android.R.layout.simple_spinner_item);
+        }else if(gym.getName().equals("Golden")){
+            routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.golden_route_wall_filter_array, android.R.layout.simple_spinner_item);
+        }else if(gym.getName().equals("Englewood")){
+            routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.englewood_route_wall_filter_array, android.R.layout.simple_spinner_item);
+        }
         routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(routeWallAdapter);
     }
 
-    private void initializeRecyclerView(final String filterSelection) {
+    private void initializeRecyclerView(final String filterSelection) { //Will need to take into account both gym and wall to determine which routes to add to list
         routeList.clear();
-        store.lookUpRoutes(new Callback<ArrayList<Route>>() {
+        store.lookUpRoutes(gym, new Callback<ArrayList<Route>>() {
             @Override
             public void receive(ArrayList<Route> strings) {
 
