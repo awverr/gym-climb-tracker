@@ -1,5 +1,6 @@
 package com.topoutlabs.gymclimbtracker.store;
 
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.google.common.base.Optional;
 
@@ -13,4 +14,8 @@ public interface LocalStore {
     Optional<User> getUser();
 
     void setUser(User user);
+
+    void setGym(Gym gym);
+
+    Gym getGym();
 }
