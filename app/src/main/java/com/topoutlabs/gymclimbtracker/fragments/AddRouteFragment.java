@@ -111,7 +111,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     RouteColor color = RouteColor.fromString(stringColor);
                     RouteWall wall = RouteWall.fromString(stringWall);
 
-                    store.saveRoute(new Route(type, grade, null, stringSetter, color, wall, dateInMillis));
+                    store.saveRoute(new Route(type, activity.getLocalStore().getGym().getId(), grade, null, stringSetter, color, wall, dateInMillis));
 
                     // Now return to the viewAllRoutesFragment
                     ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
