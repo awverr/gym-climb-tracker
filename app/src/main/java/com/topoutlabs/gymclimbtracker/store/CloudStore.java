@@ -27,4 +27,5 @@ public interface CloudStore {
     void updateRouteNotes(Climb climb, String routeNotes);
     void updateSent(Climb climb, boolean sent);
     void lookupGyms(Callback<ArrayList<Gym>> callback);
+    void saveGym(Gym gym);
 }
