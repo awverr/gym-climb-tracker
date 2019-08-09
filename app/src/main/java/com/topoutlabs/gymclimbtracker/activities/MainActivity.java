@@ -26,11 +26,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.topoutlabs.gymclimbtracker.R;
+import com.topoutlabs.gymclimbtracker.fragments.AddGymFragment;
 import com.topoutlabs.gymclimbtracker.fragments.AddRouteFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ChooseGymFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewHistoryFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewRouteFragment;
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
@@ -45,6 +47,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
 import com.google.firebase.FirebaseApp;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,6 +73,20 @@ public class MainActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_action_name);
 
         store = new FirebaseCloudStore();
+
+        //Add if branch to test if a gym exists in the db and if the user is the admin (me). If no gym exists default to the add gym form.
+        ArrayList<Gym> gyms = lookupGyms();
+        if(localStore.getUser().isPresent() && localStore.getUser().get().getEmailAddress().equals("awverret@gmail.com") && gyms.isEmpty()){
+            // Create a new Fragment to be placed in the activity layout
+            AddGymFragment addGymFragment = new AddGymFragment();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            addGymFragment.setArguments(getIntent().getExtras());
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, addGymFragment).commit();
+        }
 
         if (findViewById(R.id.fragment_container) != null) {
             // Create a new Fragment to be placed in the activity layout
@@ -176,6 +194,22 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         load();
+    }
+
+    private ArrayList<Gym> lookupGyms() {
+        final ArrayList<Gym> gyms = new ArrayList<>();
+        store.lookupGyms(new Callback<ArrayList<Gym>>() {
+            @Override
+            public void receive(ArrayList<Gym> strings) {
+
+                if(!strings.isEmpty()) {
+                    for (Gym g : strings) {
+                            gyms.add(g);
+                    }
+                }
+            }
+        });
+        return gyms;
     }
 
     private void load() {
