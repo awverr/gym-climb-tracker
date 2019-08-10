@@ -49,6 +49,8 @@ public class AddGymFragment extends Fragment implements AdapterView.OnItemSelect
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_add_gym, container, false);
 
+            store = new FirebaseCloudStore();
+
             gymStateSpinner = (Spinner) view.findViewById(R.id.gym_state_spinner);
             initializeGymStateSpinner(gymStateSpinner);
             gymStateSpinner.setOnItemSelectedListener(this);
@@ -74,20 +76,16 @@ public class AddGymFragment extends Fragment implements AdapterView.OnItemSelect
 //                    transaction.addToBackStack(null);
                 }
             });
-
-            store = new FirebaseCloudStore();
         }
 
         return view;
     }
 
     public void initializeGymStateSpinner(Spinner spinner){
-        //route_type_spinner
-
-        ArrayAdapter<CharSequence> routeTypeAdapter = ArrayAdapter.createFromResource(activity,
-                R.array.route_type_array, android.R.layout.simple_spinner_item);
-        routeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(routeTypeAdapter);
+        ArrayAdapter<CharSequence> gymStateAdapter = ArrayAdapter.createFromResource(activity,
+                R.array.state_filter_array, android.R.layout.simple_spinner_item);
+        gymStateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(gymStateAdapter);
     }
 
     @Override
