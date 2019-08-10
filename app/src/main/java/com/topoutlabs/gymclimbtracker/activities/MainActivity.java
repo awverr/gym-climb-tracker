@@ -76,28 +76,29 @@ public class MainActivity extends AppCompatActivity {
 
         //Add if branch to test if a gym exists in the db and if the user is the admin (me). If no gym exists default to the add gym form.
         ArrayList<Gym> gyms = lookupGyms();
-        if(localStore.getUser().isPresent() && localStore.getUser().get().getEmailAddress().equals("awverret@gmail.com") && gyms.isEmpty()){
-            // Create a new Fragment to be placed in the activity layout
-            AddGymFragment addGymFragment = new AddGymFragment();
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            addGymFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, addGymFragment).commit();
-        }
 
         if (findViewById(R.id.fragment_container) != null) {
-            // Create a new Fragment to be placed in the activity layout
-            ChooseGymFragment chooseGymFragment = new ChooseGymFragment();
+            if(localStore.getUser().isPresent() && localStore.getUser().get().getEmailAddress().equals("awverret@gmail.com") && gyms.isEmpty()) {
+                // Create a new Fragment to be placed in the activity layout
+                AddGymFragment addGymFragment = new AddGymFragment();
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            chooseGymFragment.setArguments(getIntent().getExtras());
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                addGymFragment.setArguments(getIntent().getExtras());
 
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, chooseGymFragment).commit();
+                // Add the fragment to the 'fragment_container' FrameLayout
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, addGymFragment).commit();
+            }else {
+                // Create a new Fragment to be placed in the activity layout
+                ChooseGymFragment chooseGymFragment = new ChooseGymFragment();
+
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                chooseGymFragment.setArguments(getIntent().getExtras());
+
+                // Add the fragment to the 'fragment_container' FrameLayout
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, chooseGymFragment).commit();
+            }
         }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
