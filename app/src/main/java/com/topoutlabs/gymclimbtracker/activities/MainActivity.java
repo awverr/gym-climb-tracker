@@ -74,21 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
         store = new FirebaseCloudStore();
 
-        //Add if branch to test if a gym exists in the db and if the user is the admin (me). If no gym exists default to the add gym form.
+        //Add test to see if any gyms exists in db. If not, load add gym fragment. Otherwise, load choose gym fragment.
         ArrayList<Gym> gyms = lookupGyms();
 
         if (findViewById(R.id.fragment_container) != null) {
-            if(localStore.getUser().isPresent() && localStore.getUser().get().getEmailAddress().equals("awverret@gmail.com") && gyms.isEmpty()) {
-                // Create a new Fragment to be placed in the activity layout
-                AddGymFragment addGymFragment = new AddGymFragment();
-
-                // In case this activity was started with special instructions from an
-                // Intent, pass the Intent's extras to the fragment as arguments
-                addGymFragment.setArguments(getIntent().getExtras());
-
-                // Add the fragment to the 'fragment_container' FrameLayout
-                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, addGymFragment).commit();
-            }else {
+            if(!gyms.isEmpty()) {
                 // Create a new Fragment to be placed in the activity layout
                 ChooseGymFragment chooseGymFragment = new ChooseGymFragment();
 
@@ -98,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // Add the fragment to the 'fragment_container' FrameLayout
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, chooseGymFragment).commit();
+            }else{
+                // Create a new Fragment to be placed in the activity layout
+                AddGymFragment addGymFragment = new AddGymFragment();
+
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                addGymFragment.setArguments(getIntent().getExtras());
+
+                // Add the fragment to the 'fragment_container' FrameLayout
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, addGymFragment).commit();
             }
         }
 
