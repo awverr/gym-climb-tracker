@@ -65,15 +65,15 @@ public class AddGymFragment extends Fragment implements AdapterView.OnItemSelect
 
                     store.saveGym(new Gym(stringName, stringGymState));
 
-                    // TODO: Which fragment do you want to return to?
-//                    ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
-//
-//                    viewAllRoutesFragment.setArguments(getActivity().getIntent().getExtras());
-//
-//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//
-//                    transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
-//                    transaction.addToBackStack(null);
+                    //Todo: Go to chooseGymFragment after new gym is saved.
+                    ChooseGymFragment chooseGymFragment = new ChooseGymFragment();
+
+                    chooseGymFragment.setArguments(getActivity().getIntent().getExtras());
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                    transaction.replace(R.id.fragment_container, chooseGymFragment).commit();
+                    transaction.addToBackStack(null);
                 }
             });
         }
