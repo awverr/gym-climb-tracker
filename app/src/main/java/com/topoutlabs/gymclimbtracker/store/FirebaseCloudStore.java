@@ -265,7 +265,7 @@ public class FirebaseCloudStore implements CloudStore {
 
     @Override
     public void saveGym(Gym gym) {
+        System.out.println("Verret: Saving gym");
         db.child("gyms").child(gym.getId()).setValue(gym);
     }
-
 }
