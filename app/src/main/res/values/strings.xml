@@ -314,5 +314,6 @@
     </string-array>
     <!-- Gyms list is empty string-->
     <string name="empty_gyms_list_string">There Are Currently No Gyms</string>
+    <string name="add_gym">Add Gym</string>
 
 </resources>
