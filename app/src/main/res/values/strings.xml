@@ -312,5 +312,7 @@
         <item>California</item>
         <item>Colorado</item>
     </string-array>
+    <!-- Gyms list is empty string-->
+    <string name="empty_gyms_list_string">There Are Currently No Gyms</string>
 
 </resources>
