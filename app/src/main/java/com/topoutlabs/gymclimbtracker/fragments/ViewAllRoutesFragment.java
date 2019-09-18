@@ -91,7 +91,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
     private void initializeRouteWallSpinner(Spinner spinner){
         //filter_route_wall_spinner
-        if(gym.getName().equals("Sunnyvale")) {
+        if(gym.getName().equals("Planet Granite Sunnyvale")) {
             routeWallAdapter = ArrayAdapter.createFromResource(activity,
                     R.array.route_wall_filter_array, android.R.layout.simple_spinner_item);
         }else if(gym.getName().equals("Golden")){
