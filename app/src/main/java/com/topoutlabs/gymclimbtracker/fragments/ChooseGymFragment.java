@@ -80,6 +80,7 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
         spinner.setAdapter(gymStateAdapter);
     }
 
+    //TODO: Handle Case where gyms isEmpty(). Display a message and add the "Add Gym button".
     private void initializeRecyclerView(final String filterSelection) {
         gymList.clear();
         store.lookupGyms(new Callback<ArrayList<Gym>>() {
