@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.topoutlabs.gymclimbtracker.R;
@@ -34,6 +35,8 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
     LocalStore localStore;
 
     ArrayList<Gym> gymList = new ArrayList<>(); //For use in recylcer view.
+
+    Button addGymButton;
 
     private RecyclerView mRecyclerView;
     private GymRecyclerAdapter recyclerAdapter;
