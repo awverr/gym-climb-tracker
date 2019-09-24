@@ -3,6 +3,7 @@ package com.topoutlabs.gymclimbtracker.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.topoutlabs.gymclimbtracker.R;
@@ -70,6 +72,21 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
             localStore = activity.getLocalStore();
 
             initializeRecyclerView("");
+
+            addGymButton = view.findViewById(R.id.add_gym_button);
+            addGymButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    AddGymFragment addGymFragment = new AddGymFragment();
+
+                    addGymFragment.setArguments(getActivity().getIntent().getExtras());
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                    transaction.replace(R.id.fragment_container, addGymFragment).commit();
+                    transaction.addToBackStack(null);
+                }
+            });
         }
 
         return view;
