@@ -71,19 +71,20 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
 
-            routeWallSpinner = (Spinner) view.findViewById(R.id.filter_route_wall_spinner);
-            initializeRouteWallSpinner(routeWallSpinner);
-            routeWallSpinner.setOnItemSelectedListener(this);
+            Bundle bundle=getArguments();
+
+            gym = bundle.getParcelable("gym");
+            System.out.println("Verret: gym in ViewALLRoutes is: " + gym.getName());
 
             store = new FirebaseCloudStore();
 
             localStore = new PreferencesLocalStore(activity);
 
-            Bundle bundle=getArguments();
-
-            gym = bundle.getParcelable("gym");
-
             initializeRecyclerView("");
+
+            routeWallSpinner = (Spinner) view.findViewById(R.id.filter_route_wall_spinner);
+            initializeRouteWallSpinner(routeWallSpinner);
+            routeWallSpinner.setOnItemSelectedListener(this);
         }
 
         return view;
