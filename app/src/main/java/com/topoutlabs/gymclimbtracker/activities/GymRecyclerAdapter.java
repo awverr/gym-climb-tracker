@@ -22,6 +22,7 @@ import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
+import com.topoutlabs.gymclimbtracker.store.LocalStore;
 import com.topoutlabs.gymclimbtracker.util.Callback;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
     private CloudStore store;
     private Context context;
     private List<Gym> gymsList;
+    LocalStore localStore;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView gymName;
@@ -42,9 +44,10 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
         }
     }
 
-    public GymRecyclerAdapter(List<Gym> gymsList, Context context) {
+    public GymRecyclerAdapter(List<Gym> gymsList, Context context, LocalStore localStore) {
         this.gymsList = gymsList;
         this.context = context;
+        this.localStore = localStore;
     }
 
     @Override
