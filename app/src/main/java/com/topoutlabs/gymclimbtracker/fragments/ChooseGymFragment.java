@@ -117,7 +117,7 @@ public class ChooseGymFragment extends Fragment implements AdapterView.OnItemSel
 
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
-                recyclerAdapter = new GymRecyclerAdapter(gymList, activity);
+                recyclerAdapter = new GymRecyclerAdapter(gymList, activity, localStore);
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
