@@ -71,6 +71,7 @@ public class GymRecyclerAdapter extends RecyclerView.Adapter<GymRecyclerAdapter.
 
                         @Override
                         public void onClick(View view) {
+                            localStore.setGym(gym);
 
                             ViewAllRoutesFragment viewRoutesFragment = new ViewAllRoutesFragment();
 
