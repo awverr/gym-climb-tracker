@@ -116,6 +116,11 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     // Now return to the viewAllRoutesFragment
                     ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
 
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("gym", activity.getLocalStore().getGym());
+
+                    viewAllRoutesFragment.setArguments(bundle);
+
                     viewAllRoutesFragment.setArguments(getActivity().getIntent().getExtras());
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
