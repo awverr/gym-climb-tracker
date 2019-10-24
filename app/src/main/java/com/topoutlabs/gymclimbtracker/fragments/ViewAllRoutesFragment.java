@@ -75,12 +75,13 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
             localStore = new PreferencesLocalStore(activity);
 
-            Bundle bundle=getArguments();
+            Bundle bundle = getArguments();
 
-            if(bundle != null) {
+            if(bundle != null && bundle.containsKey("gym")) {
                 gym = bundle.getParcelable("gym");
                 System.out.println("Verret: gym in ViewALLRoutes is: " + gym.getName());
             }else{
+                System.out.println("Verret: Called else branch ViewALLRoutes");
                 gym = localStore.getGym();
             }
 
@@ -95,6 +96,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
     }
 
     private void initializeRouteWallSpinner(Spinner spinner){
+        System.out.println("Verret: gym in ViewALLRoutes initializeRouteWallSpinner() is: " + gym.getName());
         //filter_route_wall_spinner
         if(gym.getName().equals("Planet Granite Sunnyvale")) {
             routeWallAdapter = ArrayAdapter.createFromResource(activity,
