@@ -2,6 +2,7 @@ package com.topoutlabs.gymclimbtracker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
@@ -21,8 +21,6 @@ import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 
 public class AddGymFragment extends Fragment implements AdapterView.OnItemSelectedListener{
-
-    TextView gymNameTextView;
 
     Spinner gymStateSpinner;
 
@@ -44,14 +42,14 @@ public class AddGymFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_add_gym, container, false);
 
             store = new FirebaseCloudStore();
 
-            gymStateSpinner = (Spinner) view.findViewById(R.id.gym_state_spinner);
+            gymStateSpinner = view.findViewById(R.id.gym_state_spinner);
             initializeGymStateSpinner(gymStateSpinner);
             gymStateSpinner.setOnItemSelectedListener(this);
 
@@ -59,7 +57,7 @@ public class AddGymFragment extends Fragment implements AdapterView.OnItemSelect
             saveGymButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    EditText editTextName = (EditText) view.findViewById(R.id.gym_name_text_view);
+                    EditText editTextName = view.findViewById(R.id.gym_name_text_view);
                     String stringGymState = (String) gymStateSpinner.getSelectedItem();
                     String stringName = editTextName.getText().toString();
 
