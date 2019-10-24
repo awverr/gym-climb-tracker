@@ -3,10 +3,7 @@ package com.topoutlabs.gymclimbtracker.fragments;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,24 +48,28 @@ public class ViewClimbFragment extends Fragment{
 
         Bundle bundle=getArguments();
 
-        route = bundle.getParcelable("route");
+        if(bundle != null) {
 
-        climb = bundle.getParcelable("climb");
+            route = bundle.getParcelable("route");
 
-        user = bundle.getParcelable("user");
+            climb = bundle.getParcelable("climb");
 
-        routeNameTextView = (TextView) rootView.findViewById(R.id.climb_name_text_view);
-        routeTypeTextView = (TextView) rootView.findViewById(R.id.climb_type_text_view);
-        routeGradeTextView = (TextView) rootView.findViewById(R.id.climb_grade_text_view);
-        routeColorTextView = (TextView) rootView.findViewById(R.id.climb_color_text_view);
-        routeWallTextView = (TextView) rootView.findViewById(R.id.climb_wall_text_view);
-        routeSetterTextView = (TextView) rootView.findViewById(R.id.climb_setter_text_view);
-        routeSetDateTextView = (TextView) rootView.findViewById(R.id.climb_set_date_text_view);
-        numAttempts = (TextView) rootView.findViewById(R.id.num_attempt_textview);
-        routeNotes = (TextView) rootView.findViewById(R.id.route_notes_textview);
-        sentSpinner = (Spinner) rootView.findViewById(R.id.sent_spinner);
+            user = bundle.getParcelable("user");
 
-        initializeClimb(climb, route);
+            routeNameTextView = rootView.findViewById(R.id.climb_name_text_view);
+            routeTypeTextView = rootView.findViewById(R.id.climb_type_text_view);
+            routeGradeTextView = rootView.findViewById(R.id.climb_grade_text_view);
+            routeColorTextView = rootView.findViewById(R.id.climb_color_text_view);
+            routeWallTextView = rootView.findViewById(R.id.climb_wall_text_view);
+            routeSetterTextView = rootView.findViewById(R.id.climb_setter_text_view);
+            routeSetDateTextView = rootView.findViewById(R.id.climb_set_date_text_view);
+            numAttempts = rootView.findViewById(R.id.num_attempt_textview);
+            routeNotes = rootView.findViewById(R.id.route_notes_textview);
+            sentSpinner = rootView.findViewById(R.id.sent_spinner);
+
+            initializeClimb(climb, route);
+
+        }
 
         return rootView;
     }
@@ -113,7 +114,7 @@ public class ViewClimbFragment extends Fragment{
 
         //Initialize sentSpinner
         String compareValue;
-        if(climb.getSent() == true){
+        if(climb.getSent()){
             compareValue = "Yes";
         }else{
             compareValue = "No";
@@ -123,20 +124,14 @@ public class ViewClimbFragment extends Fragment{
                 R.array.sent_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sentSpinner.setAdapter(adapter);
-        if (compareValue != null) {
-            int spinnerPosition = adapter.getPosition(compareValue);
-            sentSpinner.setSelection(spinnerPosition);
-        }
+        int spinnerPosition = adapter.getPosition(compareValue);
+        sentSpinner.setSelection(spinnerPosition);
         sentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String newSentValString = parent.getItemAtPosition(position).toString();
                 boolean newSentVal;
-                if(newSentValString.equals("Yes")){
-                    newSentVal = true;
-                } else{
-                    newSentVal = false;
-                }
+                newSentVal = newSentValString.equals("Yes");
                 climb.setSent(newSentVal);
                 store.updateSent(climb, newSentVal);
             }
