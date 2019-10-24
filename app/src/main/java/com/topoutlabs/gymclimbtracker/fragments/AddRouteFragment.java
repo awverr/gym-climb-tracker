@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
+import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.RouteColor;
 import com.topoutlabs.gymclimbtracker.model.RouteGrade;
@@ -110,23 +111,25 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     String stringSetter = editTextSetter.getText().toString();
                     RouteColor color = RouteColor.fromString(stringColor);
                     RouteWall wall = RouteWall.fromString(stringWall);
-
-                    store.saveRoute(new Route(type, activity.getLocalStore().getGym().getId(), grade, null, stringSetter, color, wall, dateInMillis));
+                    Gym gym = activity.getLocalStore().getGym();
+                    store.saveRoute(new Route(type, gym.getId(), grade, null, stringSetter, color, wall, dateInMillis));
 
                     // Now return to the viewAllRoutesFragment
                     ViewAllRoutesFragment viewAllRoutesFragment = new ViewAllRoutesFragment();
 
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("gym", activity.getLocalStore().getGym());
+                    bundle.putParcelable("gym", gym);
 
                     viewAllRoutesFragment.setArguments(bundle);
 
-                    viewAllRoutesFragment.setArguments(getActivity().getIntent().getExtras());
+                   // viewAllRoutesFragment.setArguments(getActivity().getIntent().getExtras());
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-                    transaction.replace(R.id.fragment_container, viewAllRoutesFragment).commit();
+                    transaction.replace(R.id.fragment_container, viewAllRoutesFragment);
                     transaction.addToBackStack(null);
+
+                    transaction.commit();
                 }
             });
 
