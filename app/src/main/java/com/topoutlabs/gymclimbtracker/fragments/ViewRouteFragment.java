@@ -31,18 +31,19 @@ public class ViewRouteFragment extends Fragment {
 
         Bundle bundle=getArguments();
 
-        route = bundle.getParcelable("route");
+        if(bundle != null) {
+            route = bundle.getParcelable("route");
 
-        routeNameTextView = (TextView) rootView.findViewById(R.id.route_name_text_view);
-        routeTypeTextView = (TextView) rootView.findViewById(R.id.route_type_text_view);
-        routeGradeTextView = (TextView) rootView.findViewById(R.id.route_grade_text_view);
-        routeColorTextView = (TextView) rootView.findViewById(R.id.route_color_text_view);
-        routeWallTextView = (TextView) rootView.findViewById(R.id.route_wall_text_view);
-        routeSetterTextView = (TextView) rootView.findViewById(R.id.route_setter_text_view);
-        routeSetDateTextView = (TextView) rootView.findViewById(R.id.route_set_date_text_view);
+            routeNameTextView = rootView.findViewById(R.id.route_name_text_view);
+            routeTypeTextView = rootView.findViewById(R.id.route_type_text_view);
+            routeGradeTextView = rootView.findViewById(R.id.route_grade_text_view);
+            routeColorTextView = rootView.findViewById(R.id.route_color_text_view);
+            routeWallTextView = rootView.findViewById(R.id.route_wall_text_view);
+            routeSetterTextView = rootView.findViewById(R.id.route_setter_text_view);
+            routeSetDateTextView = rootView.findViewById(R.id.route_set_date_text_view);
 
-        initializeRoute(route);
-
+            initializeRoute(route);
+        }
         return rootView;
     }
 
