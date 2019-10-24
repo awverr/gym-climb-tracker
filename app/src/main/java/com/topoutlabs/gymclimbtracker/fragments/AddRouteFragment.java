@@ -2,7 +2,7 @@ package com.topoutlabs.gymclimbtracker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.TestLooperManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -27,11 +27,8 @@ import com.topoutlabs.gymclimbtracker.model.RouteWall;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -66,21 +63,21 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         if(view == null) {
             view = inflater.inflate(R.layout.activity_add_route, container, false);
 
             //Set datePicked textView to current date as default when fragment is created.
-            datePicked = (TextView) view.findViewById(R.id.date_picked);
+            datePicked = view.findViewById(R.id.date_picked);
             String pattern = "MM-dd-yyyy";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.US);
             String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-            datePicked.setText(date.toString());
-            routeTypeSpinner = (Spinner) view.findViewById(R.id.route_type_spinner);
-            routeGradeSpinner = (Spinner) view.findViewById(R.id.grade_spinner);
-            routeWallSpinner = (Spinner) view.findViewById(R.id.route_wall_spinner);
-            routeColorSpinner = (Spinner) view.findViewById(R.id.route_color_spinner);
+            datePicked.setText(date);
+            routeTypeSpinner = view.findViewById(R.id.route_type_spinner);
+            routeGradeSpinner = view.findViewById(R.id.grade_spinner);
+            routeWallSpinner = view.findViewById(R.id.route_wall_spinner);
+            routeColorSpinner = view.findViewById(R.id.route_color_spinner);
             initializeRouteTypeSpinner(routeTypeSpinner);
             initializeRouteGradeSpinner(routeGradeSpinner);
             initializeRouteWallSpinner(routeWallSpinner);
@@ -103,7 +100,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                 public void onClick(View v) {
                     String stringType = (String) routeTypeSpinner.getSelectedItem();
                     String stringGrade = (String) routeGradeSpinner.getSelectedItem();
-                    EditText editTextSetter = (EditText) view.findViewById(R.id.route_setter_text_view);
+                    EditText editTextSetter = view.findViewById(R.id.route_setter_text_view);
                     String stringColor = (String) routeColorSpinner.getSelectedItem();
                     String stringWall = (String) routeWallSpinner.getSelectedItem();
                     RouteType type = RouteType.fromString(stringType);
@@ -192,10 +189,10 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
         dateInMillis = c.getTimeInMillis();
 
         //Set date_picked textView to chosen date.
-        datePicked = (TextView) view.findViewById(R.id.date_picked);
+        datePicked = view.findViewById(R.id.date_picked);
         String pattern = "MM-dd-yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.US);
         String date = simpleDateFormat.format(c.getTime());
-        datePicked.setText(date.toString());
+        datePicked.setText(date);
     }
 }
