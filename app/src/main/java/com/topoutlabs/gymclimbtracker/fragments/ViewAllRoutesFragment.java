@@ -2,6 +2,7 @@ package com.topoutlabs.gymclimbtracker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,16 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
 import com.topoutlabs.gymclimbtracker.activities.RouteRecyclerAdapter;
 import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
-import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 import com.topoutlabs.gymclimbtracker.store.LocalStore;
@@ -28,8 +26,6 @@ import com.topoutlabs.gymclimbtracker.store.PreferencesLocalStore;
 import com.topoutlabs.gymclimbtracker.util.Callback;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by aubry on 3/1/2018.
@@ -66,7 +62,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_view_all_routes, container, false);
@@ -87,7 +83,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
             initializeRecyclerView("");
 
-            routeWallSpinner = (Spinner) view.findViewById(R.id.filter_route_wall_spinner);
+            routeWallSpinner = view.findViewById(R.id.filter_route_wall_spinner);
             initializeRouteWallSpinner(routeWallSpinner);
             routeWallSpinner.setOnItemSelectedListener(this);
         }
@@ -129,7 +125,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
               //  routeList.stream().filter(S -> S.equals(filterSelection)).collect(Collectors.toList());
 
-                mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                mRecyclerView = view.findViewById(R.id.recyclerView);
 
                 if(localStore.getUser().isPresent()) {
                     recyclerAdapter = new RouteRecyclerAdapter(routeList, localStore.getUser().get(), activity);
