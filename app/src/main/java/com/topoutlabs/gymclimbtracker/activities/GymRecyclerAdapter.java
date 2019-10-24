@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.topoutlabs.gymclimbtracker.R;
 import com.topoutlabs.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.topoutlabs.gymclimbtracker.model.Gym;
-import com.topoutlabs.gymclimbtracker.store.CloudStore;
-import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 import com.topoutlabs.gymclimbtracker.store.LocalStore;
 
 import java.util.List;
