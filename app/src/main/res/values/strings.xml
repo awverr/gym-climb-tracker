@@ -301,12 +301,6 @@
         <item>World Cup Wall</item>
     </string-array>
 
-    <string-array name="gym_array">
-        <item>Planet Granite-Sunnyvale</item>
-        <item>Earth Treks-Englewood</item>
-        <item>Earth Treks-Golden</item>
-    </string-array>
-
     <string-array name="state_filter_array">
         <item>All States</item>
         <item>California</item>
