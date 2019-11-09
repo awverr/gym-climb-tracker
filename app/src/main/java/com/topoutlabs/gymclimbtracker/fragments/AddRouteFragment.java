@@ -6,9 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
-import com.topoutlabs.gymclimbtracker.activities.GymRecyclerAdapter;
 import com.topoutlabs.gymclimbtracker.activities.MainActivity;
 import com.topoutlabs.gymclimbtracker.model.Gym;
 import com.topoutlabs.gymclimbtracker.model.Route;
@@ -84,14 +80,16 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
             routeGradeSpinner = view.findViewById(R.id.grade_spinner);
             routeWallSpinner = view.findViewById(R.id.route_wall_spinner);
             routeColorSpinner = view.findViewById(R.id.route_color_spinner);
-            gymSpinner
+            gymSpinner = view.findViewById(R.id.gym_spinner);
             initializeRouteTypeSpinner(routeTypeSpinner);
             initializeRouteGradeSpinner(routeGradeSpinner);
             initializeRouteWallSpinner(routeWallSpinner);
             initializeRouteColorSpinner(routeColorSpinner);
+            initializeGymSpinner(gymSpinner);
             routeTypeSpinner.setOnItemSelectedListener(this);
             routeWallSpinner.setOnItemSelectedListener(this);
             routeColorSpinner.setOnItemSelectedListener(this);
+            gymSpinner.setOnItemSelectedListener(this);
 
             setDateButton = view.findViewById(R.id.date_picker);
             setDateButton.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +113,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     String stringSetter = editTextSetter.getText().toString();
                     RouteColor color = RouteColor.fromString(stringColor);
                     RouteWall wall = RouteWall.fromString(stringWall);
-                    Gym gym = activity.getLocalStore().getGym();
+                    Gym gym = (Gym) gymSpinner.getSelectedItem();
                     store.saveRoute(new Route(type, gym.getId(), grade, null, stringSetter, color, wall, dateInMillis));
 
                     // Now return to the viewAllRoutesFragment
@@ -179,7 +177,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
         spinner.setAdapter(routeWallAdapter);
     }
 
-    public void initializeGymSpinner(Spinner spinner){
+    public void initializeGymSpinner(final Spinner spinner){
         final ArrayList<Gym> gymList = new ArrayList<>();
         store.lookupGyms(new Callback<ArrayList<Gym>>() {
             @Override
@@ -190,14 +188,11 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                         gymList.add(g);
                     }
                 }
-
+                ArrayAdapter<Gym> gymAdapter = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, gymList);
+                gymAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(gymAdapter);
             }
         });
-
-        ArrayAdapter<CharSequence> routeTypeAdapter = ArrayAdapter.createFromResource(activity,
-                R.array.route_type_array, android.R.layout.simple_spinner_item);
-        routeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(routeTypeAdapter);
     }
 
     @Override
