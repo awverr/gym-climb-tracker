@@ -66,6 +66,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        store = new FirebaseCloudStore();
 
         if(view == null) {
             view = inflater.inflate(R.layout.activity_add_route, container, false);
