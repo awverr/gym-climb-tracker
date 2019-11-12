@@ -179,14 +179,14 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void initializeGymSpinner(final Spinner spinner){
-        final ArrayList<Gym> gymList = new ArrayList<>();
+        final ArrayList<String> gymList = new ArrayList<>();
         store.lookupGyms(new Callback<ArrayList<Gym>>() {
             @Override
             public void receive(ArrayList<Gym> strings) {
 
                 if(!strings.isEmpty()) {
                     for (Gym g : strings) {
-                        gymList.add(g);
+                        gymList.add(g.getName());
                     }
                 }
                 ArrayAdapter<Gym> gymAdapter = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, gymList);
