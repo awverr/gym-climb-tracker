@@ -301,6 +301,71 @@
         <item>World Cup Wall</item>
     </string-array>
 
+    <string-array name="all_wall_filter_array">
+        <item>All Walls</item>
+        <item>Welcome Wall</item>
+        <item>Left Cheek</item>
+        <item>Right Cheek</item>
+        <item>Bouldering Slabs</item>
+        <item>10 Degree Wall</item>
+        <item>Prow</item>
+        <item>Learning Center</item>
+        <item>Alcove</item>
+        <item>Storage Slabs</item>
+        <item>Tower</item>
+        <item>Gallery</item>
+        <item>Trophy Wall</item>
+        <item>Holiday Wall</item>
+        <item>Constant Wall</item>
+        <item>Crystal</item>
+        <item>Marathon Wall</item>
+        <item>Double Wave</item>
+        <item>Sun Wall</item>
+        <item>Mega Slab</item>
+        <item>Crows Nest</item>
+        <item>Crack Wall</item>
+        <item>Ice Box</item>
+        <item>Belly</item>
+        <item>Wave</item>
+        <item>Corner-Copia</item>
+        <item>All Walls</item>
+        <item>45</item>
+        <item>Arch</item>
+        <item>Arete</item>
+        <item>Column</item>
+        <item>Crystal</item>
+        <item>Cube</item>
+        <item>Egg</item>
+        <item>Freestanding Snail</item>
+        <item>Freestanding Topout</item>
+        <item>Heart</item>
+        <item>Hex</item>
+        <item>Instruction Wall</item>
+        <item>Island</item>
+        <item>Main Squeeze</item>
+        <item>Mega Roll</item>
+        <item>Party</item>
+        <item>Prow</item>
+        <item>Pump</item>
+        <item>Slab</item>
+        <item>Star</item>
+        <item>Steep</item>
+        <item>All Walls</item>
+        <item>Arch</item>
+        <item>Barrel</item>
+        <item>Birthday Room #1</item>
+        <item>Birthday Room #2</item>
+        <item>Cat Walk</item>
+        <item>Coffin Wall</item>
+        <item>Hurricane Wall</item>
+        <item>Instruction Wall #1</item>
+        <item>Instruction Wall #2</item>
+        <item>Sickle</item>
+        <item>Topout Boulder</item>
+        <item>Wave Wall</item>
+        <item>World Cup Wall</item>
+    </string-array>
+
     <string-array name="state_filter_array">
         <item>All States</item>
         <item>California</item>
