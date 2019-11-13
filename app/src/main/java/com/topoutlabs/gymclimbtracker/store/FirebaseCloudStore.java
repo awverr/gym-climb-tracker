@@ -71,17 +71,21 @@ public class FirebaseCloudStore implements CloudStore {
     @Override
     public void lookUpRoutes(final Gym gym, final Callback<ArrayList<Route>> callback) {
         final ArrayList<Route> routes = new ArrayList<>();
-        System.out.println("Verret: gym in lookupRoutes is: " + gym.getId());
         db.child("routes").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
-
-                    if(routeSnapshot.exists()) {
+                    {
                         Route route = routeSnapshot.getValue(Route.class);
-                        if(route.getGymId().equals(gym.getId())) {
-                            System.out.println("Route is: " + route);
-                            routes.add(route);
+                        if(routeSnapshot.exists()) {
+                            if (gym != null) {
+                                if (route.getGymId().equals(gym.getId())) {
+                                    System.out.println("Route is: " + route);
+                                    routes.add(route);
+                                }
+                            } else {
+                                routes.add(route);
+                            }
                         }
                     }
                 }
