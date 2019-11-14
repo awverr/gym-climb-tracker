@@ -84,7 +84,7 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
             gymSpinner = view.findViewById(R.id.gym_spinner);
             initializeRouteTypeSpinner(routeTypeSpinner);
             initializeRouteGradeSpinner(routeGradeSpinner);
-            initializeRouteWallSpinner(routeWallSpinner);
+            initializeRouteWallSpinner(routeWallSpinner, null);
             initializeRouteColorSpinner(routeColorSpinner);
             initializeGymSpinner(gymSpinner);
             routeTypeSpinner.setOnItemSelectedListener(this);
@@ -169,13 +169,29 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
         spinner.setAdapter(routeColorAdapter);
     }
 
-    public void initializeRouteWallSpinner(Spinner spinner){
+    public void initializeRouteWallSpinner(Spinner spinner, Gym gym){
         //route_wall_spinner
-
-        ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
-                R.array.route_wall_array, android.R.layout.simple_spinner_item);
-        routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(routeWallAdapter);
+        if(gym != null && gym.getName().equals("Planet Granite Sunnyvale")) {
+            ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.route_wall_array, android.R.layout.simple_spinner_item);
+            routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(routeWallAdapter);
+        }if(gym != null && gym.getName().equals("Golden")) {
+            ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.golden_route_wall_filter_array, android.R.layout.simple_spinner_item);
+            routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(routeWallAdapter);
+        }if(gym != null && gym.getName().equals("Englewood")) {
+            ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.englewood_route_wall_filter_array, android.R.layout.simple_spinner_item);
+            routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(routeWallAdapter);
+        } else{
+            ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
+                    R.array.all_wall_filter_array, android.R.layout.simple_spinner_item);
+            routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(routeWallAdapter);
+        }
     }
 
     public void initializeGymSpinner(final Spinner spinner){
