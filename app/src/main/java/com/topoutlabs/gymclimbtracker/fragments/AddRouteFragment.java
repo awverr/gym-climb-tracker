@@ -176,12 +176,12 @@ public class AddRouteFragment extends Fragment implements AdapterView.OnItemSele
                     R.array.route_wall_array, android.R.layout.simple_spinner_item);
             routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(routeWallAdapter);
-        }if(gym != null && gym.getName().equals("Earth Trek Golden")) {
+        }if(gym != null && gym.getName().equals("Earth Treks Golden")) {
             ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
                     R.array.golden_route_wall_filter_array, android.R.layout.simple_spinner_item);
             routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(routeWallAdapter);
-        }if(gym != null && gym.getName().equals("Earth Trek Englewood")) {
+        }if(gym != null && gym.getName().equals("Earth Treks Englewood")) {
             ArrayAdapter<CharSequence> routeWallAdapter = ArrayAdapter.createFromResource(activity,
                     R.array.englewood_route_wall_filter_array, android.R.layout.simple_spinner_item);
             routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
