@@ -42,7 +42,7 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
     private RecyclerView mRecyclerView;
     private RouteRecyclerAdapter recyclerAdapter;
 
-    Spinner routeWallSpinner; //For filtering routes
+    Spinner routeWallSpinner, gymSpinner; //For filtering routes and gyms
 
     ArrayAdapter<CharSequence> routeWallAdapter;
 
@@ -86,6 +86,9 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
             routeWallSpinner = view.findViewById(R.id.filter_route_wall_spinner);
             initializeRouteWallSpinner(routeWallSpinner);
             routeWallSpinner.setOnItemSelectedListener(this);
+            gymSpinner = view.findViewById(R.id.filter_gym_spinner);
+            initializeGymSpinner(gymSpinner);
+            gymSpinner.setOnItemSelectedListener(this);
         }
 
         return view;
@@ -97,10 +100,10 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
             if (gym.getName().equals("Planet Granite Sunnyvale")) {
                 routeWallAdapter = ArrayAdapter.createFromResource(activity,
                         R.array.route_wall_filter_array, android.R.layout.simple_spinner_item);
-            } else if (gym.getName().equals("Golden")) {
+            } else if (gym.getName().equals("Earth Treks Golden")) {
                 routeWallAdapter = ArrayAdapter.createFromResource(activity,
                         R.array.golden_route_wall_filter_array, android.R.layout.simple_spinner_item);
-            } else if (gym.getName().equals("Englewood")) {
+            } else if (gym.getName().equals("Earth Treks Englewood")) {
                 routeWallAdapter = ArrayAdapter.createFromResource(activity,
                         R.array.englewood_route_wall_filter_array, android.R.layout.simple_spinner_item);
             }
@@ -111,6 +114,24 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
         routeWallAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(routeWallAdapter);
 
+    }
+
+    public void initializeGymSpinner(final Spinner spinner){
+        final ArrayList<String> gymList = new ArrayList<>();
+        store.lookupGyms(new Callback<ArrayList<Gym>>() {
+            @Override
+            public void receive(ArrayList<Gym> strings) {
+
+                if(!strings.isEmpty()) {
+                    for (Gym g : strings) {
+                        gymList.add(g.getName());
+                    }
+                }
+                ArrayAdapter<Gym> gymAdapter = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, gymList);
+                gymAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(gymAdapter);
+            }
+        });
     }
 
     private void initializeRecyclerView(final String filterSelection) { //Will need to take into account both gym and wall to determine which routes to add to list
@@ -146,8 +167,17 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selection = (String) parent.getItemAtPosition(position);
-        initializeRecyclerView(selection);
+        if(parent.getItemAtPosition(position) instanceof Gym){
+            Gym selection = (Gym) parent.getItemAtPosition(position);
+            gym = selection;
+            //routeWallAdapter.clear();
+            initializeRouteWallSpinner(routeWallSpinner);
+            initializeRecyclerView(null);
+        }else{
+            String selection = (String) parent.getItemAtPosition(position);
+            initializeRecyclerView(selection);
+        }
+
     }
 
     @Override
