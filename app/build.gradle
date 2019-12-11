@@ -29,15 +29,15 @@ dependencies {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.google.firebase:firebase-database:12.0.1'
-    implementation 'com.google.android.gms:play-services-auth:12.0.1'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.firebaseui:firebase-ui-auth:3.3.0'
     implementation 'com.google.guava:guava:18.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'joda-time:joda-time:2.9.9'
     testImplementation 'junit:junit:4.12'
-    implementation "android.arch.lifecycle:extensions:1.1.0"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
 }
 
 
