@@ -1,45 +1,33 @@
 package com.topoutlabs.gymclimbtracker.activities;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.topoutlabs.gymclimbtracker.R;
-import com.topoutlabs.gymclimbtracker.fragments.AddGymFragment;
 import com.topoutlabs.gymclimbtracker.fragments.AddRouteFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ChooseGymFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewAllRoutesFragment;
 import com.topoutlabs.gymclimbtracker.fragments.ViewHistoryFragment;
-import com.topoutlabs.gymclimbtracker.fragments.ViewRouteFragment;
-import com.topoutlabs.gymclimbtracker.model.Gym;
-import com.topoutlabs.gymclimbtracker.model.Route;
 import com.topoutlabs.gymclimbtracker.model.User;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
 import com.topoutlabs.gymclimbtracker.store.LocalStore;
 import com.topoutlabs.gymclimbtracker.store.PreferencesLocalStore;
-import com.topoutlabs.gymclimbtracker.util.Callback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -47,8 +35,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.Optional;
 import com.google.firebase.FirebaseApp;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 

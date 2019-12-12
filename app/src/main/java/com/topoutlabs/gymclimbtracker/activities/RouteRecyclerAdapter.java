@@ -1,13 +1,12 @@
 package com.topoutlabs.gymclimbtracker.activities;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.topoutlabs.gymclimbtracker.R;
-import com.topoutlabs.gymclimbtracker.fragments.SharedViewModel;
 import com.topoutlabs.gymclimbtracker.fragments.ViewRouteFragment;
 import com.topoutlabs.gymclimbtracker.model.Climb;
 import com.topoutlabs.gymclimbtracker.model.Route;

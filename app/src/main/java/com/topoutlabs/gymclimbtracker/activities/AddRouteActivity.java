@@ -1,30 +1,15 @@
 package com.topoutlabs.gymclimbtracker.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.topoutlabs.gymclimbtracker.R;
-import com.topoutlabs.gymclimbtracker.model.Route;
-import com.topoutlabs.gymclimbtracker.model.RouteColor;
-import com.topoutlabs.gymclimbtracker.model.RouteGrade;
-import com.topoutlabs.gymclimbtracker.model.RouteType;
-import com.topoutlabs.gymclimbtracker.model.RouteWall;
 import com.topoutlabs.gymclimbtracker.store.CloudStore;
 import com.topoutlabs.gymclimbtracker.store.FirebaseCloudStore;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class AddRouteActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
