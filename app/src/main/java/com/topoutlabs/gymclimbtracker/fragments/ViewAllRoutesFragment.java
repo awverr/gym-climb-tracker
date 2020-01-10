@@ -81,14 +81,14 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
                 gym = localStore.getGym();
             }
 
-            initializeRecyclerView("");
-
             routeWallSpinner = view.findViewById(R.id.filter_route_wall_spinner);
-            initializeRouteWallSpinner(routeWallSpinner);
-            routeWallSpinner.setOnItemSelectedListener(this);
             gymSpinner = view.findViewById(R.id.filter_gym_spinner);
             initializeGymSpinner(gymSpinner);
             gymSpinner.setOnItemSelectedListener(this);
+            initializeRouteWallSpinner(routeWallSpinner);
+            routeWallSpinner.setOnItemSelectedListener(this);
+
+            initializeRecyclerView("");
         }
 
         return view;
@@ -130,6 +130,9 @@ public class ViewAllRoutesFragment extends Fragment implements AdapterView.OnIte
                 ArrayAdapter<Gym> gymAdapter = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, gymList);
                 gymAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(gymAdapter);
+
+//                int pos = gymAdapter.getPosition(gym);
+//                spinner.setSelection(pos);
             }
         });
     }
